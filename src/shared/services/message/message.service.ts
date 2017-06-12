@@ -65,7 +65,7 @@ export class MessageService {
     const headers = new Headers({"Content-Type": "application/json"});
     const options = new RequestOptions({headers: headers});
     this.http.post(finalUrl, message, options)
-      .subscribe((response) => this.extractAndUpdateMessageList(response));
+      .subscribe((response) => this.extractMessageAndGetMessages(response,route));
 
     // this.http.post(finalUrl,)
     // Je suis vide :(
