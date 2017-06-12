@@ -10,36 +10,36 @@ import { ChannelModel } from "../../../shared/models/ChannelModel";
 
 export class ChannelListComponent implements OnInit {
 
-  public channelList : ChannelModel[];
+  public channelList: ChannelModel[];
 
   public currentChannelRoute: ChannelModel;
 
   constructor() {
-    this.currentChannelRoute = new ChannelModel(1 , "general");
+    this.currentChannelRoute = new ChannelModel(1, "general");
   }
 
-  deleteChannel(id : number){
-    let list : ChannelModel[];
-    let j : number;
-    j=0;
-    for( let i = 0; i < this.channelList.length; i++){
-      if(this.channelList[i].id != id){
-        list[j]=this.channelList[i];
+  deleteChannel(id: number) {
+    let list: ChannelModel[];
+    list = null;
+    let j: number;
+    j = 0;
+    for (let i = 0; i < this.channelList.length; i++) {
+      if (this.channelList[i].id !== id) {
+        list[j] = this.channelList[i];
         j++;
       }
     }
-    this.channelList=list;
+    this.channelList = list;
   }
 
-  addChannel(id: number, name: string){
-    for ( let i =0; i < this.channelList.length; i++){
-      if(this.channelList[i].id == id){
+  addChannel(id: number, name: string) {
+    for ( let i = 0; i < this.channelList.length; i++) {
+      if (this.channelList[i].id === id) {
         return;
       }
     }
-    this.channelList[this.channelList.length]=new ChannelModel(id,name);
+    this.channelList[this.channelList.length] = new ChannelModel(id, name);
   }
-
 
 
   ngOnInit() {
