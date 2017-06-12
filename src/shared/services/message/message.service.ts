@@ -65,11 +65,8 @@ export class MessageService {
     const finalUrl = this.url + route;
     const headers = new Headers({"Content-Type": "application/json"});
     const options = new RequestOptions({headers: headers});
-    const addChannel = new ChannelModel(1, "generallle");
     this.http.post(finalUrl, message, options)
       .subscribe((response) => this.extractMessageAndGetMessages(response, route));
-    /*this.http.post(this.url, addChannel, options).subscribe((response) => console.log(response));
-    console.log(addChannel);*/
 
     // this.http.post(finalUrl,)
     // Je suis vide :(
