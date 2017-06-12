@@ -68,7 +68,6 @@ export class MessageService {
     this.http.post(finalUrl, message, options)
       .subscribe((response) => this.extractAndUpdateMessageList(response));
 
-
     // this.http.post(finalUrl,)
     // Je suis vide :(
     // Tu peux trouver des infos sur moi dans le README !
