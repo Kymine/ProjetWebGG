@@ -46,8 +46,8 @@ export class ChannelService {
    * @param route
    * @returns {Observable<R>}
    */
-  public getChannels(route: string) {
-    const finalUrl = this.url + route;
+  public getChannels() {
+    const finalUrl = this.url + "?page=1";
     this.http.get(finalUrl)
       .subscribe((response) => this.extractAndUpdateChannelList(response));
   }
@@ -63,12 +63,12 @@ export class ChannelService {
    * @param route
    * @param channel
    */
-  public createChannel(route: string, channel: ChannelModel) {
-    const finalUrl = this.url + route;
+  public createChannel(channel: ChannelModel) {
+    const finalUrl = this.url;
     const headers = new Headers({"Content-Type": "application/json"});
     const options = new RequestOptions({headers: headers});
-    this.http.post(finalUrl, channel.id, options)
-      .subscribe((response) => this.extractChannelAndGetChannels(response, route));
+    this.http.post(finalUrl, channel, options)
+      .subscribe((response) => this.extractChannelAndGetChannels(response));
 
     // this.http.post(finalUrl,)
     // Je suis vide :(
@@ -101,11 +101,11 @@ export class ChannelService {
    * @param route
    * @returns {any|{}}
    */
-  private extractChannelAndGetChannels(response: Response, route: string): ChannelModel {
+  private extractChannelAndGetChannels(response: Response): ChannelModel {
 
     const ChannelList = response.json() || [];
     this.channelList$.next(ChannelList);
-    this.getChannels(route);
+    this.getChannels();
 
     return ChannelList[0]; // A remplacer ! On retourne ici un ChannelModel vide seulement pour que Typescript ne lève pas d'erreur !
   }
