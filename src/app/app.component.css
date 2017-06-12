@@ -1,19 +1,16 @@
-section
-{
+section {
   margin: 0px;
   width: 300px;
   float: left;
   height: 100%;
 }
 
-aside
-{
+aside {
   margin-left: 310px;
   background-color: rgb(240, 240, 255);
 }
 
-h1
-{
+h1 {
   text-align: center;
   color: #132688;
   background-color: rgb(240, 240, 255);

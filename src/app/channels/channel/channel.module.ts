@@ -1,10 +1,10 @@
 /**
  * Created by Pierre on 12/06/2017.
  */
-import { CommonModule } from "@angular/common";
-import { NgModule } from "@angular/core";
+import {CommonModule} from "@angular/common";
+import {NgModule} from "@angular/core";
 
-import { ChannelComponent } from "./channel.component";
+import {ChannelComponent} from "./channel.component";
 
 @NgModule({
   declarations: [
@@ -16,4 +16,5 @@ import { ChannelComponent } from "./channel.component";
   exports: [ChannelComponent],
   providers: []
 })
-export class ChannelModel { }
+export class ChannelModel {
+}

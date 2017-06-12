@@ -7,7 +7,6 @@ import "rxjs/add/operator/catch";
 import {MessageModel} from "../../models/MessageModel";
 import {ReplaySubject} from "rxjs/ReplaySubject";
 import {URLSERVER} from "shared/constants/urls";
-import {ChannelModel} from "../../models/ChannelModel";
 
 @Injectable()
 export class MessageService {

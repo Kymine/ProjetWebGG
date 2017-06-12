@@ -1,6 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 
-import { ChannelModel } from "../../../shared/models/ChannelModel";
+import {ChannelModel} from "../../../shared/models/ChannelModel";
 
 @Component({
   selector: "app-channel-list",
@@ -33,7 +33,7 @@ export class ChannelListComponent implements OnInit {
   }
 
   addChannel(id: number, name: string) {
-    for ( let i = 0; i < this.channelList.length; i++) {
+    for (let i = 0; i < this.channelList.length; i++) {
       if (this.channelList[i].id === id) {
         return;
       }

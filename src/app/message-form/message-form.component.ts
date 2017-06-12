@@ -1,7 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 
-import { MessageService } from "../../shared/services";
-import { MessageModel } from "../../shared/models/MessageModel";
+import {MessageService} from "../../shared/services";
+import {MessageModel} from "../../shared/models/MessageModel";
 
 @Component({
   selector: "app-message-form",
@@ -18,7 +18,8 @@ export class MessageFormComponent implements OnInit {
     this.route = "414/messages";
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
 
   /**
    * Fonction pour envoyer un message.

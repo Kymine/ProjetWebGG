@@ -1,13 +1,13 @@
-import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
-import { HttpModule } from "@angular/http";
+import {BrowserModule} from "@angular/platform-browser";
+import {NgModule} from "@angular/core";
+import {FormsModule} from "@angular/forms";
+import {HttpModule} from "@angular/http";
 
-import { AppComponent } from "./app.component";
+import {AppComponent} from "./app.component";
 
-import { MessageComponent, MessageListComponent } from "./messages";
-import { MessageFormComponent } from "./message-form";
-import { MessageService } from "../shared/services/message/message.service";
+import {MessageComponent, MessageListComponent} from "./messages";
+import {MessageFormComponent} from "./message-form";
+import {MessageService} from "../shared/services/message/message.service";
 import {ChannelComponent} from "./channels/channel/channel.component";
 
 @NgModule({
@@ -17,7 +17,7 @@ import {ChannelComponent} from "./channels/channel/channel.component";
     MessageListComponent,
     MessageComponent,
     ChannelComponent,
- //   ChannelListComponent
+    //   ChannelListComponent
   ],
   imports: [
     BrowserModule,
@@ -27,4 +27,5 @@ import {ChannelComponent} from "./channels/channel/channel.component";
   providers: [MessageService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
