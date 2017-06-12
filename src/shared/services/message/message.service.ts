@@ -64,9 +64,9 @@ export class MessageService {
     // const finalUrl = this.url + route;
     const headers = new Headers({"Content-Type": "application/json"});
     const options = new RequestOptions({headers: headers});
-    /* this.http.post(finalUrl, message, options)
-      .subscribe((response) => this.extractMessageAndGetMessages(response, route)); */
-    this.http.post(this.url, "HTTP/1.1 201 OK\n{\n\"id\": 1,\n\"name\": \"general\",\n\"createdAt\":"+
+    /*this.http.post(finalUrl, message, options)
+      .subscribe((response) => this.extractMessageAndGetMessages(response, route));*/
+    this.http.post(this.url, "HTTP/1.1 201 OK\n{\n\"id\": 1,\n\"name\": \"general\",\n\"createdAt\":" +
       " \"timestamp\",\n\"updatedAt\": \"timestamp\"\n}", options);
     console.log("!!!!!!!");
 
