@@ -1,3 +1,10 @@
+div
+{
+  border: 2px black solid;
+}
+
 h1 {
   text-align: center;
+  color:red;
+  background-color: blue;
 }
