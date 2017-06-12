@@ -65,7 +65,7 @@ export class MessageService {
     const headers = new Headers({"Content-Type": "application/json"});
     const options = new RequestOptions({headers: headers});
     this.http.post(finalUrl, message, options)
-      .subscribe((response) => this.extractAndUpdateMessageList(response));
+      .subscribe((response) => this.extractMessageAndGetMessages(response,route));
 
     // this.http.post(finalUrl,)
     // Je suis vide :(
@@ -99,7 +99,11 @@ export class MessageService {
    * @returns {any|{}}
    */
   private extractMessageAndGetMessages(response: Response, route: string): MessageModel {
-    // Je suis vide aussi ...
-    return new MessageModel(); // A remplacer ! On retourne ici un messageModel vide seulement pour que Typescript ne lève pas d'erreur !
+
+    const messageList = response.json() || [];
+    this.messageList$.next(messageList);
+    this.getMessages(route);
+
+    return messageList[0]; // A remplacer ! On retourne ici un messageModel vide seulement pour que Typescript ne lève pas d'erreur !
   }
 }

@@ -1,9 +1,22 @@
-div
+section
 {
-  border: 2px black solid;
+  margin: 0px;
+  width: 300px;
+  float: left;
+  height: 100%;
 }
 
-h1 {
+aside
+{
+  margin-left: 310px;
+  background-color: rgb(240, 240, 255);
+}
+
+h1
+{
   text-align: center;
-  color:red;
+  color: #132688;
+  background-color: rgb(240, 240, 255);
+  margin: 0px;
+  padding: 10px;
 }
