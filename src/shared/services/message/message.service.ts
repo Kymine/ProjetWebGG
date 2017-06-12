@@ -61,7 +61,7 @@ export class MessageService {
    * @param message
    */
   public sendMessage(route: string, message: MessageModel) {
-    // Je suis vide :(
+    // Je suis vide :( RIP
     // Tu peux trouver des infos sur moi dans le README !
   }
 
