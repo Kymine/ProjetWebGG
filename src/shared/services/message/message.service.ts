@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Http, RequestOptions, Response } from "@angular/http";
+import {Headers, Http, RequestOptions, Response} from "@angular/http";
 import { Observable } from "rxjs/Observable";
 
 import "rxjs/add/operator/map";
@@ -61,6 +61,15 @@ export class MessageService {
    * @param message
    */
   public sendMessage(route: string, message: MessageModel) {
+    const finalUrl=this.url+route;
+    let headers=new Headers({ 'Content-Type': 'application/json' })
+    let options = new RequestOptions({ headers: headers });
+
+    this.http.post(finalUrl,message,options)
+      .subscribe((response) => this.extractAndUpdateMessageList(response));
+
+
+    //this.http.post(finalUrl,)
     // Je suis vide :(
     // Tu peux trouver des infos sur moi dans le README !
   }
