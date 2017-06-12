@@ -4,22 +4,19 @@ section
   width: 300px;
   float: left;
   height: 100%;
-  border: 2px black solid;
 }
 
 aside
 {
-  margin-left: 305px;
-}
-
-div
-{
-  border: 2px black solid;
-  padding: 2px;
+  margin-left: 310px;
+  background-color: rgb(240, 240, 255);
 }
 
 h1
 {
   text-align: center;
-  color:red;
+  color: #132688;
+  background-color: rgb(240, 240, 255);
+  margin: 0px;
+  padding: 10px;
 }
