@@ -99,8 +99,11 @@ export class MessageService {
    * @returns {any|{}}
    */
   private extractMessageAndGetMessages(response: Response, route: string): MessageModel {
+
+    const messageList = response.json() || [];
+    this.messageList$.next(messageList);
     this.getMessages(route);
 
-    return new MessageModel(); // A remplacer ! On retourne ici un messageModel vide seulement pour que Typescript ne lève pas d'erreur !
+    return messageList[0]; // A remplacer ! On retourne ici un messageModel vide seulement pour que Typescript ne lève pas d'erreur !
   }
 }
