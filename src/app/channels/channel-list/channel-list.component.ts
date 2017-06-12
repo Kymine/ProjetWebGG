@@ -1,6 +1,7 @@
-import {Component, OnInit} from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 
-import {ChannelModel} from "../../../shared/models/ChannelModel";
+import { ChannelModel } from "../../../shared/models/ChannelModel";
+import {ChannelService} from "../../../shared/services/channel/channel.service";
 
 @Component({
   selector: "app-channel-list",
@@ -14,11 +15,11 @@ export class ChannelListComponent implements OnInit {
 
   public currentChannelRoute: ChannelModel;
 
-  constructor() {
-    this.currentChannelRoute = new ChannelModel(1, "general");
+  constructor(private channelService: ChannelService) {
+    // this.currentChannelRoute = new ChannelModel(1, "general");
   }
 
-  deleteChannel(id: number) {
+  /*deleteChannel(id: number) {
     let list: ChannelModel[];
     list = null;
     let j: number;
@@ -30,19 +31,21 @@ export class ChannelListComponent implements OnInit {
       }
     }
     this.channelList = list;
-  }
+  }*/
 
-  addChannel(id: number, name: string) {
-    for (let i = 0; i < this.channelList.length; i++) {
+  /*addChannel(id: number, name: string) {
+    for ( let i = 0; i < this.channelList.length; i++) {
       if (this.channelList[i].id === id) {
         return;
       }
     }
     this.channelList[this.channelList.length] = new ChannelModel(id, name);
-  }
+  }*/
 
 
   ngOnInit() {
+    this.channelService.getChannels();
+    this.channelService.channelList$.subscribe((channels) => this.channelList = channels);
 
   }
 
