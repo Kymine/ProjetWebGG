@@ -1,9 +1,25 @@
-div
+section
 {
+  margin: 0px;
+  width: 300px;
+  float: left;
+  height: 100%;
   border: 2px black solid;
 }
 
-h1 {
+aside
+{
+  margin-left: 305px;
+}
+
+div
+{
+  border: 2px black solid;
+  padding: 2px;
+}
+
+h1
+{
   text-align: center;
   color:red;
 }
