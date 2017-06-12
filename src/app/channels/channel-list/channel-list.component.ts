@@ -10,12 +10,12 @@ import { ChannelModel } from "../../../shared/models/ChannelModel";
 
 export class ChannelListComponent implements OnInit {
 
-  public channelList: ChannelModel[];
+  public channelList : ChannelModel[];
 
   public currentChannelRoute: ChannelModel;
 
   constructor() {
-    this.currentChannelRoute = new ChannelModel(1,"general");
+    this.currentChannelRoute = new ChannelModel(1 , "general");
   }
 
 
