@@ -1,12 +1,12 @@
-import { Injectable } from "@angular/core";
+import {Injectable} from "@angular/core";
 import {Headers, Http, RequestOptions, Response} from "@angular/http";
-import { Observable } from "rxjs/Observable";
+import {Observable} from "rxjs/Observable";
 
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
-import { MessageModel } from "../../models/MessageModel";
-import { ReplaySubject } from "rxjs/ReplaySubject";
-import { URLSERVER } from "shared/constants/urls";
+import {MessageModel} from "../../models/MessageModel";
+import {ReplaySubject} from "rxjs/ReplaySubject";
+import {URLSERVER} from "shared/constants/urls";
 
 @Injectable()
 export class MessageService {
@@ -61,15 +61,14 @@ export class MessageService {
    * @param message
    */
   public sendMessage(route: string, message: MessageModel) {
-    const finalUrl=this.url+route;
-    let headers=new Headers({ 'Content-Type': 'application/json' })
-    let options = new RequestOptions({ headers: headers });
+    const finalUrl = this.url + route;
+    const headers = new Headers({"Content-Type": "application/json"});
+    const options = new RequestOptions({headers: headers});
 
-    this.http.post(finalUrl,message,options)
+    this.http.post(finalUrl, message, options)
       .subscribe((response) => this.extractAndUpdateMessageList(response));
 
-
-    //this.http.post(finalUrl,)
+    // this.http.post(finalUrl,)
     // Je suis vide :(
     // Tu peux trouver des infos sur moi dans le README !
   }
