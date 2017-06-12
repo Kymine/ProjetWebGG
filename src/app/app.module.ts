@@ -17,7 +17,7 @@ import {ChannelComponent} from "./channels/channel/channel.component";
     MessageListComponent,
     MessageComponent,
     ChannelComponent,
-    ChannelListComponent
+ //   ChannelListComponent
   ],
   imports: [
     BrowserModule,
