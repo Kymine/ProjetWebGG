@@ -41,6 +41,6 @@ export class MessageModel {
     this.from = from;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
-    this.threadId =  threadId;
+    this.threadId = threadId;
   }
 }

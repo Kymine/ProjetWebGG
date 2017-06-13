@@ -1,0 +1,35 @@
+p
+{
+  margin: 0px;
+}
+
+strong
+{
+  margin: 0px;
+  text-decoration:underline;
+}
+
+.create_channel button
+{
+  margin-top: 5px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.previous_page
+{
+  float: left;
+}
+
+.next_page
+{
+  float: right;
+}
+
+.p_footer
+{
+  clear: both;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
+}

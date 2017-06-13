@@ -1,12 +1,12 @@
-import { Injectable } from "@angular/core";
-import { Http, RequestOptions, Response } from "@angular/http";
-import { Observable } from "rxjs/Observable";
+import {Injectable} from "@angular/core";
+import {Headers, Http, RequestOptions, Response} from "@angular/http";
+import {Observable} from "rxjs/Observable";
 
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
-import { MessageModel } from "../../models/MessageModel";
-import { ReplaySubject } from "rxjs/ReplaySubject";
-import { URLSERVER } from "shared/constants/urls";
+import {MessageModel} from "../../models/MessageModel";
+import {ReplaySubject} from "rxjs/ReplaySubject";
+import {URLSERVER} from "shared/constants/urls";
 
 @Injectable()
 export class MessageService {
@@ -27,8 +27,11 @@ export class MessageService {
    */
   public messageList$: ReplaySubject<MessageModel[]>;
 
+  public pageNumber: number;
+
   constructor(private http: Http) {
     this.url = URLSERVER;
+    this.pageNumber = 1;
     this.messageList$ = new ReplaySubject(1);
     this.messageList$.next([new MessageModel()]);
   }
@@ -40,11 +43,24 @@ export class MessageService {
    *          Pour l'envoie des messages la route doit avoir la structure suivante: :id/messages avec ":id" étant
    *          un nombre entier correspondant à l'identifiant (id) du channel.
    * Exemple de route: 1/messages
+   * @param side
    * @param route
    * @returns {Observable<R>}
    */
-  public getMessages(route: string) {
-    const finalUrl = this.url + route;
+  public getMessages(side: number, route?: string) {
+    let pageSelector = "";
+    if (side === 0) {
+      if (this.pageNumber !== 1) {
+        this.pageNumber--;
+      }
+      pageSelector = "?page=" + this.pageNumber;
+    } else if (side === 1) {
+      this.pageNumber++;
+      pageSelector = "?page=" + this.pageNumber;
+    } else {
+      this.pageNumber = 1;
+    }
+    const finalUrl = this.url + route + pageSelector;
     this.http.get(finalUrl)
       .subscribe((response) => this.extractAndUpdateMessageList(response));
   }
@@ -61,7 +77,14 @@ export class MessageService {
    * @param message
    */
   public sendMessage(route: string, message: MessageModel) {
-    // Je suis vide :( RIP
+    const finalUrl = this.url + route;
+    const headers = new Headers({"Content-Type": "application/json"});
+    const options = new RequestOptions({headers: headers});
+    this.http.post(finalUrl, message, options)
+      .subscribe((response) => this.extractMessageAndGetMessages(response, route));
+
+    // this.http.post(finalUrl,)
+    // Je suis vide :(
     // Tu peux trouver des infos sur moi dans le README !
   }
 
@@ -78,7 +101,11 @@ export class MessageService {
     // fait CTRL + Click pour voir la déclaration et la documentation
     const messageList = response.json() || []; // ExtractMessage: Si response.json() est undefined ou null,
     // messageList prendra la valeur tableau vide: [];
-    this.messageList$.next(messageList); // On pousse les nouvelles données dans l'attribut messageList$
+    if (messageList.length === 0) {
+      this.pageNumber--;
+    } else {
+      this.messageList$.next(messageList);
+    }
   }
 
   /**
@@ -92,7 +119,11 @@ export class MessageService {
    * @returns {any|{}}
    */
   private extractMessageAndGetMessages(response: Response, route: string): MessageModel {
-    // Je suis vide aussi ...
-    return new MessageModel(); // A remplacer ! On retourne ici un messageModel vide seulement pour que Typescript ne lève pas d'erreur !
+    console.log(route);
+    const messageList = response.json() || [];
+    this.messageList$.next(messageList);
+    this.getMessages(2, route);
+
+    return messageList[0]; // A remplacer ! On retourne ici un messageModel vide seulement pour que Typescript ne lève pas d'erreur !
   }
 }

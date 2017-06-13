@@ -1,4 +1,50 @@
-h1 {
-  text-align: center;
+section
+{
+  margin: 10px;
+  width: 310px;
+  float: left;
+  height: 100%;
+}
 
+aside
+{
+  margin-left: 340px;
+  background-color: rgb(240, 240, 255);
+}
+
+h1
+{
+  text-align: center;
+  color: #132688;
+  background-color: rgb(240, 240, 255);
+  margin: 0px;
+  padding: 10px;
+}
+
+h2
+{
+  color: #1045ff;
+}
+
+aside h2
+{
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.previous_page
+{
+  float: left;
+}
+
+.next_page
+{
+  float: right;
+}
+
+.p_footer
+{
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
 }

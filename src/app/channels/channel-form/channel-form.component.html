@@ -1,0 +1,16 @@
+<p>
+  <strong> Enter channel name :</strong>
+  <input type="text" class="form-control" id="name_channel" required  [(ngModel)]="channel.name" name="name_channel">
+  <!--  <br>Message model: {{message | json}} -->
+</p>
+
+<div class="create_channel">
+  <button class="btn btn-primary" (click)="createChannel()"> Create Channel </button>
+</div>
+
+<div class="select_page">
+  <button class="previous_page" (click)="prevChannel()"> &#60; </button>
+  <button class="next_page" (click)="nextChannel()"> &#62; </button>
+</div>
+
+<p class="p_footer">Page n°{{channelService.pageNumber}}</p>

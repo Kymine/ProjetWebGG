@@ -1,9 +1,21 @@
-<br><div class="container">
-  <div class="row justify-content-md-center">
-    <div class="col-md-6 card">
-      <h1> {{title}} </h1>
-      <app-message-list></app-message-list>
-      <app-message-form></app-message-form>
-    </div>
+<h1>G-Messenger</h1>
+
+<section>
+  <h2>Channel space</h2>
+  <app-channel-form></app-channel-form>
+  <app-channel-list></app-channel-list>
+</section>
+
+<aside>
+  <h2>Messages</h2>
+
+  <div class="select_page">
+    <button class="previous_page" (click)="prevMessages()"> &#60; </button>
+    <button class="next_page" (click)="nextMessages()"> &#62; </button>
   </div>
-</div>
+
+  <p class="p_footer">Page n°{{messageService.pageNumber}}</p>
+
+  <app-message-list></app-message-list>
+  <app-message-form></app-message-form>
+</aside>

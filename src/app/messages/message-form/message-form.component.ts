@@ -1,7 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 
-import { MessageService } from "../../shared/services";
-import { MessageModel } from "../../shared/models/MessageModel";
+import {MessageService} from "../../../shared/services";
+import {MessageModel} from "../../../shared/models/MessageModel";
+import {ChannelService} from "../../../shared/services/channel/channel.service";
 
 @Component({
   selector: "app-message-form",
@@ -13,12 +14,13 @@ export class MessageFormComponent implements OnInit {
   public message: MessageModel;
   private route: string;
 
-  constructor(private messageService: MessageService) {
-    this.message = new MessageModel(1, "Hello", "moi");
-    this.route = "1/messages";
+  constructor(private messageService: MessageService, private channelService: ChannelService) {
+    this.message = new MessageModel(channelService.currentChannelRoute.id, "Hello", "groupeg");
+    this.route = "" + channelService.currentChannelRoute.id + "/messages";
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
 
   /**
    * Fonction pour envoyer un message.
@@ -27,6 +29,7 @@ export class MessageFormComponent implements OnInit {
    * ainsi que le message à envoyer. Ce dernier correspond à l'objet MessageModel que l'utilisateur rempli à travers l'input.
    */
   sendMessage() {
+    this.route = "" + this.channelService.currentChannelRoute.id + "/messages";
     console.log("Click!");
     this.messageService.sendMessage(this.route, this.message);
   }

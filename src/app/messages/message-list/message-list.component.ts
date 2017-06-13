@@ -1,7 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 
-import { MessageService } from "../../../shared/services";
-import { MessageModel } from "../../../shared/models/MessageModel";
+import {MessageService} from "../../../shared/services";
+import {MessageModel} from "../../../shared/models/MessageModel";
+import {ChannelService} from "../../../shared/services/channel/channel.service";
+import {ChannelModel} from "../../../shared/models/ChannelModel";
 
 @Component({
   selector: "app-message-list",
@@ -13,8 +15,10 @@ export class MessageListComponent implements OnInit {
   public messageList: MessageModel[];
   private route: string;
 
-  constructor(private messageService: MessageService) {
-    this.route = "1/messages";
+  constructor(private messageService: MessageService, private channelService: ChannelService) {
+    // this.route = "414/messages";
+    channelService.currentChannelRoute = new ChannelModel(414);
+    this.route = "" + channelService.currentChannelRoute.id + "/messages";
   }
 
   /**
@@ -27,8 +31,8 @@ export class MessageListComponent implements OnInit {
    * l'initialisation simple des variables. Pour plus d'information sur le ngOnInit, il y a un lien dans le README.
    */
   ngOnInit() {
-    this.messageService.getMessages(this.route);
+    this.route = "" + this.channelService.currentChannelRoute.id + "/messages";
+    this.messageService.getMessages(2, this.route);
     this.messageService.messageList$.subscribe((messages) => this.messageList = messages);
   }
-
 }

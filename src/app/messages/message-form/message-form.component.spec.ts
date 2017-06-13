@@ -1,16 +1,16 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import {async, ComponentFixture, TestBed} from "@angular/core/testing";
 
-import { MessageFormComponent } from "./message-form.component";
+import {MessageFormComponent} from "./message-form.component";
 
-describe("MessageFormComponent", () => {
+describe("AddChannelFormComponent", () => {
   let component: MessageFormComponent;
   let fixture: ComponentFixture<MessageFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MessageFormComponent ]
+      declarations: [MessageFormComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

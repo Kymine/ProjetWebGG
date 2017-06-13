@@ -2,7 +2,7 @@
  * Classe représentant l'objet Chanel
  * Cet objet est renvoyé grâce à l'url /threads.
  */
-export class ChanelModel {
+export class ChannelModel {
 
   /**
    * Identifiant du chanel.
@@ -24,7 +24,7 @@ export class ChanelModel {
    */
   public updatedAt: string;
 
-  constructor(id: number, name?: string, createdAt?: string, updatedAt?: string) {
+  constructor(id?: number, name?: string, createdAt?: string, updatedAt?: string) {
     this.id = id;
     this.name = name;
     this.createdAt = createdAt;

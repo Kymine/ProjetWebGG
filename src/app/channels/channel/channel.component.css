@@ -1,0 +1,19 @@
+div
+{
+  border: 1px black dotted;
+  min-height: 60px;
+}
+
+p
+{
+  float: left;
+  width: 230px;
+  overflow-scrolling: touch;
+}
+
+button
+{
+  float: right;
+  color: rgb(102, 166, 184);
+  margin-top: 2px;
+}

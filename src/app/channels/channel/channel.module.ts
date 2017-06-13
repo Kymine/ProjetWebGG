@@ -1,17 +1,20 @@
+/**
+ * Created by Pierre on 12/06/2017.
+ */
 import {CommonModule} from "@angular/common";
 import {NgModule} from "@angular/core";
 
-import {MessageComponent} from "./message.component";
+import {ChannelComponent} from "./channel.component";
 
 @NgModule({
   declarations: [
-    MessageComponent
+    ChannelComponent
   ],
   imports: [
     CommonModule
   ],
-  exports: [MessageComponent],
+  exports: [ChannelComponent],
   providers: []
 })
-export class MessageModule {
+export class ChannelModel {
 }
