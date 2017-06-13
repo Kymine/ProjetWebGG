@@ -10,7 +10,6 @@ import "rxjs/add/operator/catch";
 import {ReplaySubject} from "rxjs/ReplaySubject";
 import {URLSERVER} from "shared/constants/urls";
 import {ChannelModel} from "shared/models/ChannelModel";
-import {log} from "util";
 
 @Injectable()
 export class ChannelService {
@@ -23,6 +22,11 @@ export class ChannelService {
   private url: string;
 
   /**
+   * Ce nombre détermine quelle page doit être chargée pour récupérer la liste des channels.
+   */
+  private pageNumber: number;
+
+  /**
    * ChannelList$ est un type d'Observable particulier appelé ReplaySubject.
    * ChannelList$ est un flux d'évenements qui stock la liste des Channels. A chaque fois que l'on fait une requète
    * pour récupérer la liste des Channels, ChannelList$ va pousser cette nouvelle liste dans son flux pour permettre
@@ -33,6 +37,7 @@ export class ChannelService {
 
   constructor(private http: Http) {
     this.url = URLSERVER;
+    this.pageNumber = 1;
     this.channelList$ = new ReplaySubject(1);
     this.channelList$.next([new ChannelModel()]);
   }
@@ -48,7 +53,7 @@ export class ChannelService {
    * @returns {Observable<R>}
    */
   public getChannels() {
-    const finalUrl = this.url + "?page=1";
+    const finalUrl = this.url + "?page=" + this.pageNumber;
     this.http.get(finalUrl)
       .subscribe((response) => this.extractAndUpdateChannelList(response));
   }
@@ -65,16 +70,12 @@ export class ChannelService {
    * @param channel
    */
   public createChannel(channel: ChannelModel) {
-    console.log("coucou");
-    const finalUrl = this.url + channel.name;
+    const finalUrl = this.url;
     const headers = new Headers({"Content-Type": "application/json"});
     const options = new RequestOptions({headers: headers});
     this.http.post(finalUrl, channel, options)
       .subscribe((response) => this.extractChannelAndGetChannels(response));
 
-    // this.http.post(finalUrl,)
-    // Je suis vide :(
-    // Tu peux trouver des infos sur moi dans le README !
   }
 
   /**
@@ -88,9 +89,16 @@ export class ChannelService {
   extractAndUpdateChannelList(response: Response) {
     // Plus d'info sur Response ou sur la fonction .json()? si tu utilises Webstorm,
     // fait CTRL + Click pour voir la déclaration et la documentation
-    const ChannelList = response.json() || []; // ExtractChannel: Si response.json() est undefined ou null,
+    const channelList = response.json() || []; // ExtractChannel: Si response.json() est undefined ou null,
     // ChannelList prendra la valeur tableau vide: [];
-    this.channelList$.next(ChannelList); // On pousse les nouvelles données dans l'attribut ChannelList$
+    console.log(this.pageNumber);
+    if (channelList.length === 0) {
+      this.pageNumber = 1;
+    } else {
+      this.pageNumber++;
+      this.channelList$.next(channelList); // On pousse les nouvelles données dans l'attribut ChannelList$
+      this.getChannels();
+    }
   }
 
   /**
