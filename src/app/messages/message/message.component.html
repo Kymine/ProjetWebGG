@@ -1,9 +1,6 @@
 <p>
   Message:
-  <strong *ngIf="isAnUrl()">
-    <iframe src=get() width="150" height="150"></iframe>
-  </strong>
-
-  <strong ng-else>{{message.content}}</strong>
+  <strong *ngIf=isAnUrl()><br><iframe [src]="message.content | safe"></iframe></strong>
+  <strong *ng-else>{{message.content}}</strong>
   <br>  From: <strong>{{message.from}}</strong>
 </p>
