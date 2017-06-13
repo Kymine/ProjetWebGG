@@ -27,7 +27,7 @@ export class MessageService {
    */
   public messageList$: ReplaySubject<MessageModel[]>;
 
-  private pageNumber: number;
+  public pageNumber: number;
 
   constructor(private http: Http) {
     this.url = URLSERVER;

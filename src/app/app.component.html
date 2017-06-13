@@ -8,6 +8,12 @@
 
 <aside>
   <h2>Messages</h2>
+  <div class="select_page">
+    <button class="previous_page" (click)="prevMessages()"> &#60; </button>
+    <span class="p_footer">Page n°{{messageService.pageNumber}}</span>
+    <button class="next_page" (click)="nextMessages()"> &#62; </button>
+  </div>
+  <p class="breaker"></p>
   <app-message-list></app-message-list>
   <app-message-form></app-message-form>
 </aside>

@@ -9,8 +9,9 @@
 </div>
 
 <div class="select_page">
-  <button class="previous_page" (click)="prevChannel()"> &#60; </button>
-  <button class="next_page" (click)="nextChannel()"> &#62; </button>
+    <button class="previous_page" (click)="prevChannel()"> &#60; </button>
+    <span class="p_footer">Page n°{{channelService.pageNumber}}</span>
+    <button class="next_page" (click)="nextChannel()"> &#62; </button>
 </div>
 
-<p class="p_footer">Page n°{{channelService.pageNumber}}</p>
+<p class="breaker"></p>

@@ -35,13 +35,4 @@ export class MessageListComponent implements OnInit {
     this.messageService.getMessages(2, this.route);
     this.messageService.messageList$.subscribe((messages) => this.messageList = messages);
   }
-
-  public prevMessages() {
-    this.messageService.getMessages(0);
-  }
-
-  public nextMessages() {
-    this.messageService.getMessages(1);
-  }
-
 }
