@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from "@angular/core";
 
 import {ChannelModel} from "../../../shared/models/ChannelModel";
 import {ChannelService} from "../../../shared/services/channel/channel.service";
+import {MessageService} from "../../../shared/services/message/message.service";
 /**
  * Created by Pierre on 12/06/2017.
  */
@@ -15,7 +16,7 @@ import {ChannelService} from "../../../shared/services/channel/channel.service";
 export class ChannelComponent implements OnInit {
   @Input() channel: ChannelModel;
 
-  constructor(private channelService: ChannelService) {
+  constructor(private channelService: ChannelService, private messageService: MessageService) {
     this.channel = new ChannelModel(0, "Channel");
   }
 
@@ -27,6 +28,7 @@ export class ChannelComponent implements OnInit {
    */
   joinChannel(id: number) {
     this.channelService.currentChannelRoute.id = id;
+    this.messageService.getMessages("" + id + "/messages");
 }
 
 }
