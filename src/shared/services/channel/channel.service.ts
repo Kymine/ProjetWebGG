@@ -54,7 +54,7 @@ export class ChannelService {
    *          Pour l'envoie des Channels la route doit avoir la structure suivante: :id/Channels avec ":id" étant
    *          un nombre entier correspondant à l'identifiant (id) du channel.
    * Exemple de route: 1/Channels
-   * @param route
+   * @param side
    * @returns {Observable<R>}
    */
   public getChannels(side: number) {
@@ -62,7 +62,7 @@ export class ChannelService {
       if (this.pageNumber !== 1) {
         this.pageNumber--;
       }
-    } else {
+    } else if (side === 1) {
       this.pageNumber++;
     }
     const finalUrl = this.url + "?page=" + this.pageNumber;
@@ -124,7 +124,7 @@ export class ChannelService {
 
     const ChannelList = response.json() || [];
     this.channelList$.next(ChannelList);
-    this.getChannels();
+    this.getChannels(2);
 
     return ChannelList[0]; // A remplacer ! On retourne ici un ChannelModel vide seulement pour que Typescript ne lève pas d'erreur !
   }
