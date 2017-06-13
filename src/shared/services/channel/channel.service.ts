@@ -27,6 +27,11 @@ export class ChannelService {
   private pageNumber: number;
 
   /**
+   * Stocke le Channel courant
+   */
+  public currentChannelRoute: ChannelModel;
+
+  /**
    * ChannelList$ est un type d'Observable particulier appelé ReplaySubject.
    * ChannelList$ est un flux d'évenements qui stock la liste des Channels. A chaque fois que l'on fait une requète
    * pour récupérer la liste des Channels, ChannelList$ va pousser cette nouvelle liste dans son flux pour permettre
