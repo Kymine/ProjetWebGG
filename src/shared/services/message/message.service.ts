@@ -31,7 +31,7 @@ export class MessageService {
 
   constructor(private http: Http) {
     this.url = URLSERVER;
-    this.pageNumber = 1;
+    this.pageNumber = 0;
     this.messageList$ = new ReplaySubject(1);
     this.messageList$.next([new MessageModel()]);
   }
@@ -50,7 +50,7 @@ export class MessageService {
   public getMessages(side: number, route?: string) {
     let pageSelector = "";
     if (side === 0) {
-      if (this.pageNumber !== 1) {
+      if (this.pageNumber !== 0) {
         this.pageNumber--;
       }
       pageSelector = "?page=" + this.pageNumber;
@@ -58,7 +58,7 @@ export class MessageService {
       this.pageNumber++;
       pageSelector = "?page=" + this.pageNumber;
     } else {
-      this.pageNumber = 1;
+      this.pageNumber = 0;
     }
     const finalUrl = this.url + route + pageSelector;
     this.http.get(finalUrl)
@@ -102,7 +102,9 @@ export class MessageService {
     const messageList = response.json() || []; // ExtractMessage: Si response.json() est undefined ou null,
     // messageList prendra la valeur tableau vide: [];
     if (messageList.length === 0) {
-      this.pageNumber--;
+      if (this.pageNumber !== 0) {
+        this.pageNumber--;
+      }
     } else {
       this.messageList$.next(messageList);
     }
@@ -119,7 +121,6 @@ export class MessageService {
    * @returns {any|{}}
    */
   private extractMessageAndGetMessages(response: Response, route: string): MessageModel {
-    console.log(route);
     const messageList = response.json() || [];
     this.messageList$.next(messageList);
     this.getMessages(2, route);

@@ -42,7 +42,7 @@ export class ChannelService {
 
   constructor(private http: Http) {
     this.url = URLSERVER;
-    this.pageNumber = 1;
+    this.pageNumber = 0;
     this.channelList$ = new ReplaySubject(1);
     this.channelList$.next([new ChannelModel()]);
   }
@@ -59,7 +59,7 @@ export class ChannelService {
    */
   public getChannels(side: number) {
     if (side === 0) {
-      if (this.pageNumber !== 1) {
+      if (this.pageNumber !== 0) {
         this.pageNumber--;
       }
     } else if (side === 1) {
@@ -104,7 +104,9 @@ export class ChannelService {
     const channelList = response.json() || []; // ExtractChannel: Si response.json() est undefined ou null,
     // ChannelList prendra la valeur tableau vide: [];
     if (channelList.length === 0) {
-      this.pageNumber--;
+      if (this.pageNumber !== 0) {
+        this.pageNumber--;
+      }
     } else {
       this.channelList$.next(channelList);
     }
