@@ -75,6 +75,7 @@ export class ChannelService {
     const options = new RequestOptions({headers: headers});
     this.http.post(finalUrl, channel, options)
       .subscribe((response) => this.extractChannelAndGetChannels(response));
+
   }
 
   /**
