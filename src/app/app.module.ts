@@ -6,9 +6,9 @@ import {HttpModule} from "@angular/http";
 import {AppComponent} from "./app.component";
 
 import {MessageComponent, MessageListComponent} from "./messages";
-import {MessageFormComponent} from "./message-form";
+import {MessageFormComponent} from "./messages/message-form";
 import {MessageService} from "../shared/services/message/message.service";
-import {ChannelFormComponent} from "./channel-form/channel-form.component";
+import {ChannelFormComponent} from "./channels/channel-form/channel-form.component";
 import {ChannelService} from "../shared/services/channel/channel.service";
 import {ChannelListComponent} from "./channels/channel-list/channel-list.component";
 import {ChannelComponent} from "./channels/channel/channel.component";

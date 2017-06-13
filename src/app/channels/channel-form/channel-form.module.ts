@@ -5,12 +5,14 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 
 import {ChannelFormComponent} from "./channel-form.component";
-import {ChannelService} from "../../shared/services/channel/channel.service";
-import {ChannelComponent} from "../channels/channel/channel.component";
+import {ChannelService} from "../../../shared/services/channel/channel.service";
+import {ChannelComponent} from "../channel/channel.component";
+import {ChannelListComponent} from "../channel-list/channel-list.component";
 
 @NgModule({
   declarations: [
-    ChannelFormComponent
+    ChannelFormComponent,
+    ChannelListComponent
   ],
   imports: [
     CommonModule

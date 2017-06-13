@@ -46,12 +46,4 @@ export class ChannelListComponent implements OnInit {
     this.channelService.getChannels(0);
     this.channelService.channelList$.subscribe((channels) => this.channelList = channels);
   }
-
-  public prevPage() {
-    this.channelService.getChannels(0);
-  }
-
-  public nextPage() {
-    this.channelService.getChannels(1);
-  }
 }

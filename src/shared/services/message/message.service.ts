@@ -27,8 +27,11 @@ export class MessageService {
    */
   public messageList$: ReplaySubject<MessageModel[]>;
 
+  private pageNumber: number;
+
   constructor(private http: Http) {
     this.url = URLSERVER;
+    this.pageNumber = 1;
     this.messageList$ = new ReplaySubject(1);
     this.messageList$.next([new MessageModel()]);
   }
@@ -40,10 +43,20 @@ export class MessageService {
    *          Pour l'envoie des messages la route doit avoir la structure suivante: :id/messages avec ":id" étant
    *          un nombre entier correspondant à l'identifiant (id) du channel.
    * Exemple de route: 1/messages
+   * @param side
    * @param route
    * @returns {Observable<R>}
    */
-  public getMessages(route: string) {
+  public getMessages(side: number, route?: string) {
+    if (side === 0) {
+      if (this.pageNumber !== 1) {
+        this.pageNumber--;
+      }
+    } else if (side === 1) {
+      this.pageNumber++;
+    } else {
+      this.pageNumber = 1;
+    }
     const finalUrl = this.url + route;
     this.http.get(finalUrl)
       .subscribe((response) => this.extractAndUpdateMessageList(response));
@@ -102,7 +115,7 @@ export class MessageService {
 
     const messageList = response.json() || [];
     this.messageList$.next(messageList);
-    this.getMessages(route);
+    this.getMessages(2, route);
 
     return messageList[0]; // A remplacer ! On retourne ici un messageModel vide seulement pour que Typescript ne lève pas d'erreur !
   }

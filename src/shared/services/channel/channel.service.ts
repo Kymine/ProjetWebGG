@@ -24,7 +24,7 @@ export class ChannelService {
   /**
    * Ce nombre détermine quelle page doit être chargée pour récupérer la liste des channels.
    */
-  private pageNumber: number;
+  public pageNumber: number;
 
   /**
    * Stocke le Channel courant

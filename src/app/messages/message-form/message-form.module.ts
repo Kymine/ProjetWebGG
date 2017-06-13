@@ -3,8 +3,8 @@ import {NgModule} from "@angular/core";
 import {FormsModule} from "@angular/forms";
 
 import {MessageFormComponent} from "./message-form.component";
-import {MessageService} from "../../shared/services/message/message.service";
-import {ChannelService} from "../../shared/services/channel/channel.service";
+import {MessageService} from "../../../shared/services/message/message.service";
+import {ChannelService} from "../../../shared/services/channel/channel.service";
 
 @NgModule({
   declarations: [
