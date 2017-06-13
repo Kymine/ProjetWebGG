@@ -48,16 +48,19 @@ export class MessageService {
    * @returns {Observable<R>}
    */
   public getMessages(side: number, route?: string) {
+    let pageSelector = "";
     if (side === 0) {
       if (this.pageNumber !== 1) {
         this.pageNumber--;
       }
+      pageSelector = "?page=" + this.pageNumber;
     } else if (side === 1) {
       this.pageNumber++;
+      pageSelector = "?page=" + this.pageNumber;
     } else {
       this.pageNumber = 1;
     }
-    const finalUrl = this.url + route + "?page=" + this.pageNumber;;
+    const finalUrl = this.url + route + pageSelector;
     this.http.get(finalUrl)
       .subscribe((response) => this.extractAndUpdateMessageList(response));
   }
@@ -103,7 +106,6 @@ export class MessageService {
     } else {
       this.messageList$.next(messageList);
     }
-    this.messageList$.next(messageList); // On pousse les nouvelles données dans l'attribut messageList$
   }
 
   /**
@@ -117,7 +119,7 @@ export class MessageService {
    * @returns {any|{}}
    */
   private extractMessageAndGetMessages(response: Response, route: string): MessageModel {
-
+    console.log(route);
     const messageList = response.json() || [];
     this.messageList$.next(messageList);
     this.getMessages(2, route);
