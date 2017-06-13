@@ -1,18 +1,19 @@
 div
 {
-  margin-bottom: 10px;
-  witdth: 100%;
-  color: rgb(102, 166, 184);
+  border: 1px black dotted;
+  min-height: 60px;
 }
 
 p
 {
-  width: 200px;
+  min-height: 60px;
   float: left;
+  width: 230px;
 }
 
 button
 {
   float: right;
   color: rgb(102, 166, 184);
+  margin-top: 2px;
 }

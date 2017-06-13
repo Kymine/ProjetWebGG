@@ -1,6 +1,17 @@
-div {
-   border-width:1px;
+p
+{
+   margin: 0px;
 }
-strong{
+
+strong
+{
+  margin: 0px;
   text-decoration:underline;
+}
+
+button
+{
+  margin-top: 5px;
+  width: 100%;
+  margin-bottom: 20px;
 }
