@@ -4,4 +4,13 @@
   <!--  <br>Message model: {{message | json}} -->
 </p>
 
-<button class="btn btn-primary" (click)="createChannel()"> Create Channel </button>
+<div class="create_channel">
+  <button class="btn btn-primary" (click)="createChannel()"> Create Channel </button>
+</div>
+
+<div class="select_page">
+  <button class="previous_page" (click)="previousPage()"> Previous </button>
+  <button class="next_page" (click)="nextPage()"> Next </button>
+</div>
+
+<p class="p_footer">Page n°</p>
