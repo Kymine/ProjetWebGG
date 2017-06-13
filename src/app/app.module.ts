@@ -8,10 +8,10 @@ import {AppComponent} from "./app.component";
 import {MessageComponent, MessageListComponent} from "./messages";
 import {MessageFormComponent} from "./message-form";
 import {MessageService} from "../shared/services/message/message.service";
-import {ChannelComponent} from "./channels/channel/channel.component";
 import {ChannelFormComponent} from "./channel-form/channel-form.component";
 import {ChannelService} from "../shared/services/channel/channel.service";
 import {ChannelListComponent} from "./channels/channel-list/channel-list.component";
+import {ChannelComponent} from "./channels/channel/channel.component";
 
 @NgModule({
   declarations: [

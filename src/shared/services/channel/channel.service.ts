@@ -57,7 +57,14 @@ export class ChannelService {
    * @param route
    * @returns {Observable<R>}
    */
-  public getChannels() {
+  public getChannels(side: number) {
+    if (side === 0) {
+      if (this.pageNumber !== 1) {
+        this.pageNumber--;
+      }
+    } else {
+      this.pageNumber++;
+    }
     const finalUrl = this.url + "?page=" + this.pageNumber;
     this.http.get(finalUrl)
       .subscribe((response) => this.extractAndUpdateChannelList(response));
@@ -96,13 +103,10 @@ export class ChannelService {
     // fait CTRL + Click pour voir la déclaration et la documentation
     const channelList = response.json() || []; // ExtractChannel: Si response.json() est undefined ou null,
     // ChannelList prendra la valeur tableau vide: [];
-    console.log(this.pageNumber);
     if (channelList.length === 0) {
-      this.pageNumber = 1;
+      this.pageNumber--;
     } else {
-      this.pageNumber++;
-      this.channelList$.next(channelList); // On pousse les nouvelles données dans l'attribut ChannelList$
-      this.getChannels();
+      this.channelList$.next(channelList);
     }
   }
 
