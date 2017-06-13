@@ -28,7 +28,7 @@ export class ChannelComponent implements OnInit {
    */
   joinChannel(id: number) {
     this.channelService.currentChannelRoute.id = id;
-    this.messageService.getMessages(2, "" + id + "/messages");
+    this.messageService.getMessages(2, id + "/messages");
   }
 
 }

@@ -57,7 +57,7 @@ export class MessageService {
     } else {
       this.pageNumber = 1;
     }
-    const finalUrl = this.url + route;
+    const finalUrl = this.url + route + "?page=" + this.pageNumber;;
     this.http.get(finalUrl)
       .subscribe((response) => this.extractAndUpdateMessageList(response));
   }
@@ -98,6 +98,11 @@ export class MessageService {
     // fait CTRL + Click pour voir la déclaration et la documentation
     const messageList = response.json() || []; // ExtractMessage: Si response.json() est undefined ou null,
     // messageList prendra la valeur tableau vide: [];
+    if (messageList.length === 0) {
+      this.pageNumber--;
+    } else {
+      this.messageList$.next(messageList);
+    }
     this.messageList$.next(messageList); // On pousse les nouvelles données dans l'attribut messageList$
   }
 
