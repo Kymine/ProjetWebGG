@@ -9,6 +9,8 @@ import {MessageComponent, MessageListComponent} from "./messages";
 import {MessageFormComponent} from "./message-form";
 import {MessageService} from "../shared/services/message/message.service";
 import {ChannelComponent} from "./channels/channel/channel.component";
+import {ChannelFormComponent} from "./channel-form/channel-form.component";
+import {ChannelService} from "../shared/services/channel/channel.service";
 
 @NgModule({
   declarations: [
@@ -17,14 +19,14 @@ import {ChannelComponent} from "./channels/channel/channel.component";
     MessageListComponent,
     MessageComponent,
     ChannelComponent,
-    //   ChannelListComponent
+    ChannelFormComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule
   ],
-  providers: [MessageService],
+  providers: [MessageService, ChannelService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

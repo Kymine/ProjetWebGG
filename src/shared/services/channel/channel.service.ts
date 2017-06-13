@@ -10,6 +10,7 @@ import "rxjs/add/operator/catch";
 import {ReplaySubject} from "rxjs/ReplaySubject";
 import {URLSERVER} from "shared/constants/urls";
 import {ChannelModel} from "shared/models/ChannelModel";
+import {log} from "util";
 
 @Injectable()
 export class ChannelService {
@@ -64,7 +65,8 @@ export class ChannelService {
    * @param channel
    */
   public createChannel(channel: ChannelModel) {
-    const finalUrl = this.url;
+    console.log("coucou");
+    const finalUrl = this.url + channel.name;
     const headers = new Headers({"Content-Type": "application/json"});
     const options = new RequestOptions({headers: headers});
     this.http.post(finalUrl, channel, options)
