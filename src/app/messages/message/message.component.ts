@@ -1,17 +1,22 @@
-import {Component, Input, OnInit} from "@angular/core";
-
+import {Component, Input, OnInit, Pipe, PipeTransform} from "@angular/core";
 import {MessageModel} from "../../../shared/models/MessageModel";
+import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 
 @Component({
   selector: "app-message",
   templateUrl: "./message.component.html",
   styleUrls: ["./message.component.css"]
 })
-export class MessageComponent implements OnInit {
+
+@Pipe({ name: "safe" })
+export class MessageComponent implements OnInit, PipeTransform {
 
   @Input() message: MessageModel;
-
-  constructor() {
+  url: SafeResourceUrl;
+  transform(url) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+  constructor(public sanitizer: DomSanitizer) {
     this.message = new MessageModel(0, "Hello!");
   }
 
@@ -24,6 +29,17 @@ export class MessageComponent implements OnInit {
    * le faire dans le ngOnInit.
    */
   ngOnInit() {
+    this.url = this.sanitizer.bypassSecurityTrustResourceUrl(this.message.content);
   }
-
+  isAnUrl(): boolean {
+    let result = false;
+    if (this.message.content.includes("http://") || this.message.content.includes("https://")) {
+      result = true;
+    }
+    console.log("result = " + result + " message = " + this.message.content);
+    return result;
+  }
+  get(): SafeResourceUrl {
+    return this.url;
+  }
 }

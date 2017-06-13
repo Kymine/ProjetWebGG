@@ -35,6 +35,8 @@ export class MessageModel {
    */
   public threadId: number;
 
+  public url: string;
+
   constructor(id?: number, content?: string, from?: string, createdAt?: string, updatedAt?: string, threadId?: number) {
     this.id = id;
     this.content = content;
