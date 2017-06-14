@@ -26,7 +26,7 @@ export class MessageComponent implements OnInit {
   }
   isAnUrl(): boolean {
     let result = false;
-    if (this.message.content.includes("http://") || this.message.content.includes("https://")) {
+    if (this.message.content && (this.message.content.includes("http://") || this.message.content.includes("https://"))) {
       result = true;
     }
     return result;
