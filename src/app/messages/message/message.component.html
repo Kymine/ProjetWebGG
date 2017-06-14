@@ -1,6 +1,6 @@
 <p>
   Message:
   <strong *ngIf=isAnUrl()><br><iframe [src]="message.content | safe"></iframe></strong>
-  <strong *ng-else>{{message.content}}</strong>
+  <strong ng-else>{{message.content}}</strong>
   <br>  From: <strong>{{message.from}}</strong>
 </p>
