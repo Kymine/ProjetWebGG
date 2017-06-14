@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from "@angular/core";
 import {MessageModel} from "../../../shared/models/MessageModel";
+import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
   selector: "app-message",
@@ -26,6 +27,25 @@ export class MessageComponent implements OnInit {
    */
   ngOnInit() {
     this.stringList = this.message.content.split(" ");
+    let tmp: string[];
+    tmp = new Array();
+    let j = "";
+    for (let i = 0; i < this.stringList.length; i++) {
+      if (this.isAnUrl(this.stringList[i])) {
+        if (j.length > 0) {
+          tmp.push(j);
+        }
+        j = "";
+        tmp.push(this.stringList[i]);
+      }
+      if (this.notUrl(this.stringList[i])) {
+        j += this.stringList[i] + " ";
+      }
+    }
+    if (tmp.length === 0) {
+      tmp.push(j);
+    }
+    this.stringList = tmp;
   }
   notUrl(characters: string): boolean {
     return !this.isAnUrl(characters);

@@ -31,14 +31,14 @@ export class MessageFormComponent implements OnInit {
   ngOnInit() {
   }
   replaceSmiley(content: string) {
-    let result = content.replace(/\:\)/g, "🙂");
-    result = result.replace(/\:\(/g, "😞");
-    result = result.replace(/\:\o/g, "😲");
-    // result = result.replace(/\:\'\(/g , "😢");
-    result = result.replace(/\<3/g, "❤️");
-    result = result.replace(/\;\)/g, "😉");
-    result = result.replace(/\:\p/g, "😛");
-    // result = result.replace(/\:\D/g, "😄");
+    let result = content.replace(/\ :\) /g, "🙂");
+    result = result.replace(/\ :\( /g, "😞");
+    result = result.replace(/\ :\o /g, "😲");
+    result = result.replace(/\ :\'\( /g , "😢");
+    result = result.replace(/\ <3 /g, "❤️");
+    result = result.replace(/\ ;\) /g, "😉");
+    result = result.replace(/\ :\p /g, "😛");
+    result = result.replace(/\ :\D /g, "😄");
     return result;
   }
 
@@ -50,7 +50,6 @@ export class MessageFormComponent implements OnInit {
    */
   sendMessage() {
     this.route = "" + this.channelService.currentChannelRoute.id + "/messages";
-    console.log("Click!");
     this.message.content = this.replaceSmiley(this.message.content);
     this.messageService.sendMessage(this.route, this.message);
   }
