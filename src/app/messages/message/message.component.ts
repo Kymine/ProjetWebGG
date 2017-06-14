@@ -60,7 +60,7 @@ export class MessageComponent implements OnInit {
   isAnUrlToLoad(characters: string): boolean {
     let result = false;
     if (characters.includes("http://") || characters.includes("https://")) {
-      if (characters.includes("youtube")) {
+      if (characters.includes("youtube") && (characters.includes("watch?v=") || characters.includes("embed/"))) {
         this.result = this.getYoutubeUrl(characters);
         result = true;
       }
