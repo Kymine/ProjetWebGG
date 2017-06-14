@@ -90,6 +90,14 @@ export class MessageComponent implements OnInit {
     return "http://twitframe.com/show?url=https%3A%2F%2Ftwitter.com%2F" + id1 + "%2Fstatus%2F" + id2;
   }
   getInstagramUrl(myUrl: string): string {
-    return this.getUrl(myUrl, "?hl=en", "embed/");
+
+    const reg = /https:\/\/www.instagram.com\/p\/[^\ ^\/]*/;
+    const res = this.message.content.match(reg);
+
+    if (res != null && res.length > 0) {
+      res[0] += "/embed/";
+    }
+    return res[0];
+    // return this.getUrl(myUrl, "?hl=en", "embed/");
   }
 }
