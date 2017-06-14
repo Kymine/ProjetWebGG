@@ -17,6 +17,7 @@ import {PrivateChannelService} from "../shared/services/privateChannel/privateCh
 import {PrivateChannelListComponent} from "./channels/private-channel-list/private-channel-list.component";
 import {PrivateChannelComponent} from "./channels/private-channel/private-channel.component";
 import {PrivateMessageServices} from "../shared/services/privateMessage/privateMessage.service";
+import {WeatherComponent} from "./weather/weather.component";
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {PrivateMessageServices} from "../shared/services/privateMessage/privateM
     ChannelListComponent,
     PrivateChannelComponent,
     PrivateChannelListComponent,
-    SafePipe
+    SafePipe,
+    WeatherComponent
   ],
   imports: [
     BrowserModule,
