@@ -25,6 +25,7 @@ export class MessageListComponent implements OnInit {
               private privateChannelService: PrivateChannelService, private privateMessageService: PrivateMessageServices) {
     // this.route = "414/messages";
     channelService.currentChannelRoute = new ChannelModel(414);
+    channelService.currentChannelRoute.name = "Général";
     this.route = "" + channelService.currentChannelRoute.id + "/messages";
     privateChannelService.currentPrivateChannel = USER;
     this.channelType = this.privateChannelService.channelType;
