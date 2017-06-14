@@ -32,14 +32,10 @@ export class MessageFormComponent implements OnInit {
   }
   replaceSmiley(content: string) {
     let result = content.replace(/\:\)/g, "🙂");
-    result = result.replace(/\ :\( /g, "😞"); // ok
-    result = result.replace(/\ :\o /g, "😲"); // ok
-    result = result.replace(/\ 😕'\( /g , "😢"); // ok
-    result = result.replace(/\ ❤ /g, "❤️"); // ok
-    result = result.replace(/\ ;\) /g, "😉"); // ok
-    result = result.replace(/\ :\p /g, "😛"); // ok
-    result = result.replace(/\ :\D /g, "😄"); // ok
-    console.log(result);
+    result = result.replace(/\:\(/g, "😞"); // ok
+    result = result.replace(/\:\o/g, "😲"); // ok
+    result = result.replace(/\<3/g, "❤️"); // ok
+    result = result.replace(/\;\)/g, "😉"); // ok
     return result;
   }
   /**
