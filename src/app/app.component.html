@@ -1,21 +1,48 @@
-<h1>G-Messenger</h1>
+<div>
+  <h1>G-Messenger</h1>
+  <button class="public_channel" (click)="publicChannels()">Public channels</button>
+  <button class="private_channel" (click)="privateChannels()">Private channels</button>
+</div>
 
-<section>
-  <h2>Channel space</h2>
-  <app-channel-form></app-channel-form>
-  <app-channel-list></app-channel-list>
-</section>
+<div *ngIf="channelType === 0">
+  <section>
+    <h2>Public Channel space</h2>
+    <app-channel-form></app-channel-form>
+    <app-channel-list></app-channel-list>
+  </section>
 
-<aside>
-  <h2>Messages</h2>
+  <aside>
+    <h2>Public Messages</h2>
 
-  <div class="select_page">
-    <button class="previous_page" (click)="prevMessages()"> &#60; </button>
-    <button class="next_page" (click)="nextMessages()"> &#62; </button>
-  </div>
+    <div class="select_page">
+      <button class="previous_page" (click)="prevMessages()">&#60;</button>
+      <button class="next_page" (click)="nextMessages()">&#62;</button>
+    </div>
 
-  <p class="p_footer">Page n°{{messageService.pageNumber}}</p>
+    <p class="p_footer">Page n°{{messageService.pageNumber}}</p>
 
-  <app-message-list></app-message-list>
-  <app-message-form></app-message-form>
-</aside>
+    <app-message-list></app-message-list>
+    <app-message-form></app-message-form>
+  </aside>
+</div>
+
+<div *ngIf="channelType === 1">
+  <section>
+    <h2>Private Channel space</h2>
+    <app-private-channel-list></app-private-channel-list>
+  </section>
+
+  <aside>
+    <h2>Private Messages</h2>
+
+    <div class="select_page">
+      <button class="previous_page" (click)="prevMessages()">&#60;</button>
+      <button class="next_page" (click)="nextMessages()">&#62;</button>
+    </div>
+
+    <p class="p_footer">Page n°{{messageService.pageNumber}}</p>
+
+    <app-message-list></app-message-list>
+    <app-message-form></app-message-form>
+  </aside>
+</div>

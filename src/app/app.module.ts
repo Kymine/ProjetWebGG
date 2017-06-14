@@ -13,6 +13,9 @@ import {ChannelService} from "../shared/services/channel/channel.service";
 import {ChannelListComponent} from "./channels/channel-list/channel-list.component";
 import {ChannelComponent} from "./channels/channel/channel.component";
 import {SafePipe} from "../shared/pipes/safe.pipe";
+import {PrivateChannelService} from "../shared/services/privateChannel/privateChannel.service";
+import {PrivateChannelListComponent} from "./channels/private-channel-list/private-channel-list.component";
+
 
 @NgModule({
   declarations: [
@@ -23,6 +26,7 @@ import {SafePipe} from "../shared/pipes/safe.pipe";
     ChannelComponent,
     ChannelFormComponent,
     ChannelListComponent,
+    PrivateChannelListComponent,
     SafePipe
   ],
   imports: [
@@ -30,7 +34,7 @@ import {SafePipe} from "../shared/pipes/safe.pipe";
     FormsModule,
     HttpModule
   ],
-  providers: [MessageService, ChannelService],
+  providers: [MessageService, ChannelService, PrivateChannelService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
