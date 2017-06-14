@@ -1,4 +1,7 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, Input, OnInit} from "@angular/core";
+import {ChannelModel} from "../../../shared/models/ChannelModel";
+import {PrivateChannelService} from "../../../shared/services/privateChannel/privateChannel.service";
+import {PrivateMessageServices} from "../../../shared/services/privateMessage/privateMessage.service";
 
 @Component({
   selector: "app-private-channel",
@@ -8,18 +11,22 @@ import {Component, OnInit} from "@angular/core";
 
 export class PrivateChannelComponent implements OnInit {
 
-  constructor() {
+  @Input() privateChannel: string;
+
+  constructor(private privateChannelService: PrivateChannelService, private privateMessageService: PrivateMessageServices) {
+    this.privateChannel = "Channel";
+  }
+
+  ngOnInit() {
   }
 
   /**
-   * Fonction ngOnInit.
-   * Cette fonction est appelée après l'execution de tous les constructeurs de toutes les classes typescript.
-   * Cette dernière s'avère très utile lorsque l'on souhaite attendre des valeurs venant de d'autres composants.
-   * Notre composant qui prend en @Input un message. Les @Input ne sont accessibles uniquement à partir du ngOnInit,
-   * pas dans le constructeur. Si vous souhaitez manipuler votre message lors du chargement du composant, vous devez
-   * le faire dans le ngOnInit.
+   * rejoindre un channel
    */
-  ngOnInit() {
+  joinChannel(user: string) {
+    this.privateChannelService.currentPrivateChannel = user;
+    this.privateMessageService.getMessages(user);
+    console.log(user);
   }
 
 }

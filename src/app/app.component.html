@@ -1,8 +1,10 @@
-<div>
-  <h1>G-Messenger</h1>
-  <button class="public_channel" (click)="publicChannels()">Public channels</button>
-  <button class="private_channel" (click)="privateChannels()">Private channels</button>
-</div>
+<nav class="nav-bar">
+  <h1 class="messenger-title">G-Messenger</h1>
+  <div class="nav-bar-btn">
+    <button class="public_channel" (click)="publicChannels()">Public channels</button>
+    <button class="private_channel" (click)="privateChannels()">Private channels</button>
+  </div>
+</nav>
 
 <div *ngIf="channelType === 0">
   <section>
@@ -28,7 +30,7 @@
 
 <div *ngIf="channelType === 1">
   <section>
-    <h2>Private Channel space</h2>
+    <h2 class="private-channel-space">Private Channel space</h2>
     <app-private-channel-list></app-private-channel-list>
   </section>
 

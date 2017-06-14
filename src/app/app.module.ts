@@ -15,6 +15,7 @@ import {ChannelComponent} from "./channels/channel/channel.component";
 import {SafePipe} from "../shared/pipes/safe.pipe";
 import {PrivateChannelService} from "../shared/services/privateChannel/privateChannel.service";
 import {PrivateChannelListComponent} from "./channels/private-channel-list/private-channel-list.component";
+import {PrivateChannelComponent} from "./channels/private-channel/private-channel.component";
 import {PrivateMessageServices} from "../shared/services/privateMessage/privateMessage.service";
 
 
@@ -27,6 +28,7 @@ import {PrivateMessageServices} from "../shared/services/privateMessage/privateM
     ChannelComponent,
     ChannelFormComponent,
     ChannelListComponent,
+    PrivateChannelComponent,
     PrivateChannelListComponent,
     SafePipe
   ],

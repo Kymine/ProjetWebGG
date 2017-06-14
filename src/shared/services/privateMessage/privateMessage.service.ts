@@ -1,25 +1,23 @@
 import {Injectable} from "@angular/core";
 import {Headers, Http, RequestOptions, Response} from "@angular/http";
-import {URLSERVER} from "../../constants/urls";
 import {ReplaySubject} from "rxjs/ReplaySubject";
 import {PrivateMessageModel} from "../../models/PrivateMessageModel";
 import {USER} from "../../constants/user";
-
-
 
 @Injectable()
 export class PrivateMessageServices {
 
   private url: string;
-  public privatemessageList$: ReplaySubject<PrivateMessageModel[]>;
+  public privateMessageList$: ReplaySubject<PrivateMessageModel[]>;
 
   constructor(private http: Http) {
     this.url = "http://projet-3a.7ight.com/api/users";
-    this.privatemessageList$ = new ReplaySubject(1);
+    this.privateMessageList$ = new ReplaySubject(1);
   }
 
-  public getMessages(correpondentUser: string) {
-    const finalUrl = this.url + "/" + USER + "/messages?currentUserId=" + correpondentUser;
+  public getMessages(correspondentUser: string) {
+    console.log(correspondentUser);
+    const finalUrl = this.url + "/" + USER + "/messages?currentUserId=" + correspondentUser;
     this.http.get(finalUrl)
       .subscribe((response) => this.extractAndUpdateMessageList(response));
   }
@@ -32,19 +30,15 @@ export class PrivateMessageServices {
       .subscribe((response) => this.extractMessageAndGetMessages(response, correspondentUser));
   }
 
-
   private extractMessageAndGetMessages(response: Response, correspondentUser: string): PrivateMessageModel {
     const messageList = response.json() || [];
-    this.privatemessageList$.next(messageList);
+    this.privateMessageList$.next(messageList);
     this.getMessages(correspondentUser);
     return messageList[0];
   }
 
   extractAndUpdateMessageList(response: Response) {
     const messageList = response.json() || [];
-    this.privatemessageList$.next(messageList);
+    this.privateMessageList$.next(messageList);
   }
-
-
-
 }

@@ -2,6 +2,7 @@ import {CommonModule} from "@angular/common";
 import {NgModule} from "@angular/core";
 
 import {PrivateChannelListComponent} from "./private-channel-list.component";
+import {PrivateChannelService} from "../../../shared/services/privateChannel/privateChannel.service";
 
 @NgModule({
   declarations: [
@@ -11,7 +12,7 @@ import {PrivateChannelListComponent} from "./private-channel-list.component";
     CommonModule
   ],
   exports: [PrivateChannelListComponent],
-  providers: []
+  providers: [PrivateChannelService]
 })
 export class PrivateChannelListModule {
 }

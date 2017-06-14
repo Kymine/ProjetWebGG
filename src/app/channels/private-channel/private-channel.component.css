@@ -1,0 +1,30 @@
+div
+{
+  position: relative;
+  border: 1px #0084FF solid;
+  border-radius: 5px;
+  align: center;
+  min-height: 60px;
+  margin-bottom: 10px;
+}
+
+p
+{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding-left: 5px;
+  display: inline-block;
+  width: 65%;
+  overflow-scrolling: touch;
+}
+
+button
+{
+  margin-top: 10px;
+  margin-right: 5px;
+  float: right;
+  width: auto;
+  display: inline-block;
+  color: rgb(102, 166, 184);
+}
