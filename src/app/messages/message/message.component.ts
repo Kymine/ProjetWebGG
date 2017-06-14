@@ -54,16 +54,24 @@ export class MessageComponent implements OnInit {
     let result = false;
     if (characters.includes("http://") || characters.includes("https://")) {
       result = true;
+    }
+    return result;
+  }
+  isAnUrlToLoad(characters: string): boolean {
+    let result = false;
+    if (characters.includes("http://") || characters.includes("https://")) {
       if (characters.includes("youtube")) {
         this.result = this.getYoutubeUrl(characters);
+        result = true;
       }
       if (characters.includes("twitter")) {
         this.result = this.getTwitterUrl(characters);
+        result = true;
       }
       if (characters.includes("instagram")) {
         this.result = this.getInstagramUrl(characters);
+        result = true;
       }
-      // console.log(this.result);
     }
     return result;
   }
