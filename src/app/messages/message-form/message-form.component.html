@@ -1,10 +1,11 @@
 <div>
-  <input type="text" class="form-control" id="name" required [(ngModel)]="message.content" name="name">
   <div *ngIf="channelType2 === 0">
+    <input type="text" class="form-control" id="name" required [(ngModel)]="message.content" name="name">
     <button class="btn btn-primary" (click)="sendMessage()"> Send</button>
   </div>
 
   <div *ngIf="channelType2 === 1">
+    <input type="text" class="form-control" id="nom" required [(ngModel)]="privatemessage.content" name="name">
     <button class="btn btn-primary" (click)="sendPrivateMessage()"> Send</button>
   </div>
 </div>
