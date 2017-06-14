@@ -2,7 +2,7 @@
  * Classe représentant object Message
  * Cet objet est renvoyé grâce à l'url /threads/:id/messages avec :id un nombre entier représentant l'id d'un Channel
  */
-export class MessageModel {
+export class PrivateMessageModel {
 
   /**
    * Identifiant du message.
@@ -33,16 +33,14 @@ export class MessageModel {
   /**
    * Identifiant de la thread
    */
-  public threadId: number;
+  public userId: string;
 
-  public url: string;
-
-  constructor(id?: number, content?: string, from?: string, createdAt?: string, updatedAt?: string, threadId?: number) {
+  constructor(id?: number, content?: string, from?: string, createdAt?: string, updatedAt?: string, userId?: string) {
     this.id = id;
     this.content = content;
     this.from = from;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
-    this.threadId = threadId;
+    this.userId = userId;
   }
 }

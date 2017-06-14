@@ -1,21 +1,52 @@
-<h1>G-Messenger</h1>
-
-<section>
-  <h2>Channel space</h2>
-  <app-channel-form></app-channel-form>
-  <app-channel-list></app-channel-list>
-</section>
-
-<aside>
-  <h2>Messages</h2>
-
-  <div class="select_page">
-    <button class="previous_page" (click)="prevMessages()">&#60;</button>
-    <button class="next_page" (click)="nextMessages()">&#62;</button>
+<nav class="nav-bar">
+  <h1 class="messenger-title">G-Messenger</h1>
+  <div class="nav-bar-btn">
+    <button class="public_channel" (click)="publicChannels()">Public channels</button>
+    <button class="private_channel" (click)="privateChannels()">Private channels</button>
   </div>
+</nav>
 
-  <p class="p_footer">Page n°{{messageService.pageNumber}}</p>
+<div *ngIf="channelType === 0">
+  <section>
+    <h2>Public Channel space</h2>
+    <app-channel-form></app-channel-form>
+    <div class="channel-list">
+      <app-channel-list></app-channel-list>
+    </div>
+  </section>
 
-  <app-message-list></app-message-list>
-  <app-message-form></app-message-form>
-</aside>
+  <aside>
+    <h2>Public Messages on Channel <strong>{{channelService.currentChannelRoute.name}}</strong></h2>
+
+    <div class="select_page">
+      <button class="previous_page" (click)="prevMessages()">&#60;</button>
+      <button class="next_page" (click)="nextMessages()">&#62;</button>
+    </div>
+
+    <p class="p_footer">Page n°{{messageService.pageNumber}}</p>
+
+    <app-message-list></app-message-list>
+    <app-message-form></app-message-form>
+  </aside>
+</div>
+
+<div *ngIf="channelType === 1">
+  <section>
+    <h2 class="private-channel-space">Private Channel space</h2>
+    <app-private-channel-list></app-private-channel-list>
+  </section>
+
+  <aside>
+    <h2>Private Messages with <strong>{{privateMessageService.currentUser}}</strong></h2>
+
+    <div class="select_page">
+      <button class="previous_page" (click)="prevMessages()">&#60;</button>
+      <button class="next_page" (click)="nextMessages()">&#62;</button>
+    </div>
+
+    <p class="p_footer">Page n°{{privateMessageService.pageNumber}}</p>
+
+    <app-message-list></app-message-list>
+    <app-message-form></app-message-form>
+  </aside>
+</div>

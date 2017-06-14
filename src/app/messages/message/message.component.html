@@ -1,4 +1,11 @@
-<p>
-  Message: <strong> {{message.content}} </strong> <br>
-  From: <strong>{{message.from}}</strong>
-</p>
+<div>
+  <p>Message:</p>
+  <div *ngFor="let currentMessage of stringList">
+    <strong *ngIf="isAnUrlToLoad(currentMessage)">
+      <iframe [src]="result | safe"></iframe><br>
+    </strong>
+    <strong *ngIf="notUrl(currentMessage)">{{currentMessage}}</strong>
+    <strong *ngIf="isAnUrl(currentMessage)"><a href={{currentMessage}}>{{currentMessage}}</a></strong>
+  </div>
+  <p><br>  From: <strong>{{message.from}}</strong></p>
+</div>

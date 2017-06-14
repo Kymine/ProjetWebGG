@@ -1,4 +1,12 @@
-p {
+div
+{
   text-align: justify;
   background-color: rgb(221, 234, 235);
+  word-wrap: break-word;
+}
+
+iframe
+{
+  width: 300px;
+  height: 300px;
 }

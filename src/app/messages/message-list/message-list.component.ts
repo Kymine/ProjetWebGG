@@ -4,6 +4,10 @@ import {MessageService} from "../../../shared/services";
 import {MessageModel} from "../../../shared/models/MessageModel";
 import {ChannelService} from "../../../shared/services/channel/channel.service";
 import {ChannelModel} from "../../../shared/models/ChannelModel";
+import {PrivateMessageModel} from "../../../shared/models/PrivateMessageModel";
+import {PrivateChannelService} from "../../../shared/services/privateChannel/privateChannel.service";
+import {PrivateMessageServices} from "../../../shared/services/privateMessage/privateMessage.service";
+import {USER} from "../../../shared/constants/user";
 
 @Component({
   selector: "app-message-list",
@@ -13,12 +17,18 @@ import {ChannelModel} from "../../../shared/models/ChannelModel";
 export class MessageListComponent implements OnInit {
 
   public messageList: MessageModel[];
+  public privateMessageList: PrivateMessageModel[];
   private route: string;
+  private channelType;
 
-  constructor(private messageService: MessageService, private channelService: ChannelService) {
+  constructor(private messageService: MessageService, private channelService: ChannelService,
+              private privateChannelService: PrivateChannelService, private privateMessageService: PrivateMessageServices) {
     // this.route = "414/messages";
     channelService.currentChannelRoute = new ChannelModel(414);
+    channelService.currentChannelRoute.name = "Général";
     this.route = "" + channelService.currentChannelRoute.id + "/messages";
+    privateChannelService.currentPrivateChannel = USER;
+    this.channelType = this.privateChannelService.channelType;
   }
 
   /**
@@ -34,5 +44,7 @@ export class MessageListComponent implements OnInit {
     this.route = "" + this.channelService.currentChannelRoute.id + "/messages";
     this.messageService.getMessages(2, this.route);
     this.messageService.messageList$.subscribe((messages) => this.messageList = messages);
+    this.privateMessageService.getMessages(2, this.privateChannelService.currentPrivateChannel);
+    this.privateMessageService.privateMessageList$.subscribe((messages) => this.privateMessageList = messages);
   }
 }
