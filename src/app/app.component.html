@@ -14,7 +14,7 @@
   </section>
 
   <aside>
-    <h2>Public Messages</h2>
+    <h2>Public Messages on Channel <strong>{{channelService.currentChannelRoute.name}}</strong></h2>
 
     <div class="select_page">
       <button class="previous_page" (click)="prevMessages()">&#60;</button>
@@ -36,7 +36,7 @@
   </section>
 
   <aside>
-    <h2>Private Messages</h2>
+    <h2>Private Messages with <strong>{{privateMessageService.currentUser}}</strong></h2>
 
     <div class="select_page">
       <button class="previous_page" (click)="prevMessages()">&#60;</button>

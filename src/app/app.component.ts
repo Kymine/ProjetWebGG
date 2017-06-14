@@ -1,9 +1,10 @@
-import {Component} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 import {MessageService} from "../shared/services/message/message.service";
 import {ChannelService} from "../shared/services/channel/channel.service";
 import {PrivateChannelService} from "../shared/services/privateChannel/privateChannel.service";
 import {PrivateMessageServices} from "../shared/services/privateMessage/privateMessage.service";
+import {ChannelModel} from "../shared/models/ChannelModel";
 
 @Component({
   selector: "app-root",
@@ -18,7 +19,6 @@ export class AppComponent {
    * Channel privé (channelType === 1)
    */
   public channelType: number;
-
   public title: string;
 
   constructor(public messageService: MessageService, public channelService: ChannelService,
