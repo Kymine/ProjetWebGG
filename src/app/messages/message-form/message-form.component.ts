@@ -56,6 +56,7 @@ export class MessageFormComponent implements OnInit {
   }
 
   sendPrivateMessage() {
+    this.privatemessage.content = this.replaceSmiley(this.privatemessage.content);
     this.privateMessageService.postMessage(this.privateChannelService.currentPrivateChannel, this.privatemessage);
   }
 }
