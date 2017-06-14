@@ -38,7 +38,7 @@ export class MessageFormComponent implements OnInit {
     result = result.replace(/\<3/g, "❤️");
     result = result.replace(/\;\)/g, "😉");
     result = result.replace(/\:\p/g, "😛");
-    result = result.replace(/\:\D/g, "😄");
+    // result = result.replace(/\:\D/g, "😄");
     return result;
   }
 
