@@ -1,19 +1,29 @@
-div
-{
-  border: 1px black dotted;
-  min-height: 60px;
+.channel-root {
+  position: relative;
+  display: inline-block;
+  border: 1px black solid;
+  border-radius: 5px;
+  height: 60px;
+  width: 300px;
+  word-wrap: break-word;
+  text-overflow: ellipsis;
 }
 
-p
-{
-  float: left;
-  width: 230px;
-  overflow-scrolling: touch;
-}
-
-button
-{
-  float: right;
+.channel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-block;
   color: rgb(102, 166, 184);
-  margin-top: 2px;
+  border-radius: 5px;
+}
+
+.channel-info {
+  overflow: hidden;
+  text-overflow: "..." ellipsis;
+  display: inline-block;
+  width: 230px;
+  height: 50px;
+  margin-top: 5px;
+  margin-left: 10px;
 }

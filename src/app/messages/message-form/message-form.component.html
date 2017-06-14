@@ -1,6 +1,6 @@
 <div>
   <div *ngIf="channelType2 === 0">
-    <input type="text" class="form-control" id="name" required [(ngModel)]="message.content" name="name">
+    <input type="text" class="form-control" id="name" required [(ngModel)]="message.content" (keyup.enter)="sendMessage()" name="name">
     <button class="btn btn-primary" (click)="sendMessage()"> Send</button>
   </div>
 
