@@ -1,6 +1,11 @@
-<p>
-  Message:
-  <strong *ngIf=isAnUrl()><br><iframe [src]="message.content | safe"></iframe></strong>
-  <strong ng-else>{{message.content}}</strong>
-  <br>  From: <strong>{{message.from}}</strong>
-</p>
+<div>
+  <p>Message:</p>
+  <div *ngFor="let currentMessage of stringList">
+    <strong *ngIf=isAnUrl(currentMessage)>
+      <iframe [src]="result | safe"></iframe><br>
+      <a href={{currentMessage}}>{{currentMessage}}</a>
+    </strong>
+    <strong *ngIf=notUrl(currentMessage)>{{currentMessage}}</strong>
+  </div>
+  <p><br>  From: <strong>{{message.from}}</strong></p>
+</div>

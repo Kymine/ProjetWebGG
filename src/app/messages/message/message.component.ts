@@ -10,6 +10,8 @@ import {MessageModel} from "../../../shared/models/MessageModel";
 export class MessageComponent implements OnInit {
 
   @Input() message: MessageModel;
+  stringList: string[];
+  result: string;
   constructor() {
     this.message = new MessageModel(0, "Hello!");
   }
@@ -23,12 +25,43 @@ export class MessageComponent implements OnInit {
    * le faire dans le ngOnInit.
    */
   ngOnInit() {
+    this.stringList = this.message.content.split(" ");
   }
-  isAnUrl(): boolean {
+  notUrl(characters: string): boolean {
+    return !this.isAnUrl(characters);
+  }
+  isAnUrl(characters: string): boolean {
     let result = false;
-    if (this.message.content && (this.message.content.includes("http://") || this.message.content.includes("https://"))) {
+    if (characters.includes("http://") || characters.includes("https://")) {
       result = true;
+      if (characters.includes("youtube")) {
+        this.result = this.getYoutubeUrl(characters);
+      }
+      if (characters.includes("twitter")) {
+        this.result = this.getTwitterUrl(characters);
+      }
+      if (characters.includes("instagram")) {
+        this.result = this.getInstagramUrl(characters);
+      }
+      // console.log(this.result);
     }
     return result;
+  }
+  getUrl(myUrl: string, toReplace: string, word): string {
+    if (myUrl.includes(toReplace)) {
+      myUrl = myUrl.replace(toReplace, word);
+    }
+    return myUrl;
+  }
+  getYoutubeUrl(myUrl: string): string {
+    return this.getUrl(myUrl, "watch?v=", "embed/");
+  }
+  getTwitterUrl(myUrl: string): string {
+    const id1 = myUrl.split("/")[3];
+    const id2 = myUrl.split("/")[5];
+    return "http://twitframe.com/show?url=https%3A%2F%2Ftwitter.com%2F" + id1 + "%2Fstatus%2F" + id2;
+  }
+  getInstagramUrl(myUrl: string): string {
+    return this.getUrl(myUrl, "?hl=en", "embed/");
   }
 }
