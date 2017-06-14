@@ -20,18 +20,22 @@ export class AppComponent {
 
   public title: string;
 
-  constructor(public messageService: MessageService, public channelService: ChannelService) {
+  constructor(public messageService: MessageService, public channelService: ChannelService,
+              public privateChannelService: PrivateChannelService) {
     this.title = "Chat";
     this.channelType = 0;
+    this.privateChannelService.channelType = 0;
     Observable.create();
   }
 
   publicChannels() {
     this.channelType = 0;
+    this.privateChannelService.channelType = 0;
   }
 
   privateChannels() {
     this.channelType = 1;
+    this.privateChannelService.channelType = 1;
   }
 
   prevMessages() {

@@ -4,6 +4,9 @@ import {MessageService} from "../../../shared/services";
 import {MessageModel} from "../../../shared/models/MessageModel";
 import {ChannelService} from "../../../shared/services/channel/channel.service";
 import {USER} from "../../../shared/constants/user";
+import {PrivateChannelService} from "../../../shared/services/privateChannel/privateChannel.service";
+import {PrivateMessageServices} from "../../../shared/services/privateMessage/privateMessage.service";
+import {PrivateMessageModel} from "../../../shared/models/PrivateMessageModel";
 
 @Component({
   selector: "app-message-form",
@@ -14,10 +17,15 @@ export class MessageFormComponent implements OnInit {
 
   public message: MessageModel;
   private route: string;
+  public privatemessage: PrivateMessageModel;
+  private channelType2;
 
-  constructor(private messageService: MessageService, private channelService: ChannelService) {
+  constructor(private messageService: MessageService, private channelService: ChannelService,
+              private privateChannelService: PrivateChannelService, private privateMessageService: PrivateMessageServices) {
     this.message = new MessageModel(channelService.currentChannelRoute.id, "Hello", USER);
     this.route = "" + channelService.currentChannelRoute.id + "/messages";
+    this.privatemessage = new PrivateMessageModel(1, "Hello", USER);
+    this.channelType2 = this.privateChannelService.channelType;
   }
 
   ngOnInit() {
@@ -33,5 +41,9 @@ export class MessageFormComponent implements OnInit {
     this.route = "" + this.channelService.currentChannelRoute.id + "/messages";
     console.log("Click!");
     this.messageService.sendMessage(this.route, this.message);
+  }
+
+  sendPrivateMessage() {
+    this.privateMessageService.postMessage(this.privateChannelService.currentPrivateChannel, this.privatemessage);
   }
 }

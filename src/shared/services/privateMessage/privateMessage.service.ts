@@ -11,7 +11,7 @@ import {USER} from "../../constants/user";
 export class PrivateMessageServices {
 
   private url: string;
-  public privatemessageList$: ReplaySubject<PrivateMessageModel>;
+  public privatemessageList$: ReplaySubject<PrivateMessageModel[]>;
 
   constructor(private http: Http) {
     this.url = "http://projet-3a.7ight.com/api/users";
@@ -25,7 +25,7 @@ export class PrivateMessageServices {
   }
 
   public postMessage(correspondentUser: string, message: PrivateMessageModel) {
-    const finalUrl = this.url + "users/" + correspondentUser + "/messages";
+    const finalUrl = this.url + "/" + correspondentUser + "/messages";
     const headers = new Headers({"Content-Type": "application/json"});
     const options = new RequestOptions({headers: headers});
     this.http.post(finalUrl, message, options)

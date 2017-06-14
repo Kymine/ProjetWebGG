@@ -8,6 +8,7 @@ export class PrivateChannelService {
   private url: string;
   public userList$: ReplaySubject<string[]>;
   public currentPrivateChannel: string;
+  public channelType: number;
 
   constructor(private http: Http) {
     this.url = "http://projet-3a.7ight.com/api/users";
