@@ -3,6 +3,7 @@ import {Observable} from "rxjs/Observable";
 import {MessageService} from "../shared/services/message/message.service";
 import {ChannelService} from "../shared/services/channel/channel.service";
 import {PrivateChannelService} from "../shared/services/privateChannel/privateChannel.service";
+import {PrivateMessageServices} from "../shared/services/privateMessage/privateMessage.service";
 
 @Component({
   selector: "app-root",
@@ -21,7 +22,7 @@ export class AppComponent {
   public title: string;
 
   constructor(public messageService: MessageService, public channelService: ChannelService,
-              public privateChannelService: PrivateChannelService) {
+              public privateChannelService: PrivateChannelService, public privateMessageService: PrivateMessageServices) {
     this.title = "Chat";
     this.channelType = 0;
     this.privateChannelService.channelType = 0;
@@ -39,10 +40,18 @@ export class AppComponent {
   }
 
   prevMessages() {
-    this.messageService.getMessages(0, this.channelService.currentChannelRoute.id + "/messages");
+    if (this.channelType === 0) {
+      this.messageService.getMessages(0, this.channelService.currentChannelRoute.id + "/messages");
+    } else if (this.channelType === 1) {
+      this.privateMessageService.getMessages(0, this.privateMessageService.currentUser);
+    }
   }
 
   nextMessages() {
-    this.messageService.getMessages(1, this.channelService.currentChannelRoute.id + "/messages");
+    if (this.channelType === 0) {
+      this.messageService.getMessages(1, this.channelService.currentChannelRoute.id + "/messages");
+    } else if (this.channelType === 1) {
+      this.privateMessageService.getMessages(1, this.privateMessageService.currentUser);
+    }
   }
 }
