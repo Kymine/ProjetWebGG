@@ -1,3 +1,5 @@
+<div *ngIf="status === true">
+
 <nav class="nav-bar">
   <h1 class="messenger-title">G-Messenger</h1>
   <div class="nav-bar-btn">
@@ -49,4 +51,12 @@
     <app-message-list></app-message-list>
     <app-message-form></app-message-form>
   </aside>
+</div>
+</div>
+
+
+<div *ngIf="status === false">
+  <input type="text" class="form-control" id="user" required [(ngModel)]="user"
+         (keyup.enter)="login()" name="user">
+  <button class="btn btn-primary" (click)="login()">Send</button>
 </div>

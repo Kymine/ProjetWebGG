@@ -5,6 +5,7 @@ import {ChannelService} from "../shared/services/channel/channel.service";
 import {PrivateChannelService} from "../shared/services/privateChannel/privateChannel.service";
 import {PrivateMessageServices} from "../shared/services/privateMessage/privateMessage.service";
 import {ChannelModel} from "../shared/models/ChannelModel";
+import {LoginService} from "../shared/services/login/login.service";
 
 @Component({
   selector: "app-root",
@@ -20,13 +21,18 @@ export class AppComponent {
    */
   public channelType: number;
   public title: string;
+  public user: string;
+  public status: boolean;
 
   constructor(public messageService: MessageService, public channelService: ChannelService,
-              public privateChannelService: PrivateChannelService, public privateMessageService: PrivateMessageServices) {
+              public privateChannelService: PrivateChannelService,
+              public privateMessageService: PrivateMessageServices, public loginService: LoginService) {
     this.title = "Chat";
     this.channelType = 0;
     this.privateChannelService.channelType = 0;
     Observable.create();
+    this.user = loginService.username;
+    this.status = loginService.status;
   }
 
   publicChannels() {
@@ -52,6 +58,13 @@ export class AppComponent {
       this.messageService.getMessages(1, this.channelService.currentChannelRoute.id + "/messages");
     } else if (this.channelType === 1) {
       this.privateMessageService.getMessages(1, this.privateMessageService.currentUser);
+    }
+  }
+
+  login() {
+    if (this.user !== "") {
+      this.loginService.login(this.user);
+      this.status = this.loginService.status;
     }
   }
 }

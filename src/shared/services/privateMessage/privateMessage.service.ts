@@ -3,6 +3,7 @@ import {Headers, Http, RequestOptions, Response} from "@angular/http";
 import {ReplaySubject} from "rxjs/ReplaySubject";
 import {PrivateMessageModel} from "../../models/PrivateMessageModel";
 import {USER} from "../../constants/user";
+import {LoginService} from "../login/login.service";
 
 @Injectable()
 export class PrivateMessageServices {
@@ -12,7 +13,7 @@ export class PrivateMessageServices {
   public pageNumber: number;
   public currentUser: string;
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private loginService: LoginService) {
     this.url = "http://projet-3a.7ight.com/api/users";
     this.privateMessageList$ = new ReplaySubject(1);
   }
@@ -31,7 +32,7 @@ export class PrivateMessageServices {
     } else {
       this.pageNumber = 0;
     }
-    const finalUrl = this.url + "/" + USER + "/messages?currentUserId=" + correspondentUser + pageSelector;
+    const finalUrl = this.url + "/" + this.loginService.username + "/messages?currentUserId=" + correspondentUser + pageSelector;
     this.http.get(finalUrl)
       .subscribe((response) => this.extractAndUpdateMessageList(response));
   }

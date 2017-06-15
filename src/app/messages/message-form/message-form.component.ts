@@ -7,6 +7,7 @@ import {USER} from "../../../shared/constants/user";
 import {PrivateChannelService} from "../../../shared/services/privateChannel/privateChannel.service";
 import {PrivateMessageServices} from "../../../shared/services/privateMessage/privateMessage.service";
 import {PrivateMessageModel} from "../../../shared/models/PrivateMessageModel";
+import {LoginService} from "../../../shared/services/login/login.service";
 
 @Component({
   selector: "app-message-form",
@@ -21,10 +22,11 @@ export class MessageFormComponent implements OnInit {
   private channelType2;
 
   constructor(private messageService: MessageService, private channelService: ChannelService,
-              private privateChannelService: PrivateChannelService, private privateMessageService: PrivateMessageServices) {
-    this.message = new MessageModel(channelService.currentChannelRoute.id, "Hello", USER);
+              private privateChannelService: PrivateChannelService,
+              private privateMessageService: PrivateMessageServices, private loginservice: LoginService) {
+    this.message = new MessageModel(channelService.currentChannelRoute.id, "Hello", loginservice.username);
     this.route = "" + channelService.currentChannelRoute.id + "/messages";
-    this.privatemessage = new PrivateMessageModel(1, "Hello", USER);
+    this.privatemessage = new PrivateMessageModel(1, "Hello", loginservice.username);
     this.channelType2 = this.privateChannelService.channelType;
   }
 
