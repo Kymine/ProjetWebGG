@@ -70,7 +70,6 @@ export class MessageComponent implements OnInit {
       }
       const reg = /https:\/\/www.instagram.com\/p\/[^\ ^\/]*/;
       const res = this.message.content.match(reg);
-
       if (res != null && res.length > 0) {
         res[0] += "/embed/";
         result = true;
