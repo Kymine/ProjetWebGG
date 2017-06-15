@@ -5,13 +5,7 @@ div
   word-wrap: break-word;
 }
 
-iframe
-{
-  width: 300px;
-  height: 300px;
-}
-
-img
+iframe, img
 {
   width: 300px;
   height: 300px;
