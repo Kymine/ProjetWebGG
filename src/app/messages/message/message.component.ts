@@ -101,10 +101,12 @@ export class MessageComponent implements OnInit {
   isAnImage(myUrl: string): boolean {
     const formats = ["JPEG", "JPEG2000", "GIF", "PNG", "TIFF", "SVG", "JPG"];
     let test = false;
-    for (let i = 0; i < formats.length; i++) {
-      if (myUrl.endsWith(formats[i]) || myUrl.endsWith(formats[i].toLowerCase())) {
-        test = true;
-        break;
+    if (this.isAnUrl(myUrl)) {
+      for (let i = 0; i < formats.length; i++) {
+        if (myUrl.endsWith(formats[i]) || myUrl.endsWith(formats[i].toLowerCase())) {
+          test = true;
+          break;
+        }
       }
     }
     return test;
