@@ -64,7 +64,7 @@ export class PrivateMessageServices {
         this.privateMessageList$.next([new PrivateMessageModel()]);
       }
     } else {
-      if ((<PrivateMessageModel> messageList[0]).createdAt !== listmessage[0].createdAt) {
+      if (listmessage == null || (<PrivateMessageModel> messageList[0]).createdAt !== listmessage[0].createdAt) {
         this.privateMessageList$.next(messageList);
       }
     }

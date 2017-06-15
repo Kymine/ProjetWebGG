@@ -109,7 +109,7 @@ export class MessageService {
           this.messageList$.next([new MessageModel()]);
         }
       } else {
-        if ((<MessageModel> messageList[0]).createdAt !== listmessage[0].createdAt) {
+        if ( listmessage == null || (<MessageModel> messageList[0]).createdAt !== listmessage[0].createdAt) {
           this.messageList$.next(messageList);
         }
       }
