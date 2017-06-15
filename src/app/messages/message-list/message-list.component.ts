@@ -49,6 +49,6 @@ export class MessageListComponent implements OnInit {
       this.messageService.messageList$.subscribe((messages) => this.messageList = messages);
       this.privateMessageService.getMessages(2, this.privateChannelService.currentPrivateChannel, this.privateMessageList);
       this.privateMessageService.privateMessageList$.subscribe((messages) => this.privateMessageList = messages);
-    }, 100 );
+    }, 1000 );
   }
 }
