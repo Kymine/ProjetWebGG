@@ -20,6 +20,7 @@ export class LoginService {
 
   logout() {
     this.username = "";
+    this.status = false;
   }
 
   isConnected() {

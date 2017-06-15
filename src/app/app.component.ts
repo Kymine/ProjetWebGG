@@ -67,4 +67,9 @@ export class AppComponent {
       this.status = this.loginService.status;
     }
   }
+  logout() {
+    this.loginService.logout();
+    this.user = this.loginService.username;
+    this.status = this.loginService.status;
+  }
 }
