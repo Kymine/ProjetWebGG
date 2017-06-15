@@ -1,12 +1,25 @@
 .channel-root {
   position: relative;
   display: inline-block;
-  border: 1px black solid;
-  border-radius: 5px;
+  border-bottom: 1px lightgray solid;
   height: 60px;
   width: 300px;
   word-wrap: break-word;
   text-overflow: ellipsis;
+}
+
+.channel-root:hover {
+  background-color: #F2F2F2;
+}
+
+.channel-info {
+  overflow: hidden;
+  text-overflow: "..." ellipsis;
+  display: inline-block;
+  width: 200px;
+  height: 50px;
+  margin-top: 5px;
+  margin-left: 10px;
 }
 
 .channel-btn {
@@ -14,16 +27,28 @@
   top: 50%;
   transform: translateY(-50%);
   display: inline-block;
-  color: rgb(102, 166, 184);
-  border-radius: 5px;
+  background: #ECECEC;
+  border-radius: 15px;
+  font-weight: bold;
+  color: #7f7f7f;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #fff;
+  border: 1px solid #a7a7a7;
+  width: 80px;
+  box-shadow: 0px 2px 1px white inset, 0px -2px 8px white, 0px 2px 5px rgba(0, 0, 0, 0.1), 0px 8px 10px rgba(0, 0, 0, 0.1);
+  -webkit-transition: box-shadow 0.5s;
 }
 
-.channel-info {
-  overflow: hidden;
-  text-overflow: "..." ellipsis;
-  display: inline-block;
-  width: 230px;
-  height: 50px;
-  margin-top: 5px;
-  margin-left: 10px;
+button:hover {
+  box-shadow: 0px 2px 1px white inset, 0px -2px 20px white, 0px 2px 5px rgba(0, 0, 0, 0.1), 0px 8px 10px rgba(0, 0, 0, 0.1);
 }
+
+button:active {
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5) inset, 0px -2px 20px white, 0px 1px 5px rgba(0, 0, 0, 0.1), 0px 2px 10px rgba(0, 0, 0, 0.1);
+  background: -webkit-linear-gradient(top, #d1d1d1 0%, #ECECEC 100%);
+}
+
+button:after {
+
+}
+

@@ -15,9 +15,13 @@ import {MessageService} from "../../../shared/services/message/message.service";
 
 export class ChannelComponent implements OnInit {
   @Input() channel: ChannelModel;
+  public showStyle: boolean;
+  public lastChannel: ChannelComponent;
 
   constructor(private channelService: ChannelService, private messageService: MessageService) {
     this.channel = new ChannelModel(0, "Channel");
+    this.showStyle = false;
+    this.lastChannel = this;
   }
 
   ngOnInit() {
@@ -30,6 +34,22 @@ export class ChannelComponent implements OnInit {
     this.channelService.currentChannelRoute.id = id;
     this.channelService.currentChannelRoute.name = this.channel.name;
     this.messageService.getMessages(2, "" + id + "/messages");
+  }
+
+  getStyle() {
+    if (this.lastChannel !== this) {
+      this.lastChannel.showStyle = false;
+      this.lastChannel.getStyle();
+    }
+
+    if (this.showStyle) {
+      this.lastChannel = this;
+      return "#F2F2F2";
+    } else {
+      this.showStyle = false;
+      return "";
+    }
+
   }
 
 }

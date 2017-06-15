@@ -1,6 +1,6 @@
-<div class="channel-root">
+<div class="channel-root" [style.background-color]="getStyle()">
   <div class="channel-info">
-    Channel n°<strong>{{channel.id}}</strong> : {{channel.name}}
+    <span style="font-style: italic">Channel n°<strong>{{channel.id}}</strong></span> : {{channel.name}}
   </div>
-  <button class="channel-btn" (click)="joinChannel(channel.id)">Join</button>
+  <button class="channel-btn" (click)="showStyle = !showStyle; joinChannel(channel.id)">Join</button>
 </div>
