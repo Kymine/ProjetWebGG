@@ -63,6 +63,7 @@ export class AppComponent {
 
   login() {
     if (this.user !== "") {
+      this.user = this.user.toLowerCase();
       this.loginService.login(this.user);
       this.status = this.loginService.status;
     }
