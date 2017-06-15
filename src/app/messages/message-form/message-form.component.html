@@ -11,3 +11,13 @@
     <button class="btn btn-primary" (click)="sendPrivateMessage()">Send</button>
   </div>
 </div>
+<div>
+  <button class="btn btn-primary" (click)="hide()">{{buttonWeather}}</button>
+</div>
+<div *ngIf="hideBol">
+  <strong>City :</strong> {{city}} <br>
+  <strong>Current temp :</strong> {{currentTemp}}°C <br>
+  <strong>Max temp :</strong> {{temp_max}}°C<br>
+  <strong>Min temp :</strong> {{temp_min}}°C<br>
+  <strong>Description :</strong> {{description}}<br>
+</div>

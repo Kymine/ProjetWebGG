@@ -8,6 +8,7 @@ import {PrivateChannelService} from "../../../shared/services/privateChannel/pri
 import {PrivateMessageServices} from "../../../shared/services/privateMessage/privateMessage.service";
 import {PrivateMessageModel} from "../../../shared/models/PrivateMessageModel";
 import {LoginService} from "../../../shared/services/login/login.service";
+import {WeatherServices} from "../../../shared/services/weather/weather.service";
 
 @Component({
   selector: "app-message-form",
@@ -20,20 +21,32 @@ export class MessageFormComponent implements OnInit {
   private route: string;
   public privatemessage: PrivateMessageModel;
   private channelType2;
+  hideBol: boolean;
+  buttonWeather: String;
+  sendWeatherBefore: boolean;
+  city: string;
+  currentTemp: number;
+  temp_min: number;
+  temp_max: number;
+  description: string;
 
   constructor(private messageService: MessageService, private channelService: ChannelService,
               private privateChannelService: PrivateChannelService,
-              private privateMessageService: PrivateMessageServices, private loginservice: LoginService) {
+              private privateMessageService: PrivateMessageServices, private loginservice: LoginService,
+              private weatherservices: WeatherServices) {
     this.message = new MessageModel(channelService.currentChannelRoute.id, "Hello", loginservice.username);
     this.route = "" + channelService.currentChannelRoute.id + "/messages";
     this.privatemessage = new PrivateMessageModel(1, "Hello", loginservice.username);
     this.channelType2 = this.privateChannelService.channelType;
+    this.hideBol = false;
+    this.buttonWeather = "Show Weather";
+    this.sendWeatherBefore = false;
   }
 
   ngOnInit() {
   }
-  replaceSmiley(content: string) {
-    let smiley = content.replace(/\:\)/gi, "🙂");
+  replaceSmiley(contents: string) {
+    let smiley = contents.replace(/\:\)/gi, "🙂");
     smiley = smiley.replace(/;\)/gi, "😉");
     smiley = smiley.replace(/:'\(/gi, "😢");
     smiley = smiley.replace(/:\(/gi, "😞");
@@ -50,8 +63,17 @@ export class MessageFormComponent implements OnInit {
    * ainsi que le message à envoyer. Ce dernier correspond à l'objet MessageModel que l'utilisateur rempli à travers l'input.
    */
   sendMessage() {
+    if (this.sendWeatherBefore) {
+      this.hideBol = false;
+      this.buttonWeather = "Show Weather";
+    }
     this.route = "" + this.channelService.currentChannelRoute.id + "/messages";
     this.message.content = this.replaceSmiley(this.message.content);
+    this.hideBol = false;
+    if (this.message.content.includes("/meteo")) {
+      this.weatherservices.getWeather(this.meteoCity());
+      this.sendWeatherBefore = true;
+    }
     this.messageService.sendMessage(this.route, this.message);
   }
 
@@ -59,4 +81,21 @@ export class MessageFormComponent implements OnInit {
     this.privatemessage.content = this.replaceSmiley(this.privatemessage.content);
     this.privateMessageService.postMessage(this.privateChannelService.currentPrivateChannel, this.privatemessage);
   }
+  hide() {
+    if (this.hideBol) {
+      this.hideBol = false;
+      this.buttonWeather = "Show Weather";
+    } else {
+      this.hideBol = true;
+      this.description = this.weatherservices.description;
+      this.currentTemp = this.weatherservices.currentTemp;
+      this.temp_min = this.weatherservices.temp_min;
+      this.temp_max = this.weatherservices.temp_max;
+      this.buttonWeather = "Hide Weather";
+    }
+  }
+    meteoCity(): string {
+      return this.city = this.message.content.split((" "))[1];
+    }
+
 }
