@@ -60,6 +60,8 @@ export class PrivateMessageServices {
     if (messageList.length === 0) {
       if (this.pageNumber !== 0) {
         this.pageNumber--;
+      } else {
+        this.privateMessageList$.next([new PrivateMessageModel()]);
       }
     } else {
       if ((<PrivateMessageModel> messageList[0]).createdAt !== listmessage[0].createdAt) {

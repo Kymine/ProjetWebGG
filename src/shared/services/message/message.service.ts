@@ -105,6 +105,8 @@ export class MessageService {
       if (messageList.length === 0) {
         if (this.pageNumber !== 0) {
           this.pageNumber--;
+        } else {
+          this.messageList$.next([new MessageModel()]);
         }
       } else {
         if ((<MessageModel> messageList[0]).createdAt !== listmessage[0].createdAt) {
