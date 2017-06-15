@@ -5,7 +5,8 @@
     <br *ngIf="isAnImage(currentMessage)">
     <iframe *ngIf="isAnUrlToLoad(currentMessage)" [src]="result | safe"></iframe>
     <strong *ngIf="notUrl(currentMessage)">{{currentMessage}}</strong>
-    <a *ngIf="isAnUrl(currentMessage)" href={{currentMessage}}>{{currentMessage}}</a>
+    <br *ngIf="isAnUrl(currentMessage)">
+    <a *ngIf="isAnUrl(currentMessage)" href={{currentMessage}} target="_blank">{{currentMessage}}</a>
     <br *ngIf="isAnUrl(currentMessage)">
   </div>
   <p><br>From: <strong>{{message.from}}</strong></p>
