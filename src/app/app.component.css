@@ -24,6 +24,13 @@ aside {
   z-index: 1;
 }
 
+.private-channel-list {
+  padding-bottom: 2px;
+  height: 500px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
 .channel-list {
   padding-bottom: 2px;
   height: 400px;
