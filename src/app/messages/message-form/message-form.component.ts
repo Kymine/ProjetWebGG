@@ -33,12 +33,15 @@ export class MessageFormComponent implements OnInit {
   ngOnInit() {
   }
   replaceSmiley(content: string) {
-    let result = content.replace(/\:\)/g, "🙂");
-    result = result.replace(/\:\(/g, "😞"); // ok
-    result = result.replace(/\:\o/g, "😲"); // ok
-    result = result.replace(/\<3/g, "❤️"); // ok
-    result = result.replace(/\;\)/g, "😉"); // ok
-    return result;
+    let smiley = content.replace(/\:\)/gi, "🙂");
+    smiley = smiley.replace(/;\)/gi, "😉");
+    smiley = smiley.replace(/:'\(/gi, "😢");
+    smiley = smiley.replace(/:\(/gi, "😞");
+    smiley = smiley.replace(/:D/gi, "😄");
+    smiley = smiley.replace(/:p/gi, "😛");
+    smiley = smiley.replace(/<3/gi, "❤");
+    smiley = smiley.replace(/:o/gi, "😲");
+    return smiley;
   }
   /**
    * Fonction pour envoyer un message.
