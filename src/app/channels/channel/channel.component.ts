@@ -33,7 +33,8 @@ export class ChannelComponent implements OnInit {
   joinChannel(id: number) {
     this.channelService.currentChannelRoute.id = id;
     this.channelService.currentChannelRoute.name = this.channel.name;
-    this.messageService.getMessages(2, "" + id + "/messages");
+    this.messageService.pageNumber = 0;
+    // this.messageService.getMessages(2, "" + id + "/messages");
   }
 
   getStyle() {
