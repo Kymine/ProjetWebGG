@@ -52,7 +52,7 @@ export class MessageComponent implements OnInit {
   }
   isAnUrl(characters: string): boolean {
     let result = false;
-    if (characters.includes("http://") || characters.includes("https://")) {
+    if (characters.startsWith("http://") || characters.startsWith("https://")) {
       result = true;
     }
     return result;
@@ -60,7 +60,7 @@ export class MessageComponent implements OnInit {
   isAnUrlToLoad(characters: string): boolean {
     let result = false;
     if (characters.includes("http://") || characters.includes("https://")) {
-      if (characters.includes("youtube") && (characters.includes("watch?v=") || characters.includes("embed/"))) {
+      if (characters.startsWith("https://www.youtube.com/watch?v=") || (characters.includes("https://www.youtube.com/embed/"))) {
         this.result = this.getYoutubeUrl(characters);
         result = true;
       }
@@ -68,9 +68,13 @@ export class MessageComponent implements OnInit {
         this.result = this.getTwitterUrl(characters);
         result = true;
       }
-      if (characters.includes("instagram")) {
-        this.result = this.getInstagramUrl(characters);
+      const reg = /https:\/\/www.instagram.com\/p\/[^\ ^\/]*/;
+      const res = this.message.content.match(reg);
+
+      if (res != null && res.length > 0) {
+        res[0] += "/embed/";
         result = true;
+        this.result = res[0];
       }
     }
     return result;
@@ -88,15 +92,6 @@ export class MessageComponent implements OnInit {
     const id1 = myUrl.split("/")[3];
     const id2 = myUrl.split("/")[5];
     return "http://twitframe.com/show?url=https%3A%2F%2Ftwitter.com%2F" + id1 + "%2Fstatus%2F" + id2;
-  }
-  getInstagramUrl(myUrl: string): string {
-    const reg = /https:\/\/www.instagram.com\/p\/[^\ ^\/]*/;
-    const res = this.message.content.match(reg);
-
-    if (res != null && res.length > 0) {
-      res[0] += "/embed/";
-    }
-    return res[0];
   }
   isAnImage(myUrl: string): boolean {
     const formats = ["JPEG", "JPEG2000", "GIF", "PNG", "TIFF", "SVG", "JPG"];
