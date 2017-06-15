@@ -29,6 +29,7 @@ export class MessageFormComponent implements OnInit {
   temp_min: number;
   temp_max: number;
   description: string;
+  urlImage: string;
 
   constructor(private messageService: MessageService, private channelService: ChannelService,
               private privateChannelService: PrivateChannelService,
@@ -88,6 +89,7 @@ export class MessageFormComponent implements OnInit {
     } else {
       this.hideBol = true;
       this.description = this.weatherservices.description;
+      this.changeImage(this.description);
       this.currentTemp = this.weatherservices.currentTemp;
       this.temp_min = this.weatherservices.temp_min;
       this.temp_max = this.weatherservices.temp_max;
@@ -96,6 +98,40 @@ export class MessageFormComponent implements OnInit {
   }
     meteoCity(): string {
       return this.city = this.message.content.split((" "))[1];
+    }
+    changeImage(description: string) {
+      const url = "http://openweathermap.org/img/w/";
+      switch (description) {
+        case "clear sky":
+          this.urlImage = url + "01d.png";
+          break;
+        case "few clouds":
+          this.urlImage = url + "02d.png";
+          break;
+        case "scattered clouds":
+          this.urlImage = url + "03d.png";
+          break;
+        case "broken clouds":
+          this.urlImage = url + "04d.png";
+          break;
+        case "shower rain":
+          this.urlImage = url + "09d.png";
+          break;
+        case "rain":
+          this.urlImage = url + "10d.png";
+          break;
+        case "	thunderstorm":
+          this.urlImage = url + "11d.png";
+          break;
+        case "snow":
+          this.urlImage = url + "13d.png";
+          break;
+        case "mist":
+          this.urlImage = url + "50d.png";
+          break;
+        default:
+          break;
+      }
     }
 
 }
