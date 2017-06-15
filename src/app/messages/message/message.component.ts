@@ -90,7 +90,6 @@ export class MessageComponent implements OnInit {
     return "http://twitframe.com/show?url=https%3A%2F%2Ftwitter.com%2F" + id1 + "%2Fstatus%2F" + id2;
   }
   getInstagramUrl(myUrl: string): string {
-
     const reg = /https:\/\/www.instagram.com\/p\/[^\ ^\/]*/;
     const res = this.message.content.match(reg);
 
@@ -98,6 +97,20 @@ export class MessageComponent implements OnInit {
       res[0] += "/embed/";
     }
     return res[0];
-    // return this.getUrl(myUrl, "?hl=en", "embed/");
+  }
+  isAnImage(myUrl: string): boolean {
+    const formats = ["JPEG", "JPEG2000", "GIF", "PNG", "TIFF", "SVG", "JPG"];
+    let test = false;
+    for (let i = 0; i < formats.length; i++) {
+      if (myUrl.endsWith(formats[i])) {
+        test = true;
+        break;
+      }
+      if (myUrl.endsWith(formats[i].toLowerCase())) {
+        test = true;
+        break;
+      }
+    }
+    return test;
   }
 }

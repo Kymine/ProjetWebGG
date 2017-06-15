@@ -1,6 +1,8 @@
 <div>
   <p>Message:</p>
   <div *ngFor="let currentMessage of stringList">
+    <img *ngIf="isAnImage(currentMessage)" [src]="currentMessage">
+    <br *ngIf="isAnImage(currentMessage)">
     <strong *ngIf="isAnUrlToLoad(currentMessage)">
       <iframe [src]="result | safe"></iframe><br>
     </strong>
