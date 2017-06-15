@@ -47,7 +47,7 @@ export class MessageService {
    * @param route
    * @returns {Observable<R>}
    */
-  public getMessages(side: number, route?: string) {
+  public getMessages(side: number, route?: string, listmessage?: MessageModel[]) {
     let pageSelector = "";
     if (side === 0) {
       if (this.pageNumber !== 0) {
@@ -58,11 +58,11 @@ export class MessageService {
       this.pageNumber++;
       pageSelector = "?page=" + this.pageNumber;
     } else {
-      this.pageNumber = 0;
+      pageSelector = "?page=" + this.pageNumber;
     }
     const finalUrl = this.url + route + pageSelector;
     this.http.get(finalUrl)
-      .subscribe((response) => this.extractAndUpdateMessageList(response));
+      .subscribe((response) => this.extractAndUpdateMessageList(response, listmessage));
   }
 
   /**
@@ -81,7 +81,8 @@ export class MessageService {
     const headers = new Headers({"Content-Type": "application/json"});
     const options = new RequestOptions({headers: headers});
     this.http.post(finalUrl, message, options)
-      .subscribe((response) => this.extractMessageAndGetMessages(response, route));
+      .subscribe();
+    this.pageNumber = 0;
 
     // this.http.post(finalUrl,)
     // Je suis vide :(
@@ -96,19 +97,21 @@ export class MessageService {
    * les données de la reponse, il suffit d'appeler la fonction .json() qui retourne le body de la réponse.
    * @param response
    */
-  extractAndUpdateMessageList(response: Response) {
+  extractAndUpdateMessageList(response: Response, listmessage?: MessageModel[]) {
     // Plus d'info sur Response ou sur la fonction .json()? si tu utilises Webstorm,
     // fait CTRL + Click pour voir la déclaration et la documentation
     const messageList = response.json() || []; // ExtractMessage: Si response.json() est undefined ou null,
     // messageList prendra la valeur tableau vide: [];
-    if (messageList.length === 0) {
-      if (this.pageNumber !== 0) {
-        this.pageNumber--;
+      if (messageList.length === 0) {
+        if (this.pageNumber !== 0) {
+          this.pageNumber--;
+        }
+      } else {
+        if ((<MessageModel> messageList[0]).createdAt !== listmessage[0].createdAt) {
+          this.messageList$.next(messageList);
+        }
       }
-    } else {
-      this.messageList$.next(messageList);
     }
-  }
 
   /**
    * Fonction extractMessage.
@@ -123,7 +126,7 @@ export class MessageService {
   private extractMessageAndGetMessages(response: Response, route: string): MessageModel {
     const messageList = response.json() || [];
     this.messageList$.next(messageList);
-    this.getMessages(2, route);
+    // this.getMessages(2, route);
 
     return messageList[0]; // A remplacer ! On retourne ici un messageModel vide seulement pour que Typescript ne lève pas d'erreur !
   }

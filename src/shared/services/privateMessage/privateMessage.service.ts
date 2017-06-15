@@ -16,9 +16,11 @@ export class PrivateMessageServices {
   constructor(private http: Http, private loginService: LoginService) {
     this.url = "http://projet-3a.7ight.com/api/users";
     this.privateMessageList$ = new ReplaySubject(1);
+    this.pageNumber = 0;
+    this.privateMessageList$.next([new PrivateMessageModel()]);
   }
 
-  public getMessages(side: number, correspondentUser: string) {
+  public getMessages(side: number, correspondentUser: string, listmessage?: PrivateMessageModel[]) {
     this.currentUser = correspondentUser;
     let pageSelector = "";
     if (side === 0) {
@@ -30,11 +32,11 @@ export class PrivateMessageServices {
       this.pageNumber++;
       pageSelector = "&page=" + this.pageNumber;
     } else {
-      this.pageNumber = 0;
+      pageSelector = "&page=" + this.pageNumber;
     }
     const finalUrl = this.url + "/" + this.loginService.username + "/messages?currentUserId=" + correspondentUser + pageSelector;
     this.http.get(finalUrl)
-      .subscribe((response) => this.extractAndUpdateMessageList(response));
+      .subscribe((response) => this.extractAndUpdateMessageList(response, listmessage));
   }
 
   public postMessage(correspondentUser: string, message: PrivateMessageModel) {
@@ -42,7 +44,8 @@ export class PrivateMessageServices {
     const headers = new Headers({"Content-Type": "application/json"});
     const options = new RequestOptions({headers: headers});
     this.http.post(finalUrl, message, options)
-      .subscribe((response) => this.extractMessageAndGetMessages(response, correspondentUser));
+      .subscribe();
+    this.pageNumber = 0;
   }
 
   private extractMessageAndGetMessages(response: Response, correspondentUser: string): PrivateMessageModel {
@@ -52,14 +55,16 @@ export class PrivateMessageServices {
     return messageList[0];
   }
 
-  extractAndUpdateMessageList(response: Response) {
+  extractAndUpdateMessageList(response: Response, listmessage?: PrivateMessageModel[]) {
     const messageList = response.json() || [];
     if (messageList.length === 0) {
       if (this.pageNumber !== 0) {
         this.pageNumber--;
       }
     } else {
-      this.privateMessageList$.next(messageList);
+      if ((<PrivateMessageModel> messageList[0]).createdAt !== listmessage[0].createdAt) {
+        this.privateMessageList$.next(messageList);
+      }
     }
   }
 }
