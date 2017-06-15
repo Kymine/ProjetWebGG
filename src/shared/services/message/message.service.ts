@@ -48,8 +48,8 @@ export class MessageService {
    * @returns {Observable<R>}
    */
   public getMessages(side: number, route?: string, listmessage?: MessageModel[]) {
-    let pageSelector = "";
-    if (side === 0) {
+    const pageSelector = "?page=" + this.pageNumber;
+    /* if (side === 0) {
       if (this.pageNumber !== 0) {
         this.pageNumber--;
       }
@@ -59,7 +59,7 @@ export class MessageService {
       pageSelector = "?page=" + this.pageNumber;
     } else {
       pageSelector = "?page=" + this.pageNumber;
-    }
+    }*/
     const finalUrl = this.url + route + pageSelector;
     this.http.get(finalUrl)
       .subscribe((response) => this.extractAndUpdateMessageList(response, listmessage));

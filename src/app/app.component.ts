@@ -47,18 +47,22 @@ export class AppComponent {
 
   prevMessages() {
     if (this.channelType === 0) {
-      this.messageService.getMessages(0, this.channelService.currentChannelRoute.id + "/messages");
+      if (this.messageService.pageNumber !== 0) {
+        this.messageService.pageNumber--;
+      }
     } else if (this.channelType === 1) {
-      this.privateMessageService.getMessages(0, this.privateMessageService.currentUser);
+      if (this.privateMessageService.pageNumber !== 0) {
+        this.privateMessageService.pageNumber--;
+      }
     }
   }
 
   nextMessages() {
     if (this.channelType === 0) {
-      this.messageService.getMessages(1, this.channelService.currentChannelRoute.id + "/messages");
+        this.messageService.pageNumber++;
     } else if (this.channelType === 1) {
-      this.privateMessageService.getMessages(1, this.privateMessageService.currentUser);
-    }
+        this.privateMessageService.pageNumber++;
+      }
   }
 
   login() {
