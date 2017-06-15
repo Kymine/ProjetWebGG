@@ -120,7 +120,7 @@ export class MessageFormComponent implements OnInit {
         case "rain":
           this.urlImage = url + "10d.png";
           break;
-        case "	thunderstorm":
+        case "thunderstorm":
           this.urlImage = url + "11d.png";
           break;
         case "snow":
