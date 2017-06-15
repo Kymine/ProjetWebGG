@@ -19,12 +19,11 @@ p
   overflow-scrolling: touch;
 }
 
-button
+.btn
 {
   margin-top: 10px;
   margin-right: 5px;
   float: right;
-  width: auto;
   display: inline-block;
   color: rgb(102, 166, 184);
 }
