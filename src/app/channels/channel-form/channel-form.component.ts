@@ -26,8 +26,6 @@ export class ChannelFormComponent implements OnInit {
   }
 
   createChannel() {
-    console.log("create channel!");
-    console.log(this.channel.name);
     this.channelService.createChannel(this.channel);
   }
 
