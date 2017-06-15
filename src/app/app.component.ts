@@ -64,6 +64,11 @@ export class AppComponent {
   login() {
     if (this.user !== "" && !this.user.includes(" ")) {
       this.user = this.user.toLowerCase();
+      for (let i = 0 ; i < 9 ; i++) {
+        if ( this.user.includes(i.toString()) ) {
+          return;
+        }
+      }
       this.loginService.login(this.user);
       this.status = this.loginService.status;
     }
