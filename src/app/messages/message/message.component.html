@@ -1,11 +1,12 @@
 <div>
   <p>Message:</p>
   <div *ngFor="let currentMessage of stringList">
-    <strong *ngIf="isAnUrlToLoad(currentMessage)">
-      <iframe [src]="result | safe"></iframe><br>
-    </strong>
+    <img *ngIf="isAnImage(currentMessage)" [src]="currentMessage">
+    <br *ngIf="isAnImage(currentMessage)">
+    <iframe *ngIf="isAnUrlToLoad(currentMessage)" [src]="result | safe"></iframe>
     <strong *ngIf="notUrl(currentMessage)">{{currentMessage}}</strong>
-    <strong *ngIf="isAnUrl(currentMessage)"><a href={{currentMessage}}>{{currentMessage}}</a></strong>
+    <a *ngIf="isAnUrl(currentMessage)" href={{currentMessage}}>{{currentMessage}}</a>
+    <br *ngIf="isAnUrl(currentMessage)">
   </div>
-  <p><br>  From: <strong>{{message.from}}</strong></p>
+  <p><br>From: <strong>{{message.from}}</strong></p>
 </div>

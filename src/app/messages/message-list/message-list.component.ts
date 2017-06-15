@@ -8,6 +8,7 @@ import {PrivateMessageModel} from "../../../shared/models/PrivateMessageModel";
 import {PrivateChannelService} from "../../../shared/services/privateChannel/privateChannel.service";
 import {PrivateMessageServices} from "../../../shared/services/privateMessage/privateMessage.service";
 import {USER} from "../../../shared/constants/user";
+import {LoginService} from "../../../shared/services/login/login.service";
 
 @Component({
   selector: "app-message-list",
@@ -22,12 +23,13 @@ export class MessageListComponent implements OnInit {
   private channelType;
 
   constructor(private messageService: MessageService, private channelService: ChannelService,
-              private privateChannelService: PrivateChannelService, private privateMessageService: PrivateMessageServices) {
+              private privateChannelService: PrivateChannelService,
+              private privateMessageService: PrivateMessageServices, private loginService: LoginService) {
     // this.route = "414/messages";
     channelService.currentChannelRoute = new ChannelModel(414);
     channelService.currentChannelRoute.name = "Général";
     this.route = "" + channelService.currentChannelRoute.id + "/messages";
-    privateChannelService.currentPrivateChannel = USER;
+    privateChannelService.currentPrivateChannel = loginService.username;
     this.channelType = this.privateChannelService.channelType;
   }
 

@@ -1,8 +1,11 @@
+<div *ngIf="status === true">
+
 <nav class="nav-bar">
   <h1 class="messenger-title">G-Messenger</h1>
   <div class="nav-bar-btn">
     <button class="public_channel" (click)="publicChannels()">Public channels</button>
     <button class="private_channel" (click)="privateChannels()">Private channels</button>
+    <button class="logout" (click)="logout()">Logout</button>
   </div>
 </nav>
 
@@ -51,4 +54,12 @@
     <app-message-list></app-message-list>
     <app-message-form></app-message-form>
   </aside>
+</div>
+</div>
+
+
+<div *ngIf="status === false">
+  <input type="text" class="form-control" id="user" required [(ngModel)]="user"
+         (keyup.enter)="login()" name="user">
+  <button class="btn btn-primary" (click)="login()">login</button>
 </div>
