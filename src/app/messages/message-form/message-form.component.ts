@@ -9,6 +9,7 @@ import {PrivateMessageModel} from "../../../shared/models/PrivateMessageModel";
 import {LoginService} from "../../../shared/services/login/login.service";
 import {WeatherServices} from "../../../shared/services/weather/weather.service";
 import {Http} from "@angular/http";
+import {USER} from "../../../shared/constants/user";
 
 @Component({
   selector: "app-message-form",
@@ -140,17 +141,26 @@ export class MessageFormComponent implements OnInit {
     }
   }
 
-  traduction(text: string) {
-    console.log("langage avant requete  :" + this.langage);
-    let mes;
-    this.http.get("https://translate.yandex.net/api/v1.5/tr.json/translate?key=" +
-      "trnsl.1.1.20170616T071450Z.f1abae67092b3435.8db3d485331a8166871f45ca5dcbcc7d5829941d" +
-      "&text=" + text + "&lang=fr-" + this.langage)
-      .subscribe((res) => {
-        mes = res["_body"];
-        this.message.content = JSON.parse(mes)["text"][0];
-        console.log(JSON.parse(mes)["text"][0]);
-      });
+  traduction() {
+    if (this.channelType2 === 0) {
+      let mes;
+      this.http.get("https://translate.yandex.net/api/v1.5/tr.json/translate?key=" +
+        "trnsl.1.1.20170616T071450Z.f1abae67092b3435.8db3d485331a8166871f45ca5dcbcc7d5829941d" +
+        "&text=" + this.message.content + "&lang=fr-" + this.langage)
+        .subscribe((res) => {
+          mes = res["_body"];
+          this.message.content = JSON.parse(mes)["text"][0];
+        });
+    }else {
+      let mes;
+      this.http.get("https://translate.yandex.net/api/v1.5/tr.json/translate?key=" +
+        "trnsl.1.1.20170616T071450Z.f1abae67092b3435.8db3d485331a8166871f45ca5dcbcc7d5829941d" +
+        "&text=" + this.privatemessage.content + "&lang=fr-" + this.langage)
+        .subscribe((res) => {
+          mes = res["_body"];
+          this.privatemessage.content = JSON.parse(mes)["text"][0];
+        });
+    }
   }
 
   callType(value): void {
