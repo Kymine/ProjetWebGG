@@ -37,7 +37,7 @@ export class MessageFormComponent implements OnInit {
               private weatherservices: WeatherServices) {
     this.message = new MessageModel(channelService.currentChannelRoute.id, "", loginservice.username);
     this.route = "" + channelService.currentChannelRoute.id + "/messages";
-    this.privatemessage = new PrivateMessageModel(1, "Hello", loginservice.username);
+    this.privatemessage = new PrivateMessageModel(1, "", loginservice.username);
     this.channelType2 = this.privateChannelService.channelType;
     this.hideBol = false;
     this.buttonWeather = "Show Weather";
@@ -82,7 +82,7 @@ export class MessageFormComponent implements OnInit {
   sendPrivateMessage() {
     this.privatemessage.content = this.replaceSmiley(this.privatemessage.content);
     this.privateMessageService.postMessage(this.privateChannelService.currentPrivateChannel, this.privatemessage);
-    this.message.content = "";
+    this.privatemessage.content = "";
   }
   hide() {
     if (this.hideBol) {
