@@ -18,19 +18,21 @@
     <button class="send-message-btn" (click)="sendPrivateMessage()">Send</button>
 
   </div>
+  <div>
+    <button class="weather-btn" (click)="hide()">{{buttonWeather}}</button>
+    <!--<button class="traduction-btn" (click)="traduction()">Traduction</button> -->
+  </div>
+
+  <div *ngIf="hideBol">
+
+    <strong>City :</strong> {{city}} <br>
+    <strong>Current temp :</strong> {{currentTemp}}°C <br>
+    <img  *ngIf="urlImage != undefined" [src]="urlImage">
+    <strong>Max temp :</strong> {{temp_max}}°C<br>
+    <strong>Min temp :</strong> {{temp_min}}°C<br>
+    <strong>Description :</strong> {{description}}<br>
+
+  </div>
 </div>
 
-<div>
-  <button class="weather-btn" (click)="hide()">{{buttonWeather}}</button>
-</div>
 
-<div *ngIf="hideBol">
-
-  <strong>City :</strong> {{city}} <br>
-  <strong>Current temp :</strong> {{currentTemp}}°C <br>
-  <img  *ngIf="urlImage != undefined" [src]="urlImage">
-  <strong>Max temp :</strong> {{temp_max}}°C<br>
-  <strong>Min temp :</strong> {{temp_min}}°C<br>
-  <strong>Description :</strong> {{description}}<br>
-
-</div>
