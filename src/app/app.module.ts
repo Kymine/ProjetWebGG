@@ -20,7 +20,6 @@ import {PrivateMessageServices} from "../shared/services/privateMessage/privateM
 import {WeatherComponent} from "./weather/weather.component";
 import {LoginService} from "../shared/services/login/login.service";
 import {WeatherServices} from "../shared/services/weather/weather.service";
-import {TranslateServices} from "../shared/services/translate/translate.service";
 
 
 @NgModule({
@@ -42,7 +41,7 @@ import {TranslateServices} from "../shared/services/translate/translate.service"
     FormsModule,
     HttpModule
   ],
-  providers: [MessageService, ChannelService, PrivateChannelService, PrivateMessageServices, LoginService, WeatherServices, TranslateServices],
+  providers: [MessageService, ChannelService, PrivateChannelService, PrivateMessageServices, LoginService, WeatherServices],
   bootstrap: [AppComponent]
 })
 export class AppModule {
