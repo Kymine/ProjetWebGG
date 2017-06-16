@@ -142,6 +142,6 @@ export class MessageFormComponent implements OnInit {
 
   setLangue(langue: string) {
     this.langage = langue;
-    console.log("langage apres avoir mdoifié :" + this.langage);
+    console.log("langage apres avoir mdoifi  :" + this.langage);
   }
 }
