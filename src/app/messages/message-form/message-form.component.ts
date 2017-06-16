@@ -81,7 +81,7 @@ export class MessageFormComponent implements OnInit {
     this.route = "" + this.channelService.currentChannelRoute.id + "/messages";
     this.message.content = this.replaceSmiley(this.message.content);
     this.hideBol = false;
-    if (this.message.content.includes("/meteo")){
+    if (this.message.content.includes("/meteo")) {
       this.city = this.message.content.split((" "))[1];
       this.weatherservices.getWeather(this.city);
       this.sendWeatherBefore = true;
