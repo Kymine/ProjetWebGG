@@ -18,30 +18,38 @@
     <button class="send-message-btn" (click)="sendPrivateMessage()">Send</button>
 
   </div>
-  <div>
-    <button class="weather-btn" (click)="hide()">{{buttonWeather}}</button>
-    <button class="traduction-btn" (click)="traduction(message.content)">Traduction</button>
-    <label for="langue">Choissisez la langue de traduction :</label><br />
-    <select #t (change)="callType(t.value)" name="Langue" id="langue">
-      <option value="en">Anglais</option>
-      <option value="es">Espagnol</option>
-      <option value="it">Italien</option>
-      <option value="de">Allemand</option>
-      <option value="zh">Chinois</option>
-      <option value="ja">Japnonais</option>
-    </select>
+
+  <div class="message-form-modul-root">
+
+    <div class="weather-root">
+
+      <button class="weather-btn" (click)="hide()">{{buttonWeather}}</button>
+      <label class="translate-label" for="langue">Choissisez la langue de traduction :</label>
+      <select class="translate-selector style-thick-border" #t (change)="callType(t.value)" name="Langue" id="langue">
+        <option value="en">Anglais</option>
+        <option value="es">Espagnol</option>
+        <option value="it">Italien</option>
+        <option value="de">Allemand</option>
+        <option value="zh">Chinois</option>
+        <option value="ja">Japonais</option>
+      </select>
+      <button class="translate-btn" (click)="traduction(message.content)">Translate</button>
+
+    </div>
+
+    <div class="weather-show-root" *ngIf="hideBol">
+
+      <strong>City :</strong> {{city}} <br>
+      <strong>Current temp :</strong> {{currentTemp}}°C <br>
+      <img *ngIf="urlImage != undefined" [src]="urlImage">
+      <strong>Max temp :</strong> {{temp_max}}°C<br>
+      <strong>Min temp :</strong> {{temp_min}}°C<br>
+      <strong>Description :</strong> {{description}}<br>
+
+    </div>
+
   </div>
 
-  <div *ngIf="hideBol">
-
-    <strong>City :</strong> {{city}} <br>
-    <strong>Current temp :</strong> {{currentTemp}}°C <br>
-    <img  *ngIf="urlImage != undefined" [src]="urlImage">
-    <strong>Max temp :</strong> {{temp_max}}°C<br>
-    <strong>Min temp :</strong> {{temp_min}}°C<br>
-    <strong>Description :</strong> {{description}}<br>
-
-  </div>
 </div>
 
 
