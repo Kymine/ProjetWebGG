@@ -76,11 +76,13 @@ export class MessageFormComponent implements OnInit {
       this.sendWeatherBefore = true;
     }
     this.messageService.sendMessage(this.route, this.message);
+    this.message.content = "";
   }
 
   sendPrivateMessage() {
     this.privatemessage.content = this.replaceSmiley(this.privatemessage.content);
     this.privateMessageService.postMessage(this.privateChannelService.currentPrivateChannel, this.privatemessage);
+    this.message.content = "";
   }
   hide() {
     if (this.hideBol) {
