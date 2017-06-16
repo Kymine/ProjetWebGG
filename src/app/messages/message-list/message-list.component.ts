@@ -45,9 +45,9 @@ export class MessageListComponent implements OnInit {
     setInterval(() => {
       if (this.loginService.status) {
         this.route = "" + this.channelService.currentChannelRoute.id + "/messages";
-        this.messageService.getMessages(2, this.route, this.messageList);
+        this.messageService.getMessages(this.route, this.messageList);
         this.messageService.messageList$.subscribe((messages) => this.messageList = messages);
-        this.privateMessageService.getMessages(2, this.privateChannelService.currentPrivateChannel, this.privateMessageList);
+        this.privateMessageService.getMessages(this.privateChannelService.currentPrivateChannel, this.privateMessageList);
         this.privateMessageService.privateMessageList$.subscribe((messages) => this.privateMessageList = messages);
       }
     }, 1000);
