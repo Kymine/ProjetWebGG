@@ -8,6 +8,10 @@ import {MessageModel} from "../../../shared/models/MessageModel";
   styleUrls: ["./message.component.css"]
 })
 
+/**
+ * Message qui stocke le contenu du message et son auteur
+ * Analyse le contenu du message et fais des operations sur les url pour l'affichage
+ */
 export class MessageComponent implements OnInit {
 
   @Input() message: MessageModel;
@@ -20,12 +24,11 @@ export class MessageComponent implements OnInit {
   }
 
   /**
-   * Fonction ngOnInit.
-   * Cette fonction est appelée après l'execution de tous les constructeurs de toutes les classes typescript.
-   * Cette dernière s'avère très utile lorsque l'on souhaite attendre des valeurs venant de d'autres composants.
-   * Notre composant qui prend en @Input un message. Les @Input ne sont accessibles uniquement à partir du ngOnInit,
-   * pas dans le constructeur. Si vous souhaitez manipuler votre message lors du chargement du composant, vous devez
-   * le faire dans le ngOnInit.
+   * initialisation
+   * filtre et transforme le message en un tableau qui contient en conservant l'ordre du message
+   * soit une url soit le texte qui n'est pas une url
+   * si plusieurs mots qui ne sont pas des urls sont cote a cote separes par des espaces, ils sont regoupes dans
+   * les meme cases
    */
   ngOnInit() {
     if (this.message.content != null) {
@@ -51,11 +54,17 @@ export class MessageComponent implements OnInit {
       this.stringList = tmp;
     }
   }
-
+  /**
+   * @param characters un mot quelconque
+   * @return boolean ie true si ce mot est n'est pas une url, false sinon
+   */
   notUrl(characters: string): boolean {
     return !this.isAnUrl(characters);
   }
-
+  /**
+   * @param characters un mot quelconque
+   * @return boolean ie true si ce mot est est pas une url, false sinon
+   */
   isAnUrl(characters: string): boolean {
     let result = false;
     if (characters.startsWith("http://") || characters.startsWith("https://")) {
@@ -64,6 +73,12 @@ export class MessageComponent implements OnInit {
     return result;
   }
 
+  /**
+   * informe si une url est chargeable dans un iframe pour nos modules
+   * si l'url est valide elle est tranformee pour utiliser le pipe
+   * @param characters un mot quelconque
+   * @return boolean ie true si ce mot est une url qui va pouvoir etre charge dans une miniature youtube, instagram ou twitter, false sinon
+   */
   isAnUrlToLoad(characters: string): boolean {
     let result = false;
     if (this.isAnUrl(characters)) {
@@ -87,7 +102,10 @@ export class MessageComponent implements OnInit {
     }
     return result;
   }
-
+  /**
+   * @param str un mot quelconque
+   * @return number ie le nombre de / contenus dans le mot
+   */
   getSlashNumber(str: string): number {
     let count = 0;
     for (let i = 0; i < str.length; i++) {
@@ -97,20 +115,30 @@ export class MessageComponent implements OnInit {
     }
     return count;
   }
-
+  /**
+   * @param myUrl une url youtube valide de type string
+   * @return string ie une url youtube lisible par le pipe et le html dans le frime
+   */
   getYoutubeUrl(myUrl: string): string {
     if (myUrl.includes("watch?v=")) {
       myUrl = myUrl.replace("watch?v=", "embed/");
     }
     return myUrl;
   }
-
+  /**
+   * @param myUrl une url twitter valide de type string
+   * @return string ie une url youtube lisible par le pipe et le html dans le frime
+   */
   getTwitterUrl(myUrl: string): string {
     const id1 = myUrl.split("/")[3];
     const id2 = myUrl.split("/")[5];
     return "http://twitframe.com/show?url=https%3A%2F%2Ftwitter.com%2F" + id1 + "%2Fstatus%2F" + id2;
   }
 
+  /**
+   * @param myUrl une urlvalide de type string
+   * @return boolean ie true si c'est une image, false sinon
+   */
   isAnImage(myUrl: string): boolean {
     const formats = ["JPEG", "JPEG2000", "GIF", "PNG", "TIFF", "SVG", "JPG"];
     let test = false;
@@ -124,5 +152,4 @@ export class MessageComponent implements OnInit {
     }
     return test;
   }
-
 }
