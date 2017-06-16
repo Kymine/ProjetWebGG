@@ -22,8 +22,8 @@ export class PrivateMessageServices {
 
   public getMessages(side: number, correspondentUser: string, listmessage?: PrivateMessageModel[]) {
     this.currentUser = correspondentUser;
-    let pageSelector = "";
-    if (side === 0) {
+    const pageSelector = "&page=" + this.pageNumber;
+    /*if (side === 0) {
       if (this.pageNumber !== 0) {
         this.pageNumber--;
       }
@@ -33,7 +33,7 @@ export class PrivateMessageServices {
       pageSelector = "&page=" + this.pageNumber;
     } else {
       pageSelector = "&page=" + this.pageNumber;
-    }
+    }*/
     const finalUrl = this.url + "/" + this.loginService.username + "/messages?currentUserId=" + correspondentUser + pageSelector;
     this.http.get(finalUrl)
       .subscribe((response) => this.extractAndUpdateMessageList(response, listmessage));
@@ -51,7 +51,7 @@ export class PrivateMessageServices {
   private extractMessageAndGetMessages(response: Response, correspondentUser: string): PrivateMessageModel {
     const messageList = response.json() || [];
     this.privateMessageList$.next(messageList);
-    this.getMessages(2, correspondentUser);
+    // this.getMessages(2, correspondentUser);
     return messageList[0];
   }
 

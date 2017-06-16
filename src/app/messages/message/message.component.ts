@@ -31,21 +31,21 @@ export class MessageComponent implements OnInit {
       this.stringList = this.message.content.split(" ");
       let tmp: string[];
       tmp = new Array();
-      let j = "";
+      let stringNotUrl = "";
       for (let i = 0; i < this.stringList.length; i++) {
         if (this.isAnUrl(this.stringList[i])) {
-          if (j.length > 0) {
-            tmp.push(j);
+          if (stringNotUrl.length > 0) {
+            tmp.push(stringNotUrl);
           }
-          j = "";
+          stringNotUrl = "";
           tmp.push(this.stringList[i]);
         }
         if (this.notUrl(this.stringList[i])) {
-          j += this.stringList[i] + " ";
+          stringNotUrl += this.stringList[i] + " ";
         }
       }
       if (tmp.length === 0) {
-        tmp.push(j);
+        tmp.push(stringNotUrl);
       }
       this.stringList = tmp;
     }
@@ -65,17 +65,17 @@ export class MessageComponent implements OnInit {
 
   isAnUrlToLoad(characters: string): boolean {
     let result = false;
-    if (characters.includes("http://") || characters.includes("https://")) {
+    if (this.isAnUrl(characters)) {
       if (characters.startsWith("https://www.youtube.com/watch?v=") || (characters.includes("https://www.youtube.com/embed/"))) {
         this.result = this.getYoutubeUrl(characters);
         result = true;
       }
-      if (characters.includes("twitter")) {
+      if (characters.startsWith("https://twitter.com/") && characters.includes("/status/") && (this.getSlashNumber(characters) === 5)) {
         this.result = this.getTwitterUrl(characters);
         result = true;
       }
       const reg = /https:\/\/www.instagram.com\/p\/[^\ ^\/]*/;
-      const res = this.message.content.match(reg);
+      const res = characters.match(reg);
       if (res != null && res.length > 0) {
         res[0] += "/embed/";
         result = true;
@@ -84,16 +84,21 @@ export class MessageComponent implements OnInit {
     }
     return result;
   }
-
-  getUrl(myUrl: string, toReplace: string, word): string {
-    if (myUrl.includes(toReplace)) {
-      myUrl = myUrl.replace(toReplace, word);
+  getSlashNumber(str: string): number {
+    let count = 0;
+    for (let i = 0; i < str.length; i++) {
+      if (str[i] === "/") {
+        count++;
+      }
     }
-    return myUrl;
+    return count;
   }
 
   getYoutubeUrl(myUrl: string): string {
-    return this.getUrl(myUrl, "watch?v=", "embed/");
+    if (myUrl.includes("watch?v=")) {
+      myUrl = myUrl.replace("watch?v=", "embed/");
+    }
+    return myUrl;
   }
 
   getTwitterUrl(myUrl: string): string {
