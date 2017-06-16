@@ -91,7 +91,7 @@ export class MessageFormComponent implements OnInit {
     }
     this.hideBol = false;
     if (this.privatemessage.content.includes("/meteo")) {
-      this.city = this.privatemessage.content.split((" "))[1]
+      this.city = this.privatemessage.content.split((" "))[1];
       this.weatherservices.getWeather(this.city);
       this.sendWeatherBefore = true;
     }
