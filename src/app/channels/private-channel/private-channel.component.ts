@@ -21,7 +21,8 @@ export class PrivateChannelComponent implements OnInit {
   }
 
   /**
-   * rejoindre un channel
+   * Rejoindre un channel (privé).
+   * @param user Le nom de l'utilisateur avec qui communiquer.
    */
   joinChannel(user: string) {
     this.privateChannelService.currentPrivateChannel = user;

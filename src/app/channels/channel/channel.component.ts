@@ -14,21 +14,19 @@ import {MessageService} from "../../../shared/services/message/message.service";
 })
 
 export class ChannelComponent implements OnInit {
+
   @Input() channel: ChannelModel;
-  public showStyle: boolean;
-  public lastChannel: ChannelComponent;
 
   constructor(private channelService: ChannelService, private messageService: MessageService) {
     this.channel = new ChannelModel(0, "Channel");
-    this.showStyle = false;
-    this.lastChannel = this;
   }
 
   ngOnInit() {
   }
 
   /**
-   * rejoindre un channel
+   * Rejoindre un channel (public).
+   * @param id Id du channel à rejoindre.
    */
   joinChannel(id: number) {
     this.channelService.currentChannelRoute.id = id;

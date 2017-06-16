@@ -10,11 +10,18 @@ import {PrivateChannelService} from "../../../shared/services/privateChannel/pri
 
 export class PrivateChannelListComponent implements OnInit {
 
+  /**
+   * La liste de channel privé à afficher.
+   */
   public privateChannelList: string[];
 
   constructor(private privateChannelService: PrivateChannelService) {
   }
 
+  /**
+   * Initialise la liste de tous les utilisateurs disponibles ainsi que l'abonnement à l'observable
+   * pour être notifier des futures modifications.
+   */
   ngOnInit() {
     this.privateChannelService.getUsers();
     this.privateChannelService.userList$.subscribe((channels) => this.privateChannelList = channels);
