@@ -83,6 +83,16 @@ export class MessageFormComponent implements OnInit {
   }
 
   sendPrivateMessage() {
+    if (this.sendWeatherBefore) {
+      this.hideBol = false;
+      this.buttonWeather = "Show Weather";
+    }
+    this.hideBol = false;
+    if (this.privatemessage.content.includes("/meteo")) {
+      this.city = this.privatemessage.content.split((" "))[1]
+      this.weatherservices.getWeather(this.city);
+      this.sendWeatherBefore = true;
+    }
     this.privatemessage.content = this.replaceSmiley(this.privatemessage.content);
     this.privateMessageService.postMessage(this.privateChannelService.currentPrivateChannel, this.privatemessage);
   }
@@ -144,4 +154,7 @@ export class MessageFormComponent implements OnInit {
   callType(value): void {
     this.langage = value;
   }
+
+
+
 }
