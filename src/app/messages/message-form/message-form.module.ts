@@ -7,6 +7,7 @@ import {MessageService} from "../../../shared/services/message/message.service";
 import {ChannelService} from "../../../shared/services/channel/channel.service";
 import {PrivateMessageServices} from "../../../shared/services/privateMessage/privateMessage.service";
 import {WeatherServices} from "../../../shared/services/weather/weather.service";
+import {TranslateServices} from "../../../shared/services/translate/translate.service";
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import {WeatherServices} from "../../../shared/services/weather/weather.service"
     FormsModule
   ],
   exports: [MessageFormComponent],
-  providers: [MessageService, ChannelService, PrivateMessageServices, WeatherServices]
+  providers: [MessageService, ChannelService, PrivateMessageServices, WeatherServices, TranslateServices]
 })
 export class MessageFormModule {
 }
