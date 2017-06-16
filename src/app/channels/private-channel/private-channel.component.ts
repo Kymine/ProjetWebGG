@@ -25,6 +25,7 @@ export class PrivateChannelComponent implements OnInit {
    */
   joinChannel(user: string) {
     this.privateChannelService.currentPrivateChannel = user;
+    this.privateMessageService.pageNumber = 0;
     // this.privateMessageService.getMessages(2, user);
   }
 
