@@ -43,26 +43,15 @@ export class MessageService {
    *          Pour l'envoie des messages la route doit avoir la structure suivante: :id/messages avec ":id" étant
    *          un nombre entier correspondant à l'identifiant (id) du channel.
    * Exemple de route: 1/messages
-   * @param side
    * @param route
+   * @param listMessage
    * @returns {Observable<R>}
    */
-  public getMessages(side: number, route?: string) {
-    let pageSelector = "";
-    if (side === 0) {
-      if (this.pageNumber !== 0) {
-        this.pageNumber--;
-      }
-      pageSelector = "?page=" + this.pageNumber;
-    } else if (side === 1) {
-      this.pageNumber++;
-      pageSelector = "?page=" + this.pageNumber;
-    } else {
-      this.pageNumber = 0;
-    }
+  public getMessages(route?: string, listMessage?: MessageModel[]) {
+    const pageSelector = "?page=" + this.pageNumber;
     const finalUrl = this.url + route + pageSelector;
     this.http.get(finalUrl)
-      .subscribe((response) => this.extractAndUpdateMessageList(response));
+      .subscribe((response) => this.extractAndUpdateMessageList(response, listMessage));
   }
 
   /**
@@ -81,11 +70,8 @@ export class MessageService {
     const headers = new Headers({"Content-Type": "application/json"});
     const options = new RequestOptions({headers: headers});
     this.http.post(finalUrl, message, options)
-      .subscribe((response) => this.extractMessageAndGetMessages(response, route));
-
-    // this.http.post(finalUrl,)
-    // Je suis vide :(
-    // Tu peux trouver des infos sur moi dans le README !
+      .subscribe();
+    this.pageNumber = 0;
   }
 
   /**
@@ -95,8 +81,9 @@ export class MessageService {
    * Elle est appelée dans la fonction getMessages et permet de directement récuperer une liste de MessageModel. Pour récupérer
    * les données de la reponse, il suffit d'appeler la fonction .json() qui retourne le body de la réponse.
    * @param response
+   * @param listMessage
    */
-  extractAndUpdateMessageList(response: Response) {
+  extractAndUpdateMessageList(response: Response, listMessage?: MessageModel[]) {
     // Plus d'info sur Response ou sur la fonction .json()? si tu utilises Webstorm,
     // fait CTRL + Click pour voir la déclaration et la documentation
     const messageList = response.json() || []; // ExtractMessage: Si response.json() est undefined ou null,
@@ -104,27 +91,14 @@ export class MessageService {
     if (messageList.length === 0) {
       if (this.pageNumber !== 0) {
         this.pageNumber--;
+      } else {
+        this.messageList$.next([new MessageModel()]);
       }
     } else {
-      this.messageList$.next(messageList);
+      if (listMessage == null || (<MessageModel> messageList[0]).createdAt !== listMessage[0].createdAt) {
+        this.messageList$.next(messageList);
+      }
     }
   }
 
-  /**
-   * Fonction extractMessage.
-   * Cette fonction permet d'extraire les données reçues à travers les requêtes HTTP. Elle est appelée dans la fonction
-   * sendMessage et permet de directement récuperer un MessageModel.
-   * Elle va également faire un nouvel appel pour récupérer la liste complete des messages pour pouvoir mettre à jour la
-   * liste des messages dans les composants.
-   * @param response
-   * @param route
-   * @returns {any|{}}
-   */
-  private extractMessageAndGetMessages(response: Response, route: string): MessageModel {
-    const messageList = response.json() || [];
-    this.messageList$.next(messageList);
-    this.getMessages(2, route);
-
-    return messageList[0]; // A remplacer ! On retourne ici un messageModel vide seulement pour que Typescript ne lève pas d'erreur !
-  }
 }

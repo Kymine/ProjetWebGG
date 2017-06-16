@@ -3,7 +3,6 @@
  */
 import {Component, OnInit} from "@angular/core";
 
-
 import {ChannelModel} from "../../../shared/models/ChannelModel";
 import {ChannelService} from "../../../shared/services/channel/channel.service";
 
@@ -12,22 +11,22 @@ import {ChannelService} from "../../../shared/services/channel/channel.service";
   templateUrl: "./channel-form.component.html",
   styleUrls: ["./channel-form.component.css"]
 })
+
 export class ChannelFormComponent implements OnInit {
 
+  /**
+   * Le nouveau channel à créer.
+   */
   public channel: ChannelModel;
-  private route: string;
 
   constructor(public channelService: ChannelService) {
     this.channel = new ChannelModel();
-    this.route = this.channel.name + "";
   }
 
   ngOnInit() {
   }
 
   createChannel() {
-    console.log("create channel!");
-    console.log(this.channel.name);
     this.channelService.createChannel(this.channel);
   }
 

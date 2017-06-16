@@ -17,7 +17,8 @@ import {PrivateChannelService} from "../shared/services/privateChannel/privateCh
 import {PrivateChannelListComponent} from "./channels/private-channel-list/private-channel-list.component";
 import {PrivateChannelComponent} from "./channels/private-channel/private-channel.component";
 import {PrivateMessageServices} from "../shared/services/privateMessage/privateMessage.service";
-import {WeatherComponent} from "./weather/weather.component";
+import {LoginService} from "../shared/services/login/login.service";
+import {WeatherServices} from "../shared/services/weather/weather.service";
 
 
 @NgModule({
@@ -32,14 +33,13 @@ import {WeatherComponent} from "./weather/weather.component";
     PrivateChannelComponent,
     PrivateChannelListComponent,
     SafePipe,
-    WeatherComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule
   ],
-  providers: [MessageService, ChannelService, PrivateChannelService, PrivateMessageServices],
+  providers: [MessageService, ChannelService, PrivateChannelService, PrivateMessageServices, LoginService, WeatherServices],
   bootstrap: [AppComponent]
 })
 export class AppModule {

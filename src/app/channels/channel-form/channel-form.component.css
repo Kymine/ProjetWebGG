@@ -1,35 +1,51 @@
-p
-{
-  margin: 0;
+:focus {
+  outline: none;
 }
 
-strong
-{
-  margin: 0;
-  text-decoration:underline;
+::-moz-focus-inner {
+  border: 0;
 }
 
-.create_channel button
-{
-  margin-top: 5px;
+.channel-form-root {
   width: 100%;
-  margin-bottom: 20px;
 }
 
-.previous_page
-{
-  float: left;
-}
-
-.next_page
-{
-  float: right;
-}
-
-.p_footer
-{
-  clear: both;
+.create-channel {
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4%;
+}
+
+.input-channel-name {
+  width: 60%;
+  display: inline;
+}
+
+.create-channel-btn {
+  width: 40%;
+  display: inline;
+}
+
+/* Page selector */
+.page-selector {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-self: center;
+  vertical-align: middle;
+  margin-bottom: 3%;
+}
+
+.previous-page {
+  width: 15%;
+}
+
+.next-page {
+  width: 15%;
+}
+
+.page-display {
   text-align: center;
-  margin-bottom: 20px;
 }

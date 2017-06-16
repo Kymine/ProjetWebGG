@@ -1,8 +1,8 @@
 /**
  * Created by Pierre on 12/06/2017.
  */
-import { CommonModule } from "@angular/common";
-import { NgModule } from "@angular/core";
+import {CommonModule} from "@angular/common";
+import {NgModule} from "@angular/core";
 
 import {ChannelFormComponent} from "./channel-form.component";
 import {ChannelService} from "../../../shared/services/channel/channel.service";
@@ -20,4 +20,5 @@ import {ChannelListComponent} from "../channel-list/channel-list.component";
   exports: [ChannelComponent],
   providers: [ChannelService]
 })
-export class ChannelModel { }
+export class ChannelModel {
+}

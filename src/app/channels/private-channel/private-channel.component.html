@@ -1,7 +1,10 @@
-<div>
-  <p>
-    <strong>{{privateChannel}}</strong>
-  </p>
+<div class="private-channel-root">
 
-  <button class="btn" (click)="joinChannel(privateChannel)">Join</button>
+  <div class="private-channel-wrapper">
+    <div class="private-channel-name">
+      <span><i>User : </i><strong>{{privateChannel}}</strong></span>
+    </div>
+    <button class="private-channel-btn btn" (click)="joinChannel(privateChannel)">Join</button>
+  </div>
+
 </div>

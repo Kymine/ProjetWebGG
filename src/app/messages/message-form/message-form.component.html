@@ -1,13 +1,55 @@
-<div>
-  <div *ngIf="channelType2 === 0">
-    <input type="text" class="form-control" id="name" required [(ngModel)]="message.content"
-           (keyup.enter)="sendMessage()" name="name">
-    <button class="btn btn-primary" (click)="sendMessage()"> Send</button>
+<div class="message-form-root">
+
+  <div class="input-root" *ngIf="channelType2 === 0">
+
+    <span><input class="message-input style-thick-border" type="text" id="name" name="name"
+                 placeholder="Type your message here..." required [(ngModel)]="message.content"
+                 (keyup.enter)="sendMessage()"></span>
+
+    <button class="send-message-btn" (click)="sendMessage()"> Send</button>
+
   </div>
 
-  <div class="form-root" *ngIf="channelType2 === 1">
-    <input type="text" class="form-control" id="nom" required [(ngModel)]="privatemessage.content"
-           (keyup.enter)="sendPrivateMessage()" name="name">
-    <button class="btn btn-primary" (click)="sendPrivateMessage()">Send</button>
+  <div class="input-root" *ngIf="channelType2 === 1">
+
+    <span><input class="message-input style-thick-border" type="text" id="input message" name="name"
+                 placeholder="Type your message here..." required [(ngModel)]="privatemessage.content"
+                 (keyup.enter)="sendPrivateMessage()"></span>
+
+    <button class="send-message-btn" (click)="sendPrivateMessage()">Send</button>
+
   </div>
+
+  <div class="message-form-module-root">
+
+    <div class="weather-root">
+
+      <button class="weather-btn" (click)="hide()">{{buttonWeather}}</button>
+      <label class="translate-label" for="langue">Choissisez la langue de traduction :</label>
+      <select class="translate-selector style-thick-border" #t (change)="callType(t.value)" name="Langue" id="langue">
+        <option value="en">Anglais</option>
+        <option value="es">Espagnol</option>
+        <option value="it">Italien</option>
+        <option value="de">Allemand</option>
+        <option value="zh">Chinois</option>
+        <option value="ja">Japonais</option>
+      </select>
+      <button class="translate-btn" (click)="traduction()">Translate</button>
+
+
+    </div>
+
+    <div class="weather-show-root" *ngIf="hideBol">
+
+      <strong>City :</strong> {{city}} <br>
+      <strong>Current temp :</strong> {{currentTemp}}°C <br>
+      <img *ngIf="urlImage != undefined" [src]="urlImage">
+      <strong>Max temp :</strong> {{temp_max}}°C<br>
+      <strong>Min temp :</strong> {{temp_min}}°C<br>
+      <strong>Description :</strong> {{description}}<br>
+
+    </div>
+
+  </div>
+
 </div>

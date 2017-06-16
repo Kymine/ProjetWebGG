@@ -1,29 +1,44 @@
+:focus {
+  outline: none;
+}
+
+::-moz-focus-inner {
+  border: 0;
+}
+
 .channel-root {
-  position: relative;
-  display: inline-block;
-  border: 1px black solid;
-  border-radius: 5px;
-  height: 60px;
-  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-bottom: 1px lightgray solid;
+  height: 75px;
+  width: 100%;
   word-wrap: break-word;
   text-overflow: ellipsis;
 }
 
-.channel-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  display: inline-block;
-  color: rgb(102, 166, 184);
-  border-radius: 5px;
+.channel-root:hover {
+  background-color: #c6d6ff;
+}
+
+.channel-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: space-between;
 }
 
 .channel-info {
   overflow: hidden;
-  text-overflow: "..." ellipsis;
+  text-overflow: ellipsis;
   display: inline-block;
-  width: 230px;
+  width: 70%;
   height: 50px;
-  margin-top: 5px;
-  margin-left: 10px;
+  margin-top: 1%;
+  margin-left: 1%;
 }
+
+.channel-info-prefix {
+  font-style: italic
+}
+

@@ -1,92 +1,189 @@
-section {
-  margin: 10px;
-  width: 310px;
-  float: left;
-  height: 100%;
+:focus {
+  outline: none;
 }
 
-aside {
-  margin-left: 340px;
-  background-color: rgb(240, 240, 255);
+::-moz-focus-inner {
+  border: 0;
+}
+
+.app-root {
+  overflow: hidden;
+  overflow-y: scroll;
+  display: block;
+  width: 100vw;
+  height: 56.25vw; /* height:width ratio = 9/16 = .5625  */
+  max-height: 100vh;
+  position: absolute;
+  top: 0;
+  bottom: 0; /* vertical center */
+  left: 0;
+  right: 0; /* horizontal center */
 }
 
 .nav-bar {
-  background-color: rgb(240, 240, 255);
-  position: relative;
-  max-width: 1600px;
-  height: 60px;
-  margin: 0 auto;
-  box-sizing: border-box;
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.4;
-  z-index: 1;
+  background-color: #356488 /* Nice black #232323*/;
+  width: 100%;
+  height: 10%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  /* Alignement vertical */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+.messenger-title {
+  width: auto;
+  height: auto;
+  float: left;
+  color: #F2F2F2;
+  margin-left: 5%;
+}
+
+.nav-bar-btn {
+  color: #35363B;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-self: center;
+  vertical-align: middle;
+}
+
+.public-channel-btn {
+  margin-left: 4%;
+}
+
+.private-channel-btn {
+  width: 100%;
+  margin-right: 4%;
+}
+
+.logout-btn {
+  margin-left: 4%;
+  margin-right: 4%;
+}
+
+.chat-app {
+  width: 100%;
+  height: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-self: center;
+  vertical-align: middle;
+}
+
+.channel-space {
+  background-color: #e6f0ff;
+  padding-right: 10px;
+  border-right: 1px solid #35363B;
+  width: 30%;
+  height: 100%;
+}
+
+.channel-space-title {
+  overflow: hidden;
+  text-align: center;
+  margin-top: 10px;
+  padding-bottom: 5px;
+  color: #35363B;
+  border-bottom: 1px solid #35363B;
+}
+
+.public-channel-form {
+  padding: 2%;
+}
+
+.message-space {
+  padding-left: 10px;
+  width: 70%;
+  height: 75%;
+}
+
+.message-space-title {
+  height: 8.5%;
+  overflow: hidden;
+  text-align: center;
+  margin-top: 10px;
+  color: #35363B;
+  border-bottom: 1px solid #35363B;
 }
 
 .private-channel-list {
   padding-bottom: 2px;
-  height: 500px;
   overflow: hidden;
   overflow-y: scroll;
-}
-
-.channel-list {
-  padding-bottom: 2px;
-  height: 400px;
-  overflow: hidden;
-  overflow-y: scroll;
-}
-
-.nav-bar-btn {
-  display: inline-block;
-  vertical-align: center;
-  position: absolute;
-  top: 15px;
-  right: 40px;
 }
 
 .private-channel-space {
   margin-bottom: 10px;
 }
 
-h1.messenger-title {
-  position: absolute;
-  left: 120px;
-  display: inline;
+/* Page selector */
+.page-selector {
+  height: 8%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-self: center;
+  margin-bottom: 2%;
 }
 
-h1 {
-  color: #132688;
-}
-
-h2 {
-  color: #1045ff;
-}
-
-aside h2 {
-  margin-top: 10px;
-  margin-bottom: 20px;
-}
-
-.previous_page {
+.previous-page {
+  width: 10%;
   float: left;
 }
 
-.next_page {
+.next-page {
+  width: 10%;
   float: right;
 }
 
-.p_footer {
-  width: 100%;
+.page-display {
   text-align: center;
+}
+
+/* Login part */
+.login-root {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.login-root-wrapper {
+  background-color: #c8dcff;
+  border: 3px lightgray solid;
+  border-radius: 5px;
+  padding: 20px 20px 20px 20px;
+}
+
+.login-text {
+  font-family: "Calibri Light", Helvetica, sans-serif;
+  font-size: large;
+  font-weight: bold;
+  color: #35363B;
   margin-bottom: 20px;
+  display: block;
 }
 
-.public_channel {
-  display: inline;
+.login-input-wrapper {
+  color: #35363B;
+  display: block;
 }
 
-.private_channel {
+.login-input {
   display: inline;
+  color: #35363B;
+  margin-right: 20px;
+}
+
+.login-btn {
+  display: inline;
+  color: #35363B;
 }
