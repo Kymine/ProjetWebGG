@@ -22,13 +22,13 @@
     <button class="weather-btn" (click)="hide()">{{buttonWeather}}</button>
     <button class="traduction-btn" (click)="traduction(message.content)">Traduction</button>
     <label for="langue">Choissisez la langue de traduction :</label><br />
-    <select name="Langue" id="langue">
-      <option (click)="setLangue('en')" value="en">Anglais</option>
-      <option (click)="setLangue('es')" value="es">Espagnol</option>
-      <option (click)="setLangue('it')" value="it">Italien</option>
-      <option (click)="setLangue('de')" value="de">Allemand</option>
-      <option (click)="setLangue('zh')" value="zh">Chinois</option>
-      <option (click)="setLangue('ja')"  value="ja">Japnonais</option>
+    <select #t (change)="callType(t.value)" name="Langue" id="langue">
+      <option value="en">Anglais</option>
+      <option value="es">Espagnol</option>
+      <option value="it">Italien</option>
+      <option value="de">Allemand</option>
+      <option value="zh">Chinois</option>
+      <option value="ja">Japnonais</option>
     </select>
   </div>
 

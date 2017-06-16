@@ -3,13 +3,11 @@ import {Component, OnInit} from "@angular/core";
 import {MessageService} from "../../../shared/services";
 import {MessageModel} from "../../../shared/models/MessageModel";
 import {ChannelService} from "../../../shared/services/channel/channel.service";
-import {USER} from "../../../shared/constants/user";
 import {PrivateChannelService} from "../../../shared/services/privateChannel/privateChannel.service";
 import {PrivateMessageServices} from "../../../shared/services/privateMessage/privateMessage.service";
 import {PrivateMessageModel} from "../../../shared/models/PrivateMessageModel";
 import {LoginService} from "../../../shared/services/login/login.service";
 import {WeatherServices} from "../../../shared/services/weather/weather.service";
-import {TranslateServices} from "../../../shared/services/translate/translate.service";
 import {Http} from "@angular/http";
 
 @Component({
@@ -37,7 +35,7 @@ export class MessageFormComponent implements OnInit {
   constructor(private messageService: MessageService, private channelService: ChannelService,
               private privateChannelService: PrivateChannelService,
               private privateMessageService: PrivateMessageServices, private loginservice: LoginService,
-              private weatherservices: WeatherServices, private translateServices: TranslateServices, private http: Http) {
+              private weatherservices: WeatherServices, private http: Http) {
     this.message = new MessageModel(channelService.currentChannelRoute.id, "", loginservice.username);
     this.route = "" + channelService.currentChannelRoute.id + "/messages";
     this.privatemessage = new PrivateMessageModel(1, "Hello", loginservice.username);
@@ -132,16 +130,18 @@ export class MessageFormComponent implements OnInit {
 
   traduction(text: string) {
     console.log("langage avant requete  :" + this.langage);
-     let mes ;
-     this.http.get("https://translate.yandex.net/api/v1.5/tr.json/translate?key=" +
-     "trnsl.1.1.20170616T071450Z.f1abae67092b3435.8db3d485331a8166871f45ca5dcbcc7d5829941d" +
-     "&text=" + text + "&lang=fr-" + this.langage)
-     .subscribe( ( res ) => {  mes = res["_body"]; this.message.content = JSON.parse(mes)["text"][0];
-     console.log(JSON.parse(mes)["text"][0]); });
-     }
+    let mes;
+    this.http.get("https://translate.yandex.net/api/v1.5/tr.json/translate?key=" +
+      "trnsl.1.1.20170616T071450Z.f1abae67092b3435.8db3d485331a8166871f45ca5dcbcc7d5829941d" +
+      "&text=" + text + "&lang=fr-" + this.langage)
+      .subscribe((res) => {
+        mes = res["_body"];
+        this.message.content = JSON.parse(mes)["text"][0];
+        console.log(JSON.parse(mes)["text"][0]);
+      });
+  }
 
-  setLangue(langue: string) {
-    this.langage = langue;
-    console.log("langage apres avoir mdoifi  :" + this.langage);
+  callType(value): void {
+    this.langage = value;
   }
 }
