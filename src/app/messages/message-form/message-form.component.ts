@@ -37,7 +37,7 @@ export class MessageFormComponent implements OnInit {
               private weatherservices: WeatherServices) {
     this.message = new MessageModel(channelService.currentChannelRoute.id, "", loginservice.username);
     this.route = "" + channelService.currentChannelRoute.id + "/messages";
-    this.privatemessage = new PrivateMessageModel(1, "", loginservice.username);
+    this.privatemessage = new PrivateMessageModel(1, "Hello", loginservice.username);
     this.channelType2 = this.privateChannelService.channelType;
     this.hideBol = false;
     this.buttonWeather = "Show Weather";
@@ -76,13 +76,11 @@ export class MessageFormComponent implements OnInit {
       this.sendWeatherBefore = true;
     }
     this.messageService.sendMessage(this.route, this.message);
-    this.message.content = "";
   }
 
   sendPrivateMessage() {
     this.privatemessage.content = this.replaceSmiley(this.privatemessage.content);
     this.privateMessageService.postMessage(this.privateChannelService.currentPrivateChannel, this.privatemessage);
-    this.message.content = "";
   }
   hide() {
     if (this.hideBol) {
@@ -103,37 +101,23 @@ export class MessageFormComponent implements OnInit {
     }
     changeImage(description: string) {
       const url = "http://openweathermap.org/img/w/";
-      switch (description) {
-        case "clear sky":
-          this.urlImage = url + "01d.png";
-          break;
-        case "few clouds":
-          this.urlImage = url + "02d.png";
-          break;
-        case "scattered clouds":
-          this.urlImage = url + "03d.png";
-          break;
-        case "broken clouds":
-          this.urlImage = url + "04d.png";
-          break;
-        case "shower rain":
-          this.urlImage = url + "09d.png";
-          break;
-        case "rain":
-          this.urlImage = url + "10d.png";
-          break;
-        case "thunderstorm":
-          this.urlImage = url + "11d.png";
-          break;
-        case "snow":
-          this.urlImage = url + "13d.png";
-          break;
-        case "mist":
-          this.urlImage = url + "50d.png";
-          break;
-        default:
-          break;
+      if (description.includes("clear sky")) {
+        this.urlImage = url + "01d.png";
+      }
+      if (description.includes("clouds")) {
+        this.urlImage = url + "02d.png";
+      }
+      if (description.includes("rain")) {
+        this.urlImage = url + "09d.png";
+      }
+      if (description.includes("thunderstorm")) {
+        this.urlImage = url + "11d.png";
+      }
+      if (description.includes("snow")) {
+        this.urlImage = url + "13d.png";
+      }
+      if (description.includes("mist")) {
+        this.urlImage = url + "50d.png";
       }
     }
-
 }
