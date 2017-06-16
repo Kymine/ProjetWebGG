@@ -20,6 +20,12 @@ export class PrivateMessageServices {
     this.privateMessageList$.next([new PrivateMessageModel()]);
   }
 
+  /**
+   * Cette fonction permet de récupérer la liste des messages privé pour un utilisateur donné.
+   * @param correspondentUser Le nom de l'utilisateur avec qui on communique.
+   * @param listMessage La liste des messages privés à récupérer.
+   * @returns {Observable<R>}
+   */
   public getMessages(correspondentUser: string, listMessage?: PrivateMessageModel[]) {
     this.currentUser = correspondentUser;
     const pageSelector = "&page=" + this.pageNumber;
@@ -28,6 +34,11 @@ export class PrivateMessageServices {
       .subscribe((response) => this.extractAndUpdateMessageList(response, listMessage));
   }
 
+  /**
+   * Cette fonction permet l'envoi d'un message privé.
+   * @param correspondentUser Le nom de l'utilisateur à qui envoyer le message privé.
+   * @param message Le message à envoyer. Ce message est de type PrivateMessageModel.
+   */
   public postMessage(correspondentUser: string, message: PrivateMessageModel) {
     const finalUrl = this.url + "/" + correspondentUser + "/messages";
     const headers = new Headers({"Content-Type": "application/json"});
@@ -37,6 +48,15 @@ export class PrivateMessageServices {
     this.pageNumber = 0;
   }
 
+  /**
+   * Fonction extractAndUpdateMessageList.
+   * Cette fonction permet d'extraire la liste des messages de la 'response' reçue et ensuite de mettre à jour la liste
+   * des message dans l'observable privateMessageList$.
+   * Elle est appelée dans la fonction getMessages et permet de directement récuperer une liste de PrivateMessageModel. Pour récupérer
+   * les données de la reponse, il suffit d'appeler la fonction .json() qui retourne le body de la réponse.
+   * @param response
+   * @param listMessage
+   */
   extractAndUpdateMessageList(response: Response, listMessage?: PrivateMessageModel[]) {
     const messageList = response.json() || [];
     if (messageList.length === 0) {
