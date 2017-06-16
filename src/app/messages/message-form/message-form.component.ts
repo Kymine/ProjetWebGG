@@ -50,6 +50,12 @@ export class MessageFormComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Fonction permettant de transformer un string initialement sans émoticones
+   * et de remplacer tout ses caractères representant une émoticone en une véritable émoticone.
+   * @param contents string à transformer
+   * @return string
+   */
   replaceSmiley(contents: string) {
     let smiley = contents.replace(/\:\)/gi, "🙂");
     smiley = smiley.replace(/;\)/gi, "😉");
@@ -63,7 +69,7 @@ export class MessageFormComponent implements OnInit {
   }
 
   /**
-   * Fonction pour envoyer un message.
+   * Fonction pour envoyer un message public.
    * L'envoi du message se fait à travers la methode sendMessage du service MessageService.
    * Cette méthode prend en paramètre la route pour envoyer un message (:id/messages avec id un entier correspondant à l'id du channel)
    * ainsi que le message à envoyer. Ce dernier correspond à l'objet MessageModel que l'utilisateur rempli à travers l'input.
@@ -76,14 +82,19 @@ export class MessageFormComponent implements OnInit {
     this.route = "" + this.channelService.currentChannelRoute.id + "/messages";
     this.message.content = this.replaceSmiley(this.message.content);
     this.hideBol = false;
-    if (this.message.content.includes("/meteo")) {
-      this.weatherservices.getWeather(this.meteoCity());
+    if (this.message.content.includes("/meteo")){
+      this.city = this.message.content.split((" "))[1];
+      this.weatherservices.getWeather(this.city);
       this.sendWeatherBefore = true;
     }
     this.messageService.sendMessage(this.route, this.message);
     this.message.content = "";
   }
-
+  /**
+   * Fonction pour envoyer un message privée.
+   * L'envoi du message se fait à travers la methode postMessage du service PrivateMessageServices.
+   * Elle utilise également la fonction replaceSmiley avant d'envoyer le message
+   */
   sendPrivateMessage() {
     if (this.sendWeatherBefore) {
       this.hideBol = false;
@@ -99,7 +110,9 @@ export class MessageFormComponent implements OnInit {
     this.privateMessageService.postMessage(this.privateChannelService.currentPrivateChannel, this.privatemessage);
     this.privatemessage.content = "";
   }
-
+  /**
+   * Fonction permettant d'afficher ou cacher la météo, fonction déclencher lorsque l'utilisateur appuie sur le weather-btn bouton
+   */
   hide() {
     if (this.hideBol) {
       this.hideBol = false;
@@ -115,10 +128,11 @@ export class MessageFormComponent implements OnInit {
     }
   }
 
-  meteoCity(): string {
-    return this.city = this.message.content.split((" "))[1];
-  }
 
+  /**
+   * Fonction permettant de charger l'image de la météo en fonction de la description de la météo reçu par le serveur
+   * @param description : string correspondant à la description de la météo reçu par le serveur
+   */
   changeImage(description: string) {
     const url = "http://openweathermap.org/img/w/";
     if (description.includes("clear sky")) {
@@ -140,7 +154,10 @@ export class MessageFormComponent implements OnInit {
       this.urlImage = url + "50d.png";
     }
   }
-
+  /**
+   * Fonction permettant de traduire le message tapé par l'utilisateur en fonction de son choix de traduction (ou par défaut en anglais)
+   * et du fait qu'il se trouve dans un channel public ou privé, en faisant une requete sur un serveur
+   */
   traduction() {
     if (this.channelType2 === 0) {
       let mes;
@@ -162,11 +179,12 @@ export class MessageFormComponent implements OnInit {
         });
     }
   }
-
+  /**
+   * Fonction permettant de modifier en quoi le message de l'utilisateur va etre traduit :
+   * francais -> choix de l'utilisateur via le select (translate-selector)
+   * @param value : valeur représentant le choix de l'utilisateur
+   */
   callType(value): void {
     this.langage = value;
   }
-
-
-
 }
