@@ -1,30 +1,46 @@
-div
-{
-  position: relative;
-  border: 1px #0084FF solid;
-  border-radius: 5px;
-  align: center;
-  min-height: 60px;
-  margin-bottom: 10px;
+:focus {
+  outline: none;
 }
 
-p
-{
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  padding-left: 5px;
-  display: inline-block;
-  width: 65%;
-  overflow-scrolling: touch;
+::-moz-focus-inner {
+  border: 0;
 }
 
-button
-{
-  margin-top: 10px;
-  margin-right: 5px;
-  float: right;
-  width: auto;
-  display: inline-block;
-  color: rgb(102, 166, 184);
+.private-channel-root {
+  padding: 1%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: center;
+  border-bottom: 1px lightgray solid;
+  height: 75px;
+  width: 100%;
+  word-wrap: break-word;
+  text-overflow: ellipsis;
+}
+
+.private-channel-root:hover {
+  background-color: #b4b5ba;
+}
+
+.private-channel-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.private-channel-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline;
+  width: 70%;
+  height: 50px;
+  margin-top: 7%;
+  margin-left: 7%;
+}
+
+.private-channel-btn {
+  display: inline;
+
 }

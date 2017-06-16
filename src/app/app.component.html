@@ -5,9 +5,9 @@
     <nav>
       <h1 class="messenger-title">G-Messenger</h1>
       <div class="nav-bar-btn">
-        <button class="public-channel-btn" (click)="publicChannels()">Public channels</button>
+        <button class="public-channel-btn btn" (click)="publicChannels()">Public channels</button>
         <div class="private-channel-btn-wrapper">
-          <button class="private-channel-btn" (click)="privateChannels()">Private channels</button>
+          <button class="private-channel-btn btn" (click)="privateChannels()">Private channels</button>
         </div>
         <button class="logout-btn" (click)="logout()">Logout</button>
       </div>
@@ -28,8 +28,7 @@
 
     <!-- Public Message Space -->
     <section class="message-space">
-      <h2 class="message-space-title">Public Messages on Channel
-        <strong>{{channelService.currentChannelRoute.name}}</strong></h2>
+      <h2 class="message-space-title"><strong>{{channelService.currentChannelRoute.name}}</strong></h2>
 
       <div class="page-selector">
         <button class="previous-page" (click)="prevMessages()">❮</button>
@@ -58,9 +57,9 @@
       <h2 class="channel-space-title">Private Messages with <strong>{{privateMessageService.currentUser}}</strong></h2>
 
       <div class="select_page">
-        <button class="previous_page" (click)="prevMessages()">&#60;</button>
+        <button class="previous_page" (click)="prevMessages()">❮</button>
         <span class="page-display">Page n°{{privateMessageService.pageNumber}}</span>
-        <button class="next_page" (click)="nextMessages()">&#62;</button>
+        <button class="next_page" (click)="nextMessages()">❯</button>
       </div>
 
       <app-message-list></app-message-list>
