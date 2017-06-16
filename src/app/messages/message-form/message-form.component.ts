@@ -9,6 +9,8 @@ import {PrivateMessageServices} from "../../../shared/services/privateMessage/pr
 import {PrivateMessageModel} from "../../../shared/models/PrivateMessageModel";
 import {LoginService} from "../../../shared/services/login/login.service";
 import {WeatherServices} from "../../../shared/services/weather/weather.service";
+import {TranslateServices} from "../../../shared/services/translate/translate.service";
+import {Http} from "@angular/http";
 
 @Component({
   selector: "app-message-form",
@@ -30,11 +32,12 @@ export class MessageFormComponent implements OnInit {
   temp_max: number;
   description: string;
   urlImage: string;
+  langage: string;
 
   constructor(private messageService: MessageService, private channelService: ChannelService,
               private privateChannelService: PrivateChannelService,
               private privateMessageService: PrivateMessageServices, private loginservice: LoginService,
-              private weatherservices: WeatherServices) {
+              private weatherservices: WeatherServices, private translateServices: TranslateServices, private http: Http) {
     this.message = new MessageModel(channelService.currentChannelRoute.id, "", loginservice.username);
     this.route = "" + channelService.currentChannelRoute.id + "/messages";
     this.privatemessage = new PrivateMessageModel(1, "Hello", loginservice.username);
@@ -42,10 +45,12 @@ export class MessageFormComponent implements OnInit {
     this.hideBol = false;
     this.buttonWeather = "Show Weather";
     this.sendWeatherBefore = false;
+    this.langage = "en";
   }
 
   ngOnInit() {
   }
+
   replaceSmiley(contents: string) {
     let smiley = contents.replace(/\:\)/gi, "🙂");
     smiley = smiley.replace(/;\)/gi, "😉");
@@ -57,6 +62,7 @@ export class MessageFormComponent implements OnInit {
     smiley = smiley.replace(/:o/gi, "😲");
     return smiley;
   }
+
   /**
    * Fonction pour envoyer un message.
    * L'envoi du message se fait à travers la methode sendMessage du service MessageService.
@@ -82,6 +88,7 @@ export class MessageFormComponent implements OnInit {
     this.privatemessage.content = this.replaceSmiley(this.privatemessage.content);
     this.privateMessageService.postMessage(this.privateChannelService.currentPrivateChannel, this.privatemessage);
   }
+
   hide() {
     if (this.hideBol) {
       this.hideBol = false;
@@ -96,28 +103,45 @@ export class MessageFormComponent implements OnInit {
       this.buttonWeather = "Hide Weather";
     }
   }
-    meteoCity(): string {
-      return this.city = this.message.content.split((" "))[1];
+
+  meteoCity(): string {
+    return this.city = this.message.content.split((" "))[1];
+  }
+
+  changeImage(description: string) {
+    const url = "http://openweathermap.org/img/w/";
+    if (description.includes("clear sky")) {
+      this.urlImage = url + "01d.png";
     }
-    changeImage(description: string) {
-      const url = "http://openweathermap.org/img/w/";
-      if (description.includes("clear sky")) {
-        this.urlImage = url + "01d.png";
-      }
-      if (description.includes("clouds")) {
-        this.urlImage = url + "02d.png";
-      }
-      if (description.includes("rain")) {
-        this.urlImage = url + "09d.png";
-      }
-      if (description.includes("thunderstorm")) {
-        this.urlImage = url + "11d.png";
-      }
-      if (description.includes("snow")) {
-        this.urlImage = url + "13d.png";
-      }
-      if (description.includes("mist")) {
-        this.urlImage = url + "50d.png";
-      }
+    if (description.includes("clouds")) {
+      this.urlImage = url + "02d.png";
     }
+    if (description.includes("rain")) {
+      this.urlImage = url + "09d.png";
+    }
+    if (description.includes("thunderstorm")) {
+      this.urlImage = url + "11d.png";
+    }
+    if (description.includes("snow")) {
+      this.urlImage = url + "13d.png";
+    }
+    if (description.includes("mist")) {
+      this.urlImage = url + "50d.png";
+    }
+  }
+
+  traduction(text: string) {
+    console.log("langage avant requete  :" + this.langage);
+     let mes ;
+     this.http.get("https://translate.yandex.net/api/v1.5/tr.json/translate?key=" +
+     "trnsl.1.1.20170616T071450Z.f1abae67092b3435.8db3d485331a8166871f45ca5dcbcc7d5829941d" +
+     "&text=" + text + "&lang=fr-" + this.langage)
+     .subscribe( ( res ) => {  mes = res["_body"]; this.message.content = JSON.parse(mes)["text"][0];
+     console.log(JSON.parse(mes)["text"][0]); });
+     }
+
+  setLangue(langue: string) {
+    this.langage = langue;
+    console.log("langage apres avoir mdoifié :" + this.langage);
+  }
 }
