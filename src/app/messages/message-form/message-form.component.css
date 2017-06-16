@@ -31,3 +31,43 @@
   display: inline;
   */
 }
+
+.message-form-modul-root {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-self: center;
+  vertical-align: middle;
+  margin-top: 1%;
+  width: 100%;
+}
+
+.weather-root {
+
+}
+
+.weather-btn {
+
+}
+
+.translate-label {
+  width: auto;
+  border-left: 1px solid #F2F2F2;
+}
+
+.translate-btn {
+
+}
+
+.translate-selector {
+
+}
+
+option {
+
+}
+
+.weather-show-root {
+
+}
+
