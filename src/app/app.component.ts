@@ -68,7 +68,7 @@ export class AppComponent {
   login() {
     const reg = /[^a-z]+/;
     const res = this.user.match(reg);
-    if (res == null) {
+    if (res == null && this.user.length <= 20) {
       this.loginService.login(this.user);
       this.status = this.loginService.status;
     }

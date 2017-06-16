@@ -72,8 +72,10 @@ export class MessageComponent implements OnInit {
         result = true;
       }
       if (characters.startsWith("https://twitter.com/") && characters.includes("/status/") && (this.getSlashNumber(characters) === 5)) {
-        this.result = this.getTwitterUrl(characters);
-        result = true;
+        if (!characters.startsWith("https://twitter.com/status/")) {
+          this.result = this.getTwitterUrl(characters);
+          result = true;
+        }
       }
       const reg = /https:\/\/www.instagram.com\/p\/[^\ ^\/]*/;
       const res = characters.match(reg);
