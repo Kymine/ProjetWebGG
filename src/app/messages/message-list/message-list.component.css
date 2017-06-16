@@ -9,9 +9,6 @@
   color: #F2F2F2;
   background-color: #35363B;
   text-align: justify;
-  /*display: flex;
-  flex-direction: row;
-  justify-content: flex-start;*/
 }
 
 .right-display {
@@ -19,7 +16,4 @@
   color: #35363B;
   background-color: #F2F2F2;
   text-align: justify;
-  /*display: flex;
-  flex-direction: row;
-  justify-content: flex-end;*/
 }
