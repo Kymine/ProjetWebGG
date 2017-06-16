@@ -1,68 +1,84 @@
-<div *ngIf="status === true">
+<div class="app-root container-fluid" *ngIf="status === true">
 
-  <nav class="nav-bar">
-    <h1 class="messenger-title">G-Messenger</h1>
-    <div class="nav-bar-btn">
-      <button class="public_channel" (click)="publicChannels()">Public channels</button>
-      <button class="private_channel" (click)="privateChannels()">Private channels</button>
-      <button class="logout" (click)="logout()">Logout</button>
-    </div>
-  </nav>
-
-  <div *ngIf="channelType === 0">
-    <section>
-      <h2>Public Channel space</h2>
-      <app-channel-form></app-channel-form>
-      <div class="channel-list">
-        <app-channel-list></app-channel-list>
+  <!-- Main app bar -->
+  <div class="nav-bar">
+    <nav>
+      <h1 class="messenger-title">G-Messenger</h1>
+      <div class="nav-bar-btn">
+        <button class="public-channel-btn" (click)="publicChannels()">Public channels</button>
+        <div class="private-channel-btn-wrapper">
+          <button class="private-channel-btn" (click)="privateChannels()">Private channels</button>
+        </div>
+        <button class="logout-btn" (click)="logout()">Logout</button>
       </div>
+    </nav>
+  </div>
+
+  <!-- Public channel and messages -->
+  <div class="chat-app" *ngIf="channelType === 0">
+
+    <!-- Public Channel Space -->
+    <section class="channel-space">
+      <h2 class="channel-space-title">Public Channel space</h2>
+      <div class="public-channel-form">
+        <app-channel-form></app-channel-form>
+      </div>
+      <app-channel-list></app-channel-list>
     </section>
 
-    <aside>
-      <h2>Public Messages on Channel <strong>{{channelService.currentChannelRoute.name}}</strong></h2>
+    <!-- Public Message Space -->
+    <section class="message-space">
+      <h2 class="message-space-title">Public Messages on Channel
+        <strong>{{channelService.currentChannelRoute.name}}</strong></h2>
 
-      <div class="select_page">
-        <button class="previous_page" (click)="prevMessages()">&#60;</button>
-        <button class="next_page" (click)="nextMessages()">&#62;</button>
+      <div class="page-selector">
+        <button class="previous-page" (click)="prevMessages()">❮</button>
+        <span class="page-display">Page n°{{messageService.pageNumber}}</span>
+        <button class="next-page" (click)="nextMessages()">❯</button>
       </div>
-
-      <p class="p_footer">Page n°{{messageService.pageNumber+1}}</p>
 
       <app-message-list></app-message-list>
       <app-message-form></app-message-form>
-    </aside>
-  </div>
-
-  <div *ngIf="channelType === 1">
-    <section>
-      <h2 class="private-channel-space">Private Channel space</h2>
-      <div class="private-channel-list">
-        <app-private-channel-list></app-private-channel-list>
-      </div>
     </section>
 
-    <aside>
-      <h2>Private Messages with <strong>{{privateMessageService.currentUser}}</strong></h2>
+  </div>
+
+  <!-- Private channel and messages -->
+  <div class="chat-app" *ngIf="channelType === 1">
+
+    <!-- Private Channel Space -->
+    <section class="channel-space">
+      <h2 class="channel-space-title">Private Channel space</h2>
+
+      <app-private-channel-list></app-private-channel-list>
+    </section>
+
+    <!-- Private Messsage Space -->
+    <section class="message-space">
+      <h2 class="channel-space-title">Private Messages with <strong>{{privateMessageService.currentUser}}</strong></h2>
 
       <div class="select_page">
         <button class="previous_page" (click)="prevMessages()">&#60;</button>
+        <span class="page-display">Page n°{{privateMessageService.pageNumber}}</span>
         <button class="next_page" (click)="nextMessages()">&#62;</button>
       </div>
 
-      <p class="p_footer">Page n°{{privateMessageService.pageNumber+1}}</p>
-
       <app-message-list></app-message-list>
       <app-message-form></app-message-form>
-    </aside>
+    </section>
+
   </div>
+
 </div>
 
-
-<div class="login" *ngIf="status === false">
-  <span class="login-text">Enter a username to login</span>
-  <div class="input-login">
-    <input type="text" class="login-input form-control" id="user" required [(ngModel)]="user"
-           (keyup.enter)="login()" name="user">
-    <button class="login-btn btn btn-primary" (click)="login()">Login</button>
+<!-- Login part -->
+<div align="center" class="login-root" *ngIf="status === false">
+  <div class="login-root-wrapper">
+    <span class="login-text">Enter a username to login</span>
+    <div class="login-input-wrapper ">
+    <span><input class="login-input style-underline" id="login" name="user" type="text" placeholder="Your username..."
+                 required [(ngModel)]="user" (keyup.enter)="login()"/></span>
+      <button class="login-btn" (click)="login()">Login</button>
+    </div>
   </div>
 </div>

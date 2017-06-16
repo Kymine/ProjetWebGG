@@ -1,2 +1,105 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 /* You can add global styles to this file, and also import other style files */
+/* To remove the dotted lines when a button is focused in mozilla */
+html, body {
+
+}
+
+button {
+  position: relative;
+  top: 0px;
+  text-decoration: none;
+  font-size: 20px;
+  background: #f7f7f7;
+  padding: 2px 7px;
+  margin: 0 10px;
+  border: 1px solid #c4c4c4;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 5px 0px #c4c4c4;
+  -moz-box-shadow: 0px 5px 0px #c4c4c4;
+  -ms-box-shadow: 0px 5px 0px #c4c4c4;
+  -o-box-shadow: 0px 5px 0px #c4c4c4;
+  box-shadow: 0px 5px 0px #c4c4c4;
+  color: #35363B;
+  text-shadow: 1px 1px 1px #fff;
+  -webkit-transition: All 125ms ease;
+  -moz-transition: All 125ms ease;
+  -o-transition: All 125ms ease;
+  -ms-transition: All 125ms ease;
+  transition: All 125ms ease;
+}
+
+button:active {
+  position: relative;
+  top: 5px;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  -ms-box-shadow: none !important;
+  -o-box-shadow: none !important;
+  box-shadow: none !important;
+  -webkit-transition: All 250ms ease;
+  -moz-transition: All 250ms ease;
+  -o-transition: All 250ms ease;
+  -ms-transition: All 250ms ease;
+  transition: All 250ms ease;
+}
+
+input {
+  display: block;
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+  font-size: 18px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  -webkit-border-radius: unset;
+  -moz-border-radius: unset;
+  -ms-border-radius: none;
+  -o-border-radius: none;
+  border-radius: unset;
+}
+
+/* Fancy input form */
+input:focus {
+  outline: none;
+  padding: 10px;
+  border: none;
+  border-bottom: solid 2px #c9c9c9;
+  -webkit-transition: border 0.3s;
+  -moz-transition: border 0.3s;
+  -o-transition: border 0.3s;
+  transition: border 0.3s;
+  border-bottom: solid 2px #35363B;
+}
+
+.style-underline {
+  padding: 10px;
+  border: none;
+  border-bottom: solid 2px #c9c9c9;
+  -webkit-transition: border 0.3s;
+  -moz-transition: border 0.3s;
+  -o-transition: border 0.3s;
+  transition: border 0.3s;
+}
+
+.style-underline:focus, .style-underline.focus {
+  border-bottom: solid 2px #35363B;
+}
+
+.style-thick-border {
+  padding: 10px;
+  border: solid 5px #c9c9c9;
+  -webkit-transition: border 0.3s;
+  -moz-transition: border 0.3s;
+  -o-transition: border 0.3s;
+  transition: border 0.3s;
+}
+
+.style-thick-border:focus, .style-thick-border.focus {
+  border: solid 5px #969696;
+}

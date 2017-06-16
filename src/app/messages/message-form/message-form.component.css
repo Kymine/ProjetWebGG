@@ -1,0 +1,31 @@
+:focus {
+  outline: none;
+}
+
+::-moz-focus-inner {
+  border: 0;
+}
+
+.message-form-root {
+  height: 100%;
+}
+
+.input-root {
+  color: #35363B;
+  margin-left: 5px;
+  margin-top: 5px;
+  width: 100%;
+  display: block;
+}
+
+.message-input {
+  color: #35363B;
+  width: 85%;
+  display: inline;
+}
+
+.send-message-btn {
+  color: #35363B;
+  width: 15%;
+  display: inline;
+}

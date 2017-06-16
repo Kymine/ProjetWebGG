@@ -1,5 +1,25 @@
 .message-list {
-  height: 480px;
+  height: 95%;
   overflow: hidden;
   overflow-y: scroll;
+}
+
+.left-display {
+  width: 100%;
+  color: #F2F2F2;
+  background-color: #35363B;
+  text-align: justify;
+  /*display: flex;
+  flex-direction: row;
+  justify-content: flex-start;*/
+}
+
+.right-display {
+  width: 100%;
+  color: #35363B;
+  background-color: #F2F2F2;
+  text-align: justify;
+  /*display: flex;
+  flex-direction: row;
+  justify-content: flex-end;*/
 }

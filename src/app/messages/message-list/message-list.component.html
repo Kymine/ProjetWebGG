@@ -1,16 +1,20 @@
 <div class="message-list" *ngIf="channelType === 0">
+
   <!-- On boucle sur tous les messages de notre liste de messages stockés dans messageList -->
-  <div *ngFor="let currentMessage of messageList">
+  <div class="single-message" *ngFor="let currentMessage of messageList">
     <!--CurrentMessage est le message courant dans la boucle -->
     <!--On donne notre message courant en Input (en entrée, parametre) du composant Message qui va lui l'afficher.-->
     <app-message [message]="currentMessage"></app-message>
   </div>
+
 </div>
 
 <div class="message-list" *ngIf="channelType === 1">
-  <div *ngFor="let currentMessage of privateMessageList">
+
+  <div class="single-message" *ngFor="let currentMessage of privateMessageList">
     <!--CurrentMessage est le message courant dans la boucle -->
     <!--On donne notre message courant en Input (en entrée, parametre) du composant Message qui va lui l'afficher.-->
     <app-message [message]="currentMessage"></app-message>
   </div>
+
 </div>

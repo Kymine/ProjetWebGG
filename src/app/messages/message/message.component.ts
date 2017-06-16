@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from "@angular/core";
 import {MessageModel} from "../../../shared/models/MessageModel";
-import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
   selector: "app-message",
@@ -11,10 +10,12 @@ import {forEach} from "@angular/router/src/utils/collection";
 export class MessageComponent implements OnInit {
 
   @Input() message: MessageModel;
+
   stringList: string[];
   result: string;
+
   constructor() {
-    this.message = new MessageModel(0, "Hello!");
+    this.message = new MessageModel(0, "");
   }
 
   /**
@@ -49,9 +50,11 @@ export class MessageComponent implements OnInit {
       this.stringList = tmp;
     }
   }
+
   notUrl(characters: string): boolean {
     return !this.isAnUrl(characters);
   }
+
   isAnUrl(characters: string): boolean {
     let result = false;
     if (characters.startsWith("http://") || characters.startsWith("https://")) {
@@ -59,6 +62,7 @@ export class MessageComponent implements OnInit {
     }
     return result;
   }
+
   isAnUrlToLoad(characters: string): boolean {
     let result = false;
     if (characters.includes("http://") || characters.includes("https://")) {
@@ -80,20 +84,24 @@ export class MessageComponent implements OnInit {
     }
     return result;
   }
+
   getUrl(myUrl: string, toReplace: string, word): string {
     if (myUrl.includes(toReplace)) {
       myUrl = myUrl.replace(toReplace, word);
     }
     return myUrl;
   }
+
   getYoutubeUrl(myUrl: string): string {
     return this.getUrl(myUrl, "watch?v=", "embed/");
   }
+
   getTwitterUrl(myUrl: string): string {
     const id1 = myUrl.split("/")[3];
     const id2 = myUrl.split("/")[5];
     return "http://twitframe.com/show?url=https%3A%2F%2Ftwitter.com%2F" + id1 + "%2Fstatus%2F" + id2;
   }
+
   isAnImage(myUrl: string): boolean {
     const formats = ["JPEG", "JPEG2000", "GIF", "PNG", "TIFF", "SVG", "JPG"];
     let test = false;

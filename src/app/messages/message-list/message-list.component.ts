@@ -43,14 +43,22 @@ export class MessageListComponent implements OnInit {
    * l'initialisation simple des variables. Pour plus d'information sur le ngOnInit, il y a un lien dans le README.
    */
   ngOnInit() {
-    setInterval( () => {
-      if (this.loginService.status) {
-        this.route = "" + this.channelService.currentChannelRoute.id + "/messages";
-        this.messageService.getMessages(2, this.route, this.messageList);
-        this.messageService.messageList$.subscribe((messages) => this.messageList = messages);
-        this.privateMessageService.getMessages(2, this.privateChannelService.currentPrivateChannel, this.privateMessageList);
-        this.privateMessageService.privateMessageList$.subscribe((messages) => this.privateMessageList = messages);
-      }
-    }, 1000 );
+    setInterval(() => {
+      this.route = "" + this.channelService.currentChannelRoute.id + "/messages";
+      this.messageService.getMessages(2, this.route, this.messageList);
+      this.messageService.messageList$.subscribe((messages) => this.messageList = messages);
+      this.privateMessageService.getMessages(2, this.privateChannelService.currentPrivateChannel, this.privateMessageList);
+      this.privateMessageService.privateMessageList$.subscribe((messages) => this.privateMessageList = messages);
+    }, 2500);
+  }
+
+  /**
+   * Permet de savoir comment nous allons devoir afficher le message qui vient d'être reçu
+   * @param user l'utilisateur ayant envoyé le message
+   * @returns {boolean}
+   */
+  isFromOther(user: string): boolean {
+    console.log(user);
+    return user !== USER;
   }
 }
