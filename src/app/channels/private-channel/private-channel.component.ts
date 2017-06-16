@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from "@angular/core";
-import {ChannelModel} from "../../../shared/models/ChannelModel";
+
 import {PrivateChannelService} from "../../../shared/services/privateChannel/privateChannel.service";
 import {PrivateMessageServices} from "../../../shared/services/privateMessage/privateMessage.service";
 
@@ -26,7 +26,6 @@ export class PrivateChannelComponent implements OnInit {
   joinChannel(user: string) {
     this.privateChannelService.currentPrivateChannel = user;
     this.privateMessageService.pageNumber = 0;
-    // this.privateMessageService.getMessages(2, user);
   }
 
 }

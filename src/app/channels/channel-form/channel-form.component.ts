@@ -3,7 +3,6 @@
  */
 import {Component, OnInit} from "@angular/core";
 
-
 import {ChannelModel} from "../../../shared/models/ChannelModel";
 import {ChannelService} from "../../../shared/services/channel/channel.service";
 

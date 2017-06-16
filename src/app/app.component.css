@@ -14,8 +14,10 @@
   height: 56.25vw; /* height:width ratio = 9/16 = .5625  */
   max-height: 100vh;
   position: absolute;
-  top:0;bottom:0; /* vertical center */
-  left:0;right:0; /* horizontal center */
+  top: 0;
+  bottom: 0; /* vertical center */
+  left: 0;
+  right: 0; /* horizontal center */
 }
 
 .nav-bar {

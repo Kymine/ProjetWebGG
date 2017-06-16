@@ -28,13 +28,6 @@ getWeather() {
     this.temp_min = test.json().main.temp_min;
     this.temp_max = test.json().main.temp_max;
     this.description = test.json().weather[0].description;
-    console.log(test.json().main.temp);
-    console.log(test.json().main.temp_max);
-    console.log(test.json().main.temp_min);
-    console.log(test.json().weather[0].description);
-    console.log(test.json());
-    console.log("city : " + this.cityName);
-    console.log(test.json().weather[0].icon);
   });
 }}
 

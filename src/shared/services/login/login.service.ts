@@ -23,7 +23,4 @@ export class LoginService {
     this.status = false;
   }
 
-  isConnected() {
-    return status;
-  }
 }

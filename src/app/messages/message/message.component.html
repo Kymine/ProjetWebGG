@@ -1,17 +1,17 @@
 <div class="message-root">
 
   <div class="sender">
-    <i class="sender-prefix">F r o m  :  </i><strong>{{message.from}}</strong>
+    <i class="sender-prefix">F r o m : </i><strong>{{message.from}}</strong>
   </div>
 
   <div class="message-content" *ngFor="let currentMessage of stringList">
-      <img *ngIf="isAnImage(currentMessage)" [src]="currentMessage">
-      <br *ngIf="isAnImage(currentMessage)">
-      <iframe *ngIf="isAnUrlToLoad(currentMessage)" [src]="result | safe"></iframe>
-      <strong *ngIf="notUrl(currentMessage)">{{currentMessage}}</strong>
-      <br *ngIf="isAnUrl(currentMessage)">
-      <a *ngIf="isAnUrl(currentMessage)" href={{currentMessage}} target="_blank">{{currentMessage}}</a>
-      <br *ngIf="isAnUrl(currentMessage)">
+    <img *ngIf="isAnImage(currentMessage)" [src]="currentMessage">
+    <br *ngIf="isAnImage(currentMessage)">
+    <iframe *ngIf="isAnUrlToLoad(currentMessage)" [src]="result | safe"></iframe>
+    <strong *ngIf="notUrl(currentMessage)">{{currentMessage}}</strong>
+    <br *ngIf="isAnUrl(currentMessage)">
+    <a *ngIf="isAnUrl(currentMessage)" href={{currentMessage}} target="_blank">{{currentMessage}}</a>
+    <br *ngIf="isAnUrl(currentMessage)">
   </div>
 
 </div>

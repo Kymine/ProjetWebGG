@@ -1,10 +1,10 @@
-import {Component, OnInit} from "@angular/core";
+import {Component} from "@angular/core";
 import {Observable} from "rxjs/Observable";
+
 import {MessageService} from "../shared/services/message/message.service";
 import {ChannelService} from "../shared/services/channel/channel.service";
 import {PrivateChannelService} from "../shared/services/privateChannel/privateChannel.service";
 import {PrivateMessageServices} from "../shared/services/privateMessage/privateMessage.service";
-import {ChannelModel} from "../shared/models/ChannelModel";
 import {LoginService} from "../shared/services/login/login.service";
 
 @Component({
@@ -59,10 +59,10 @@ export class AppComponent {
 
   nextMessages() {
     if (this.channelType === 0) {
-        this.messageService.pageNumber++;
+      this.messageService.pageNumber++;
     } else if (this.channelType === 1) {
-        this.privateMessageService.pageNumber++;
-      }
+      this.privateMessageService.pageNumber++;
+    }
   }
 
   login() {
@@ -73,6 +73,7 @@ export class AppComponent {
       this.status = this.loginService.status;
     }
   }
+
   logout() {
     this.loginService.logout();
     this.user = this.loginService.username;

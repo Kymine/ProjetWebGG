@@ -13,12 +13,12 @@ export class ChannelListComponent implements OnInit {
 
   public channelList: ChannelModel[];
 
-  public currentChannelRoute: ChannelModel;
-
   constructor(private channelService: ChannelService) {
   }
+
   ngOnInit() {
     this.channelService.getChannels(0);
     this.channelService.channelList$.subscribe((channels) => this.channelList = channels);
   }
+
 }

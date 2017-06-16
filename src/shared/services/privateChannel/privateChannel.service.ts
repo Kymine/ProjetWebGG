@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
-import {Headers, Http, RequestOptions, Response} from "@angular/http";
-import {URLSERVER} from "../../constants/urls";
+import {Http, Response} from "@angular/http";
 import {ReplaySubject} from "rxjs/ReplaySubject";
+
 @Injectable()
 export class PrivateChannelService {
 
@@ -15,15 +15,14 @@ export class PrivateChannelService {
     this.userList$ = new ReplaySubject(1);
   }
 
-
   public getUsers() {
     this.http.get(this.url)
       .subscribe((response) => this.extractAndUpdatePrivateChannelList(response));
   }
 
-
   extractAndUpdatePrivateChannelList(response: Response) {
-    const privatechannelList = response.json() || [];
-    this.userList$.next(privatechannelList);
+    const privateChannelList = response.json() || [];
+    this.userList$.next(privateChannelList);
   }
+
 }

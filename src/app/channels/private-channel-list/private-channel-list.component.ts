@@ -1,4 +1,5 @@
 import {Component, OnInit} from "@angular/core";
+
 import {PrivateChannelService} from "../../../shared/services/privateChannel/privateChannel.service";
 
 @Component({

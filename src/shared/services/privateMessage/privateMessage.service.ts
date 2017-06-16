@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
 import {Headers, Http, RequestOptions, Response} from "@angular/http";
 import {ReplaySubject} from "rxjs/ReplaySubject";
+
 import {PrivateMessageModel} from "../../models/PrivateMessageModel";
-import {USER} from "../../constants/user";
 import {LoginService} from "../login/login.service";
 
 @Injectable()
@@ -20,23 +20,12 @@ export class PrivateMessageServices {
     this.privateMessageList$.next([new PrivateMessageModel()]);
   }
 
-  public getMessages(side: number, correspondentUser: string, listmessage?: PrivateMessageModel[]) {
+  public getMessages(correspondentUser: string, listMessage?: PrivateMessageModel[]) {
     this.currentUser = correspondentUser;
     const pageSelector = "&page=" + this.pageNumber;
-    /*if (side === 0) {
-      if (this.pageNumber !== 0) {
-        this.pageNumber--;
-      }
-      pageSelector = "&page=" + this.pageNumber;
-    } else if (side === 1) {
-      this.pageNumber++;
-      pageSelector = "&page=" + this.pageNumber;
-    } else {
-      pageSelector = "&page=" + this.pageNumber;
-    }*/
     const finalUrl = this.url + "/" + this.loginService.username + "/messages?currentUserId=" + correspondentUser + pageSelector;
     this.http.get(finalUrl)
-      .subscribe((response) => this.extractAndUpdateMessageList(response, listmessage));
+      .subscribe((response) => this.extractAndUpdateMessageList(response, listMessage));
   }
 
   public postMessage(correspondentUser: string, message: PrivateMessageModel) {
@@ -48,14 +37,7 @@ export class PrivateMessageServices {
     this.pageNumber = 0;
   }
 
-  private extractMessageAndGetMessages(response: Response, correspondentUser: string): PrivateMessageModel {
-    const messageList = response.json() || [];
-    this.privateMessageList$.next(messageList);
-    // this.getMessages(2, correspondentUser);
-    return messageList[0];
-  }
-
-  extractAndUpdateMessageList(response: Response, listmessage?: PrivateMessageModel[]) {
+  extractAndUpdateMessageList(response: Response, listMessage?: PrivateMessageModel[]) {
     const messageList = response.json() || [];
     if (messageList.length === 0) {
       if (this.pageNumber !== 0) {
@@ -64,9 +46,10 @@ export class PrivateMessageServices {
         this.privateMessageList$.next([new PrivateMessageModel()]);
       }
     } else {
-      if (listmessage == null || (<PrivateMessageModel> messageList[0]).createdAt !== listmessage[0].createdAt) {
+      if (listMessage == null || (<PrivateMessageModel> messageList[0]).createdAt !== listMessage[0].createdAt) {
         this.privateMessageList$.next(messageList);
       }
     }
   }
+
 }

@@ -1,4 +1,5 @@
 import {Component, OnInit} from "@angular/core";
+import {Http} from "@angular/http";
 
 import {MessageService} from "../../../shared/services";
 import {MessageModel} from "../../../shared/models/MessageModel";
@@ -8,8 +9,6 @@ import {PrivateMessageServices} from "../../../shared/services/privateMessage/pr
 import {PrivateMessageModel} from "../../../shared/models/PrivateMessageModel";
 import {LoginService} from "../../../shared/services/login/login.service";
 import {WeatherServices} from "../../../shared/services/weather/weather.service";
-import {Http} from "@angular/http";
-import {USER} from "../../../shared/constants/user";
 
 @Component({
   selector: "app-message-form",
@@ -91,7 +90,7 @@ export class MessageFormComponent implements OnInit {
     }
     this.hideBol = false;
     if (this.privatemessage.content.includes("/meteo")) {
-      this.city = this.privatemessage.content.split((" "))[1]
+      this.city = this.privatemessage.content.split((" "))[1];
       this.weatherservices.getWeather(this.city);
       this.sendWeatherBefore = true;
     }
@@ -151,7 +150,7 @@ export class MessageFormComponent implements OnInit {
           mes = res["_body"];
           this.message.content = JSON.parse(mes)["text"][0];
         });
-    }else {
+    } else {
       let mes;
       this.http.get("https://translate.yandex.net/api/v1.5/tr.json/translate?key=" +
         "trnsl.1.1.20170616T071450Z.f1abae67092b3435.8db3d485331a8166871f45ca5dcbcc7d5829941d" +
@@ -166,7 +165,5 @@ export class MessageFormComponent implements OnInit {
   callType(value): void {
     this.langage = value;
   }
-
-
 
 }

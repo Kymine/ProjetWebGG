@@ -7,7 +7,6 @@ import {ChannelModel} from "../../../shared/models/ChannelModel";
 import {PrivateMessageModel} from "../../../shared/models/PrivateMessageModel";
 import {PrivateChannelService} from "../../../shared/services/privateChannel/privateChannel.service";
 import {PrivateMessageServices} from "../../../shared/services/privateMessage/privateMessage.service";
-import {USER} from "../../../shared/constants/user";
 import {LoginService} from "../../../shared/services/login/login.service";
 
 @Component({
@@ -51,17 +50,7 @@ export class MessageListComponent implements OnInit {
         this.privateMessageService.getMessages(2, this.privateChannelService.currentPrivateChannel, this.privateMessageList);
         this.privateMessageService.privateMessageList$.subscribe((messages) => this.privateMessageList = messages);
       }
-      }, 1000);
-
+    }, 1000);
   }
 
-/**
- * Permet de savoir comment nous allons devoir afficher le message qui vient d'être reçu
- * @param user l'utilisateur ayant envoyé le message
- * @returns {boolean}
- */
-isFromOther(user: string): boolean {
-  console.log(user);
-  return user !== USER;
-}
 }

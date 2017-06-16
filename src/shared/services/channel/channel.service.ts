@@ -78,7 +78,6 @@ export class ChannelService {
    *          entier correspondant à l'identifiant (id) du channel.
    *          Exemple de route: 1/Channels
    * - Channel: Le Channel à envoyer. Ce Channel est de type ChannelModel.
-   * @param route
    * @param channel
    */
   public createChannel(channel: ChannelModel) {
@@ -119,7 +118,6 @@ export class ChannelService {
    * Elle va également faire un nouvel appel pour récupérer la liste complete des Channels pour pouvoir mettre à jour la
    * liste des Channels dans les composants.
    * @param response
-   * @param route
    * @returns {any|{}}
    */
   private extractChannelAndGetChannels(response: Response): ChannelModel {

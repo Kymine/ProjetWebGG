@@ -6,10 +6,10 @@
 | :------------------------------------------ |:-------:|
 | Découpage de la page en composants          | 100%    |
 | Envoyer un message dans le channel général  | 100%    |
-| Changement de channel                       | ?       |
-| Envoi de message dans chaque channel        | ?       |
-| Création d’un channel                       | \>50%   |
-| Pouvoir accéder à l'historique d'un channel | 0%      |
+| Changement de channel                       | 100%    |
+| Envoi de message dans chaque channel        | 100%    |
+| Création d’un channel                       | 100%    |
+| Pouvoir accéder à l'historique d'un channel | 100%    |
 
 #### Changement de channel
 

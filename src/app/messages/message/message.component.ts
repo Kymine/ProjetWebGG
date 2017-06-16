@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from "@angular/core";
+
 import {MessageModel} from "../../../shared/models/MessageModel";
 
 @Component({
@@ -30,7 +31,7 @@ export class MessageComponent implements OnInit {
     if (this.message.content != null) {
       this.stringList = this.message.content.split(" ");
       let tmp: string[];
-      tmp = new Array();
+      tmp = [];
       let stringNotUrl = "";
       for (let i = 0; i < this.stringList.length; i++) {
         if (this.isAnUrl(this.stringList[i])) {
@@ -84,6 +85,7 @@ export class MessageComponent implements OnInit {
     }
     return result;
   }
+
   getSlashNumber(str: string): number {
     let count = 0;
     for (let i = 0; i < str.length; i++) {
@@ -120,4 +122,5 @@ export class MessageComponent implements OnInit {
     }
     return test;
   }
+
 }
