@@ -66,13 +66,9 @@ export class AppComponent {
   }
 
   login() {
-    if (this.user !== "" && !this.user.includes(" ")) {
-      this.user = this.user.toLowerCase();
-      for (let i = 0 ; i < 9 ; i++) {
-        if ( this.user.includes(i.toString()) ) {
-          return;
-        }
-      }
+    const reg = /[^a-z]+/;
+    const res = this.user.match(reg);
+    if (res == null) {
       this.loginService.login(this.user);
       this.status = this.loginService.status;
     }
