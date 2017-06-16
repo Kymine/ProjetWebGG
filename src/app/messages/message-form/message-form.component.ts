@@ -3,7 +3,6 @@ import {Component, OnInit} from "@angular/core";
 import {MessageService} from "../../../shared/services";
 import {MessageModel} from "../../../shared/models/MessageModel";
 import {ChannelService} from "../../../shared/services/channel/channel.service";
-import {USER} from "../../../shared/constants/user";
 import {PrivateChannelService} from "../../../shared/services/privateChannel/privateChannel.service";
 import {PrivateMessageServices} from "../../../shared/services/privateMessage/privateMessage.service";
 import {PrivateMessageModel} from "../../../shared/models/PrivateMessageModel";
@@ -46,6 +45,7 @@ export class MessageFormComponent implements OnInit {
 
   ngOnInit() {
   }
+
   replaceSmiley(contents: string) {
     let smiley = contents.replace(/\:\)/gi, "🙂");
     smiley = smiley.replace(/;\)/gi, "😉");
@@ -57,6 +57,7 @@ export class MessageFormComponent implements OnInit {
     smiley = smiley.replace(/:o/gi, "😲");
     return smiley;
   }
+
   /**
    * Fonction pour envoyer un message.
    * L'envoi du message se fait à travers la methode sendMessage du service MessageService.
@@ -84,6 +85,7 @@ export class MessageFormComponent implements OnInit {
     this.privateMessageService.postMessage(this.privateChannelService.currentPrivateChannel, this.privatemessage);
     this.privatemessage.content = "";
   }
+
   hide() {
     if (this.hideBol) {
       this.hideBol = false;
@@ -98,28 +100,30 @@ export class MessageFormComponent implements OnInit {
       this.buttonWeather = "Hide Weather";
     }
   }
-    meteoCity(): string {
-      return this.city = this.message.content.split((" "))[1];
+
+  meteoCity(): string {
+    return this.city = this.message.content.split((" "))[1];
+  }
+
+  changeImage(description: string) {
+    const url = "http://openweathermap.org/img/w/";
+    if (description.includes("clear sky")) {
+      this.urlImage = url + "01d.png";
     }
-    changeImage(description: string) {
-      const url = "http://openweathermap.org/img/w/";
-      if (description.includes("clear sky")) {
-        this.urlImage = url + "01d.png";
-      }
-      if (description.includes("clouds")) {
-        this.urlImage = url + "02d.png";
-      }
-      if (description.includes("rain")) {
-        this.urlImage = url + "09d.png";
-      }
-      if (description.includes("thunderstorm")) {
-        this.urlImage = url + "11d.png";
-      }
-      if (description.includes("snow")) {
-        this.urlImage = url + "13d.png";
-      }
-      if (description.includes("mist")) {
-        this.urlImage = url + "50d.png";
-      }
+    if (description.includes("clouds")) {
+      this.urlImage = url + "02d.png";
     }
+    if (description.includes("rain")) {
+      this.urlImage = url + "09d.png";
+    }
+    if (description.includes("thunderstorm")) {
+      this.urlImage = url + "11d.png";
+    }
+    if (description.includes("snow")) {
+      this.urlImage = url + "13d.png";
+    }
+    if (description.includes("mist")) {
+      this.urlImage = url + "50d.png";
+    }
+  }
 }

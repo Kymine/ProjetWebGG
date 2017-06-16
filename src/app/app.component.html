@@ -32,7 +32,7 @@
 
       <div class="page-selector">
         <button class="previous-page" (click)="prevMessages()">❮</button>
-        <span class="page-display">Page n°{{messageService.pageNumber}}</span>
+        <span class="page-display">Page n°{{messageService.pageNumber + 1}}</span>
         <button class="next-page" (click)="nextMessages()">❯</button>
       </div>
 
@@ -54,12 +54,12 @@
 
     <!-- Private Messsage Space -->
     <section class="message-space">
-      <h2 class="channel-space-title">Private Messages with <strong>{{privateMessageService.currentUser}}</strong></h2>
+      <h2 class="message-space-title">MP with <strong>{{privateMessageService.currentUser}}</strong></h2>
 
-      <div class="select_page">
-        <button class="previous_page" (click)="prevMessages()">❮</button>
-        <span class="page-display">Page n°{{privateMessageService.pageNumber}}</span>
-        <button class="next_page" (click)="nextMessages()">❯</button>
+      <div class="page-selector">
+        <button class="previous-page" (click)="prevMessages()">❮</button>
+        <span class="page-display">Page n°{{privateMessageService.pageNumber + 1}}</span>
+        <button class="next-page" (click)="nextMessages()">❯</button>
       </div>
 
       <app-message-list></app-message-list>
